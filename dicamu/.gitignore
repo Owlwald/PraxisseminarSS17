@@ -136,9 +136,7 @@ bower_components
 
 ### BS ###
 platforms/
-**/platforms/**
-platforms/**
 www/
-**/www/**
-www/**
+config.xml
+package.json
 
