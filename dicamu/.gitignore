@@ -136,5 +136,7 @@ bower_components
 
 ### BS ###
 platforms/
+**/platforms/**
 www/
+**/www/**
 
