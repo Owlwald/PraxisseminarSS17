@@ -1,5 +1,6 @@
 # Fehlerbehebung
 https://github.com/ai4biz/phonegap-tutorial
+
 https://github.com/mcasimir/generator-mobileangularui/issues/21
 
 # Hello World PhoneGap Template [![bitHound Score][bithound-img]][bithound-url]
