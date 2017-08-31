@@ -71,8 +71,8 @@
             "cordova-plugin-whitelist": {}
         },
         "platforms": [
-      "android"
-    ]
+            "android"
+        ]
     },
     "repository": {
         "type": "git",
