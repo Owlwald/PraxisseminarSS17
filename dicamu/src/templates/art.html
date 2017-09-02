@@ -1,0 +1,26 @@
+<section class="section container-fluid">
+    <h1 class="page-header">Kunstwerk Name</h1>
+    <p>picture of art</p>
+    <div ui-state="activeTab" default="1">
+        <ul class="nav nav-tabs">
+            <li ui-class="{'active': activeTab == 1}">
+                <a ui-set="{'activeTab': 1}">Informationen</a>
+            </li>
+            <li ui-class="{'active': activeTab == 2}">
+                <a ui-set="{'activeTab': 2}">Details</a>
+            </li>
+        </ul>
+
+        <div ui-if="activeTab == 1">
+            <p>
+                <p>Description</p>
+            </p>
+        </div>
+
+        <div ui-if="activeTab == 2">
+            <p>
+                <p>Facts</p>
+            </p>
+        </div>
+    </div>
+</section>
