@@ -27,6 +27,10 @@
                 templateUrl: "catalog.html",
                 reloadOnSearch: false
             })
+            .when('/artlist', {
+                templateUrl: "artlist.html",
+                reloadOnSearch: false
+            })
             .when('/art', {
                 templateUrl: "art.html",
                 reloadOnSearch: false
