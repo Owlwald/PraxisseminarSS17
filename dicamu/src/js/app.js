@@ -1,8 +1,8 @@
 'use strict';
 
 var app = angular.module('Dicamu', [
-    "ngRoute",
-    "mobile-angular-ui",
+    'ngRoute',
+    'mobile-angular-ui',
     'Dicamu.controllers.Main'
 ]);
 
@@ -24,7 +24,7 @@ app.config(function ($routeProvider) {
             templateUrl: "catalog.html",
             reloadOnSearch: false
         })
-        .when("/art", {
+        .when('/art', {
             templateUrl: "art.html",
             reloadOnSearch: false
         });
