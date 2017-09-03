@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 var app = angular.module('Dicamu', [
     "ngRoute",
     "mobile-angular-ui",
@@ -14,17 +12,20 @@ app.config(function ($routeProvider) {
             templateUrl: "home.html",
             reloadOnSearch: false
         })
+        .when('/home', {
+            templateUrl: "home.html",
+            reloadOnSearch: false
+        })
+        .when('/my-catalogues', {
+            templateUrl: "my-catalogues.html",
+            reloadOnSearch: false
+        })
+        .when('/catalog', {
+            templateUrl: "catalog.html",
+            reloadOnSearch: false
+        })
         .when("/art", {
             templateUrl: "art.html",
             reloadOnSearch: false
         });
-
-    $routeProvider.when('/catalog', {
-        templateUrl: "catalog.html",
-        reloadOnSearch: false
-    });
-    $routeProvider.when('/catalogues', {
-        templateUrl: "catalogues.html",
-        reloadOnSearch: false
-    });
 });
