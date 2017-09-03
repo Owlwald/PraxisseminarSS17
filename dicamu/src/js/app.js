@@ -12,6 +12,10 @@ app.config(function ($routeProvider) {
             templateUrl: "home.html",
             reloadOnSearch: false
         })
+        .when('/home', {
+            templateUrl: "home.html",
+            reloadOnSearch: false
+        })
         .when('/my-catalogues', {
             templateUrl: "my-catalogues.html",
             reloadOnSearch: false
