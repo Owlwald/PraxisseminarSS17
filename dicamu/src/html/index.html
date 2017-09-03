@@ -11,8 +11,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
     <link rel="stylesheet" href="css/app.min.css" />
     <link rel="stylesheet" href="css/responsive.min.css" />
-    <link rel="stylesheet" href="css/dicamu.css" />
-    <!-- inject:js -->
+
+    <script src="/dist/js/mobile-angular-ui.min.js"></script>
+    <!-- Required to use $touch, $swipe, $drag and $translate services -->
+    <script src="/dist/js/mobile-angular-ui.gestures.min.js"></script>
     <script src="js/app.min.js"></script>
     <script src="js/app.js"></script>
 </head>
@@ -25,14 +27,9 @@
 
     <div class="app">
 
-        <ng-view></ng-view>
-        <!-- App Body -->
         <div class="app-body">
             <div class="app-content">
-
-                <div class="loading">
-                    <img src="" class="ajax-loader" />
-                </div>
+                <ng-view></ng-view>
             </div>
         </div>
 

@@ -1,26 +1,31 @@
-<section class="section container-fluid">
-    <h1 class="page-header">Kunstwerk Name</h1>
-    <p>picture of art</p>
-    <div ui-state="activeTab" default="1">
-        <ul class="nav nav-tabs">
-            <li ui-class="{'active': activeTab == 1}">
-                <a ui-set="{'activeTab': 1}">Informationen</a>
-            </li>
-            <li ui-class="{'active': activeTab == 2}">
-                <a ui-set="{'activeTab': 2}">Details</a>
-            </li>
-        </ul>
+<div class="scrollable">
+    <div class="scrollable-content">
 
-        <div ui-if="activeTab == 1">
-            <p>
-                <p>Description</p>
-            </p>
-        </div>
+        <section class="section container-fluid">
+            <h1 class="page-header">Kunstwerk Name</h1>
+            <img src="../images/1.PNG" />
+            <div ui-state="activeTab" default="1">
+                <ul class="nav nav-tabs">
+                    <li ui-class="{'active': activeTab == 1}">
+                        <a ui-set="{'activeTab': 1}">Informationen</a>
+                    </li>
+                    <li ui-class="{'active': activeTab == 2}">
+                        <a ui-set="{'activeTab': 2}">Details</a>
+                    </li>
+                </ul>
 
-        <div ui-if="activeTab == 2">
-            <p>
-                <p>Facts</p>
-            </p>
-        </div>
+                <div ui-if="activeTab == 1">
+                    <h3>Description</h3>
+                    <p>Meowing chowing and wowing flop over, yet bathe private parts with tongue then lick owner's face. Chase imaginary bugs sun bathe, yet cough hairball on conveniently placed pants intently sniff hand mew. Stick butt in face damn that dog yet leave fur on owners clothes so make meme, make cute face yet annoy owner until he gives you food say meow repeatedly until belly rubs, feels good have secret plans scamper. Eat the fat cats food knock over christmas tree or under the bed howl uncontrollably for no reason. Sleep nap. Lie on your belly and purr when you are asleep sleep nap for stare at wall turn and meow stare at wall some more meow again continue staring going to catch the red dot today going to catch the red dot today but sit on the laptop destroy couch. Meow all night having their mate disturbing sleeping humans then cats take over the world so scratch leg; meow for can opener to feed me if it fits, i sits.</p>
+                </div>
+
+                <div ui-if="activeTab == 2">
+                    <p>
+                        <p>Facts</p>
+                    </p>
+                </div>
+            </div>
+        </section>
+
     </div>
-</section>
+</div>
