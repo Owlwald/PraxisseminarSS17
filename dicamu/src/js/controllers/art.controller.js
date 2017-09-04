@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('dnb.art')
+        .module('dcm.art')
         .controller('ArtCtrl', ArtController);
 
     ////////////////////////////////////////

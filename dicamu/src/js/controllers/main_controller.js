@@ -1,5 +1,5 @@
-angular.module('Dicamu.controllers.Main', [])
+angular.module('dcm.main', [])
 
-.controller('MainController', function($scope){
-  
+.controller('MainController', function ($scope) {
+
 });

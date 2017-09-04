@@ -2,11 +2,11 @@
     'use strict';
 
     /*global angular */
-    var app = angular.module('Dicamu', [
+    var app = angular.module('dcm', [
         'ngRoute',
         'mobile-angular-ui',
         'mobile-angular-ui.gestures',
-        'Dicamu.controllers.Main'
+        'dcm.main'
     ]);
 
     app.config(function ($routeProvider) {
