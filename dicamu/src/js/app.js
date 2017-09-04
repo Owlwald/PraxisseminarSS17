@@ -3,10 +3,14 @@
 
     /*global angular */
     var app = angular.module('dcm', [
+        //app
+        'dcm.main',
+        //'dcm.art',
+
+        //external components
         'ngRoute',
         'mobile-angular-ui',
-        'mobile-angular-ui.gestures',
-        'dcm.main'
+        'mobile-angular-ui.gestures'
     ]);
 
     app.config(function ($routeProvider) {
@@ -36,4 +40,5 @@
                 reloadOnSearch: false
             });
     });
+
 }());
