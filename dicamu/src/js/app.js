@@ -2,11 +2,15 @@
     'use strict';
 
     /*global angular */
-    var app = angular.module('Dicamu', [
+    var app = angular.module('dcm', [
+        //app
+        'dcm.main',
+        //'dcm.art',
+
+        //external components
         'ngRoute',
         'mobile-angular-ui',
-        'mobile-angular-ui.gestures',
-        'Dicamu.controllers.Main'
+        'mobile-angular-ui.gestures'
     ]);
 
     app.config(function ($routeProvider) {
@@ -36,4 +40,5 @@
                 reloadOnSearch: false
             });
     });
+
 }());

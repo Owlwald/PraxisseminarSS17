@@ -218,7 +218,7 @@ gulp.task('js', function () {
             gulp.src(config.vendor.js),
             gulp.src('./src/js/**/*.js').pipe(ngFilesort()),
             gulp.src(['src/templates/**/*.html']).pipe(templateCache({
-                module: 'Dicamu'
+                module: 'dcm'
             }))
         )
         .pipe(sourcemaps.init())
