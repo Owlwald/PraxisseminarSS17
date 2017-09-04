@@ -10,6 +10,11 @@ bitte einstellen, da es sonst zu Mergekonflikten kommt (oder Brackets nutzen)
 
 https://github.com/brackets-beautify/brackets-beautify
 
+
+## Coding Convention
+https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+
+
 ## Entwickeln
 * in der Konsole: git pull
 * in einer anderen Konsole: gulp
