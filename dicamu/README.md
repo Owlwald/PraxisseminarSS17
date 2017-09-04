@@ -16,7 +16,7 @@ https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
 
 
 ## Entwickeln
-* in der Konsole: git pull
+* in der Konsole: git fetch && pull
 * in einer anderen Konsole: gulp
 * im Browser: http://localhost:8000
 * möglichst atomare Commits
