@@ -1,5 +1,12 @@
-angular.module('dcm.main', [])
+(function () {
+    'use strict';
 
-.controller('MainController', function ($scope) {
+    angular
+        .module('dcm.main', [])
+        .controller('MainController', MainCtrl);
 
-});
+    function MainCtrl($scope) {
+
+    }
+
+})();
