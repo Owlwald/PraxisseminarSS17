@@ -1,26 +1,5 @@
-/*(function () {
-    'use strict';
+var app = angular.module("dcm");
 
-    angular
-        .module('dcm.art')
-        .controller('ArtCtrl', ArtController);
-
-    ////////////////////////////////////////
-
-    ArtController.$inject = [
-        '$scope',
-    ];
-
-    function ArtController($scope) {
-
-        $scope.currentUser = null;
-        $scope.currentArt = null;
-        activate();
-
-        function activate() {
-            //not implemented yet:
-            //$scope.currentUser = AppContext.getActiveUser();
-            //$scope.currentArt = AppContext.getActiveArt();
-        }
-    }
-})();*/
+app.controller("ArtController", function ($scope) {
+    $scope.controllername = 'ArtController!';
+});
