@@ -1,10 +1,12 @@
 (function () {
     'use strict';
 
-    /*global angular */
+
+    console.log("here i am")
+        /*global angular */
     var app = angular.module('dcm', [
         //app
-        'dcm.main',
+        //'dcm.main',
         //'dcm.fire',
         //'dcm.art',
         //external components
@@ -42,5 +44,24 @@
                 reloadOnSearch: false
             });
     });
+
+    app.controller('SimpleController', ["$scope", function ($scope) {
+        $scope.customer = [
+            {
+                name: "Deepak",
+                city: "Bhubaneswar"
+            },
+            {
+                name: "Sivaji",
+                city: "Banglore"
+            }
+    ];
+        $scope.addCustomer = function ($scope) {
+            $scope.customer.push({
+                name: $scope.newCustomer.name,
+                city: $scope.newCustomer.city
+            });
+        }
+}]);
 
 }());
