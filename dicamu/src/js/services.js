@@ -1,13 +1,9 @@
 (function () {
     'use strict';
 
-    angular
-        .module('dcm.fire', [])
-        .factory('fireService', fireService);
+    var app = angular.module('dcm');
 
-    fireService.$inject = ['$firebase'];
-
-    function fireService($firebase) {
+    app.factory('fireBaseData', function ($firebase) {
         var ref = new Firebase("https://dicamu-1ed50.firebaseio.com"),
             refUsers = new Firebase("https://dicamu-1ed50.firebaseio.com/User"),
             refMuseums = new Firebase("https://dicamu-1ed50.firebaseio.com/Museum");
@@ -22,5 +18,5 @@
                 return refMuseums;
             }
         }
-    }
-})();
+    });
+}());
