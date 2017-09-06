@@ -1,12 +1,5 @@
-(function () {
-    'use strict';
+var app = angular.module("dcm");
 
-    angular
-        .module('dcm.main', [])
-        .controller('MainController', MainCtrl);
-
-    function MainCtrl($scope) {
-
-    }
-
-})();
+app.controller("MainController", function ($scope) {
+    $scope.bonjour = 'I\'m main controller !';
+});
