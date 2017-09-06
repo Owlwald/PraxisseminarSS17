@@ -8,8 +8,8 @@
         'firebase'
     ]);
 
-    app.controller("SampleCtrl", function ($scope, $firebaseArray) {
-        //var firebase = require("firebase");
+    app.controller("MainCtrl", function ($scope, $firebaseArray) {
+
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyDx888a0huvJQCpklJsDdf4Sq2mddAxbhk",
@@ -21,9 +21,9 @@
         };
         firebase.initializeApp(config);
 
+        //get museum data
         firebase.database().ref('Museum').on('value', function (snapshot) {
             var data = snapshot.val();
-
             $scope.museums = data;
             console.log(data);
             $scope.$apply();
