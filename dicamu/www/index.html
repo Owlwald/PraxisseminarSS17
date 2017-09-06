@@ -12,8 +12,21 @@
     <link rel="stylesheet" href="css/app.min.css" />
     <link rel="stylesheet" href="css/responsive.min.css" />
 
+
     <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDx888a0huvJQCpklJsDdf4Sq2mddAxbhk",
+            authDomain: "dicamu-1ed50.firebaseapp.com",
+            databaseURL: "https://dicamu-1ed50.firebaseio.com",
+            projectId: "dicamu-1ed50",
+            storageBucket: "dicamu-1ed50.appspot.com",
+            messagingSenderId: "181342973516"
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <!-- Angular -->
     <script src="/dist/js/mobile-angular-ui.min.js"></script>

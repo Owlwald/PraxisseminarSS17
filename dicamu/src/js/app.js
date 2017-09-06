@@ -5,14 +5,14 @@
     var app = angular.module('dcm', [
         //app
         'dcm.main',
-        'dcm.fire',
+        //'dcm.fire',
         //'dcm.art',
         //external components
         'ngRoute',
         'mobile-angular-ui',
         'mobile-angular-ui.gestures',
         //'angularfire',
-        'firebase'
+        //'firebase'
     ]);
 
     app.config(function ($routeProvider) {
