@@ -22,6 +22,7 @@
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.0.3/firebase.js"></script>
     <script>
+        var firebase = require("firebase");
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyDx888a0huvJQCpklJsDdf4Sq2mddAxbhk",
@@ -49,7 +50,7 @@
 
 </head>
 
-<body ng-app="dcm" ng-controller="MainController">
+<body ng-app="dcm" ng-controller="SampleCtrl">
 
     <!-- Navigation -->
     <div ng-include="'sidebar.html'" ui-track-as-search-param='true' class="sidebar sidebar-left"></div>
