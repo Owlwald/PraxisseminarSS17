@@ -1,17 +1,36 @@
 (function () {
     'use strict';
 
-    /*global angular */
     var app = angular.module('dcm', [
-        //app
-        'dcm.main',
-        //'dcm.art',
-
-        //external components
         'ngRoute',
         'mobile-angular-ui',
-        'mobile-angular-ui.gestures'
+        'mobile-angular-ui.gestures',
+        'firebase'
     ]);
+
+    app.controller("MainCtrl", function ($scope, $firebaseArray) {
+
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDx888a0huvJQCpklJsDdf4Sq2mddAxbhk",
+            authDomain: "dicamu-1ed50.firebaseapp.com",
+            databaseURL: "https://dicamu-1ed50.firebaseio.com",
+            projectId: "dicamu-1ed50",
+            storageBucket: "dicamu-1ed50.appspot.com",
+            messagingSenderId: "181342973516"
+        };
+        firebase.initializeApp(config);
+
+        //get museum data
+        firebase.database().ref('Museum').on('value', function (snapshot) {
+            var data = snapshot.val();
+            $scope.museums = data;
+            console.log(data);
+            $scope.$apply();
+        });
+
+    });
+
 
     app.config(function ($routeProvider) {
         $routeProvider
@@ -40,5 +59,4 @@
                 reloadOnSearch: false
             });
     });
-
 }());
