@@ -5,24 +5,33 @@
         'ngRoute',
         'mobile-angular-ui',
         'mobile-angular-ui.gestures',
-        'firebase'
+        'firebase',
     ]);
 
-    app.controller("MainCtrl", function ($scope, $firebaseArray) {
+    app.controller("MainCtrl", function ($scope, museumService, $firebaseArray) {
 
-        // Initialize Firebase
-
+        $scope.data = {};
+        $scope.data.museums = museumService.getMuseums();
 
         //get museum data
-        firebase.database().ref('Museum').on('value', function (snapshot) {
-            var data = snapshot.val();
-            $scope.museums = data;
-            console.log(data);
-            $scope.$apply();
-        });
+        /* firebase.database().ref('Museum').on('value', function (snapshot) {
+             var data = snapshot.val();
+             $scope.museums = data;
+             console.log(data);
+             $scope.$apply();
+         });*/
 
     });
 
+    app.factory('museumService',
+        function ($firebaseArray) {
+            var museums = firebase.database().ref('Museum').$asArray();
+
+            var getMuseums = function () {
+                console.log('getMuseums');
+                return museums;
+            };
+        });
 
     app.config(function ($routeProvider) {
         $routeProvider
