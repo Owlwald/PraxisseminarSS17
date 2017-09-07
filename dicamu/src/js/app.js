@@ -5,32 +5,20 @@
         'ngRoute',
         'mobile-angular-ui',
         'mobile-angular-ui.gestures',
-        'firebase'
+        'firebase',
     ]);
 
-    app.controller("MainCtrl", function ($scope, $firebaseArray) {
+    app.controller("MainCtrl", function ($scope, $firebaseArray, $firebaseObject) {
 
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyDx888a0huvJQCpklJsDdf4Sq2mddAxbhk",
-            authDomain: "dicamu-1ed50.firebaseapp.com",
-            databaseURL: "https://dicamu-1ed50.firebaseio.com",
-            projectId: "dicamu-1ed50",
-            storageBucket: "dicamu-1ed50.appspot.com",
-            messagingSenderId: "181342973516"
-        };
-        firebase.initializeApp(config);
+        $scope.data = {};
 
-        //get museum data
         firebase.database().ref('Museum').on('value', function (snapshot) {
             var data = snapshot.val();
             $scope.museums = data;
             console.log(data);
             $scope.$apply();
         });
-
     });
-
 
     app.config(function ($routeProvider) {
         $routeProvider

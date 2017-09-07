@@ -1,11 +1,8 @@
 <div class="scrollable">
     <div class="scrollable-content">
         <section class="section container-fluid">
-            <h1 class="page-header">I am home</h1>
-            <h2>museums:</h2>
-            <p>
-                {{museums}}
-            </p>
+            <h1 class="page-header">Museums</h1>
+            <h1 ng-repeat="museum in museums">{{museum.Name}}</h1>
         </section>
     </div>
 </div>
