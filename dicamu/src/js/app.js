@@ -8,30 +8,17 @@
         'firebase',
     ]);
 
-    app.controller("MainCtrl", function ($scope, museumService, $firebaseArray) {
+    app.controller("MainCtrl", function ($scope, $firebaseArray, $firebaseObject) {
 
         $scope.data = {};
-        $scope.data.museums = museumService.getMuseums();
 
-        //get museum data
-        /* firebase.database().ref('Museum').on('value', function (snapshot) {
-             var data = snapshot.val();
-             $scope.museums = data;
-             console.log(data);
-             $scope.$apply();
-         });*/
-
-    });
-
-    app.factory('museumService',
-        function ($firebaseArray) {
-            var museums = firebase.database().ref('Museum').$asArray();
-
-            var getMuseums = function () {
-                console.log('getMuseums');
-                return museums;
-            };
+        firebase.database().ref('Museum').on('value', function (snapshot) {
+            var data = snapshot.val();
+            $scope.museums = data;
+            console.log(data);
+            $scope.$apply();
         });
+    });
 
     app.config(function ($routeProvider) {
         $routeProvider
