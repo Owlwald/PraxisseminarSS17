@@ -1,0 +1,203 @@
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiCaMu</title>
+
+    <!-- Material Design Theming -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <link href="./mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="./mui.min.js"></script>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header class="mui-appbar mui--z1">
+        <div class="mui-container">
+            <table width="100%">
+                <tr class="mui--appbar-height">
+                    <td class="mui--text-title"><a>DiCaMu - <b>Di</b>gital <b>Mu</b>seum <b>Ca</b>talogue</a></td>
+                </tr>
+            </table>
+        </div>
+    </header>
+    <div class="mui--appbar-height"></div><br><br>
+    <div class="mui-container-fluid">
+        <div class="mui-dropdown">
+            <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown" id="dropdown_title">
+                Museum
+                <span class="mui-caret"></span>
+            </button>
+            <ul class="mui-dropdown__menu" id="dropdown_museen">
+                <li><a href="#" onclick="AddMuseumDialog()">Museum hinzufügen</a></li>
+            </ul>
+        </div>
+        <form class="mui-form hidden" id="add_mus">
+            <div class="mui-textfield mui-textfield--float-label">
+                <input type="text" id="add_mus_input">
+                <label>Name des Museums</label>
+            </div>
+            <div class="mui-textfield mui-textfield--float-label">
+                <input type="text" id="add_mus_input_place">
+                <label>Standort</label>
+            </div>
+            <button type="submit" class="mui-btn mui-btn--raised" onclick="writeNewMuseum()">Abschicken</button>
+            <button type="submit" class="mui-btn" onclick="closeMuseumPanel()">Abbrechen</button>
+
+        </form>
+        <div id="catalogue_table" class="hidden">
+        <table class="mui-table">
+          <thead>
+            <tr>
+              <th>Titel</th>
+              <th>Autoren</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+          </tbody>
+        </table>
+        <button class="mui-btn mui-btn--primary" onclick="showCatForm()">Katalog hinzufügen</button></div>
+
+        <form class="mui-form hidden" id="add_cat">
+            <div class="mui-textfield mui-textfield--float-label">
+                <input type="text" id="add_cat_title">
+                <label>Titel</label>
+            </div>
+            <div class="mui-textfield mui-textfield--float-label">
+                <input type="text" id="add_cat_author">
+                <label>Autoren</label>
+            </div>
+            <button type="submit" class="mui-btn mui-btn--raised" onclick="writeNewCat()">Abschicken</button>
+            <button type="submit" class="mui-btn" onclick="closeCatPanel()">Abbrechen</button>
+
+        </form>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDx888a0huvJQCpklJsDdf4Sq2mddAxbhk",
+            authDomain: "dicamu-1ed50.firebaseapp.com",
+            databaseURL: "https://dicamu-1ed50.firebaseio.com",
+            projectId: "dicamu-1ed50",
+            storageBucket: "dicamu-1ed50.appspot.com",
+            messagingSenderId: "181342973516"
+        };
+        firebase.initializeApp(config);
+
+
+        var database = firebase.database();
+        var museumRef = database.ref('Museum');
+        var numOfCatalogues=0;
+        var currentID=0;
+        function show_catalogues(id){
+            database.ref('Museum/'+id).once('value').then(function(snapshot) {
+                document.querySelector("#dropdown_title").innerHTML= snapshot.val().Name + " <span class='mui-caret'></span>";
+
+            })
+            database.ref('Museum/'+id+'/Kataloge').once('value').then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childData = childSnapshot.val();
+                    console.log(childData)
+                    numOfCatalogues++;
+                    document.querySelector("#tbody").innerHTML += "<tr onclick=openCatalogue("+childData.ID+")><td>"+childData.Titel+"</td><td>"+childData.Autor+"</td></tr>"
+                });
+            })
+            document.querySelector("#catalogue_table").classList.remove("hidden")
+            currentID=id;
+        }
+        var numOfMuseums=0;
+
+        function loadMuseums(){
+            museumRef.once('value').then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childData = childSnapshot.val();
+                    numOfMuseums++;
+                    document.querySelector('#dropdown_museen').innerHTML+= "<li><a href='#' onclick='show_catalogues("+childData.ID+")'>"+childData.Name+" ("+childData.Ort+")</a></li>"
+                    console.log(childData)
+                });
+            })
+        }
+        function AddMuseumDialog(){
+            console.log(numOfMuseums);
+            document.querySelector("#add_mus").classList.remove("hidden");
+        }
+
+        function writeNewMuseum(){
+            name_input = document.querySelector("#add_mus_input")
+            place_input = document.querySelector("#add_mus_input_place")
+            var name = name_input.value;
+            var place = place_input.value;
+            name_input.value = ""
+            place_input.value = ""
+            var museumID = numOfMuseums +1;
+            database.ref('Museum/'+museumID).set({
+                ID:museumID,
+                Name:name,
+                Ort:place
+            });
+            updateDropdownMuseum()
+            closeMuseumPanel()
+        }
+        function closeMuseumPanel(){
+            document.querySelector("#add_mus").classList.add("hidden");
+
+        }
+        function updateDropdownMuseum(){
+            document.querySelector('#dropdown_museen').innerHTML= "<li><a href='#' onclick='AddMuseumDialog()'>Museum hinzufügen</a></li>";
+            loadMuseums()
+        }
+
+        function openCatalogue(id){
+        }
+
+        function showCatForm(){
+            document.querySelector("#catalogue_table").classList.add("hidden");
+            document.querySelector("#add_cat").classList.remove("hidden");
+        }
+
+        function closeCatPanel(){
+            document.querySelector("#catalogue_table").classList.remove("hidden");
+            document.querySelector("#add_cat").classList.add("hidden");
+        }
+        function writeNewCat(){
+            title_input = document.querySelector("#add_cat_title")
+            author_input = document.querySelector("#add_cat_author")
+            var title = title_input.value;
+            var author = author_input.value;
+            title_input.value = ""
+            author_input.value = ""
+            var catID=numOfCatalogues+1;
+            database.ref('Museum/'+currentID+'/Kataloge/'+catID).set({
+                ID:catID,
+                Autor:author,
+                Titel:title,
+                Aufsätze: {},
+                Kunstwerke: {}
+            });
+
+            closeCatPanel()
+            clearTable()
+            show_catalogues(currentID)
+        }
+        function clearTable(){
+            document.querySelector('#tbody').innerHTML =""
+        }
+        loadMuseums()
+    </script>
+
+    <!-- Import and configure the Firebase SDK -->
+    <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+    <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+
+</body>
+
+</html>
