@@ -1,7 +1,7 @@
 <div class="scrollable" ng-controller="HomeCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
-            <div ng-repeat="museum in museums">
+            <div ng-repeat="museum in museums" ng-if="!$first">
                 <i class="fa fa-home" aria-hidden="true" id="museum"></i>
                 <span class="name">{{museum.Name}}</span>
             </div>

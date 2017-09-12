@@ -1,7 +1,13 @@
 <div class="scrollable" ng-controller="MyCatCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
-            <p class="lead">Look at all the catalogues I own!</p>
+            <div ng-repeat="catalogue in mycatalogues" ng-if="!$first">
+                <i class="fa fa-book" aria-hidden="true" id="my-catalogues"></i>
+                <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
+                <span class="name">
+                    {{catalogue.Titel}}"
+                </span>
+            </div>
         </section>
     </div>
 </div>

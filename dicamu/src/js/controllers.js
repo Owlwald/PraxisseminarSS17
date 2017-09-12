@@ -21,4 +21,15 @@
     app.controller("HomeCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Museen';
     });
+
+    app.controller("Clicked", function ($scope, $rootScope) {
+        $scope.clicked = function ($event) {
+            var clickedTarget = $event.currentTarget
+            var element = clickedTarget.querySelector("span.title")
+            var content = element.children
+
+            alert("Clicked:" + content)
+        }
+    });
+
 }());

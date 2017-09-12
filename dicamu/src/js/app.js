@@ -12,10 +12,19 @@
 
         $scope.data = {};
 
-        firebase.database().ref('Museum').on('value', function (snapshot) {
+        //firebase.database().ref('Museum').on('value', function (snapshot) {
+        firebase.database().ref().on('value', function (snapshot) {
             var data = snapshot.val();
-            $scope.museums = data;
+            var museums = snapshot.child("Museum").val()
+            $scope.museums = museums;
+            var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
+            $scope.allcatalogues = allcatalogues
+            var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
+            $scope.mycatalogues = mycatalogues;
             console.log(data);
+            //console.log(museums);
+            //console.log(mycatalogues);
+            //console.log(allcatalogues);
             $scope.$apply();
         });
     });
@@ -44,6 +53,10 @@
             })
             .when('/art', {
                 templateUrl: "art.html",
+                reloadOnSearch: false
+            })
+            .when('/all-catalogues', {
+                templateUrl: "all-catalogues.html",
                 reloadOnSearch: false
             });
     });
