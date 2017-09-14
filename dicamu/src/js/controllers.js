@@ -25,10 +25,12 @@
     app.controller("Clicked", function ($scope, $rootScope) {
         $scope.clicked = function ($event) {
             var clickedTarget = $event.currentTarget
-            var element = clickedTarget.querySelector("span.title")
-            var content = element.children
+            console.log(clickedTarget)
+            var element = clickedTarget.querySelector("span")
+            var content = element.firstChild.textContent
 
             alert("Clicked:" + content)
+
         }
     });
 

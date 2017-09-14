@@ -2,12 +2,19 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <div ng-repeat="catalogue in mycatalogues" ng-if="!$first">
-                <i class="fa fa-book" aria-hidden="true" id="my-catalogues"></i>
-                <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
-                <span class="name">
+                <div ng-controller="Clicked">
+                    <div ng-click="clicked($event)">
+                        <i class="fa fa-book" aria-hidden="true" id="my-catalogues"></i>
+                        <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
+                        <span class="name">
                     {{catalogue.Titel}}"
                 </span>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
 </div>
+
+
+<script
