@@ -33,7 +33,16 @@
                 <span class="mui-caret"></span>
             </button>
             <ul class="mui-dropdown__menu" id="dropdown_museen">
-                <li><a href="#" onclick="AddMuseumDialog()">Museum hinzufügen</a></li>
+                <li><a href="#" onclick="addMuseumDialog()">Museum hinzufügen</a></li>
+            </ul>
+        </div>
+        <div class="mui-dropdown hidden" id="dropdown_cat_div">
+            <button class="mui-btn mui-btn--primary" data-mui-toggle="dropdown" id="dropdown_title_cat">
+                Kataloge
+                <span class="mui-caret"></span>
+            </button>
+            <ul class="mui-dropdown__menu" id="dropdown_cat">
+                <li><a href="#" onclick="addCatDialog()">Katalog hinzufügen</a></li>
             </ul>
         </div>
         <form class="mui-form hidden" id="add_mus">
@@ -46,7 +55,7 @@
                 <label>Standort</label>
             </div>
             <button type="submit" class="mui-btn mui-btn--raised" onclick="writeNewMuseum()">Abschicken</button>
-            <button type="submit" class="mui-btn" onclick="closeMuseumPanel()">Abbrechen</button>
+            <button type="submit" class="mui-btn" onclick="hideMuseumPanel()">Abbrechen</button>
 
         </form>
         <div id="catalogue_table" class="hidden">
@@ -60,7 +69,8 @@
           <tbody id="tbody">
           </tbody>
         </table>
-        <button class="mui-btn mui-btn--primary" onclick="showCatForm()">Katalog hinzufügen</button></div>
+        <button class="mui-btn mui-btn--primary" onclick="addCatDialog()">Katalog hinzufügen</button>
+        </div>
 
         <form class="mui-form hidden" id="add_cat">
             <div class="mui-textfield mui-textfield--float-label">
@@ -75,6 +85,72 @@
             <button type="submit" class="mui-btn" onclick="closeCatPanel()">Abbrechen</button>
 
         </form>
+        <div id="catalogue_detail" class="hidden">
+        <h1 class="mui--text-center" id="cat_title"></h1>
+        <h2>Aufsätze</h2>
+        <table class="mui-table">
+          <thead>
+            <tr>
+              <th>Titel</th>
+              <th>Autor</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_essay">
+          </tbody>
+        </table>
+        <button class="mui-btn mui-btn--primary" onclick="writeNewEssay()"> Aufsatz hinzufügen</button>
+        <h2>Kunstwerke</h2>
+        <table class="mui-table">
+          <thead>
+            <tr>
+              <th>Titel</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_artwork">
+          </tbody>
+        </table>
+        <button class="mui-btn mui-btn--primary" onclick="writeNewArtwork()">Kunstwerk hinzufügen</button>
+        </div>
+        <div id="essay_detail" class="hidden">
+            <form class="mui-form">
+                <br>
+                <legend> Aufsatz <legend><br>
+                <div class="mui-textfield">
+                    <input type="text" id="essay_title">
+                    <label>Titel</label>
+                </div>
+                <div class="mui-textfield">
+                    <input type="text" id="essay_author">
+                    <label>Autor</label>
+                </div>
+                <div class="mui-textfield">
+                    <textarea id="essay_text"></textarea>
+                    <label>Text</label>
+                </div>
+                <button type="submit" class="mui-btn mui-btn--raised" id="essay_save">Speichern</button>
+                <button  class="mui-btn" onclick="closeEssay()">Zurück</button>
+            </form>
+        </div>
+        <div id="artwork_detail" class="hidden">
+            <form class="mui-form">
+                <br>
+                <legend>Kunstwerk<legend><br>
+                <div class="mui-textfield">
+                    <input type="text" id="artwork_title">
+                    <label>Titel</label>
+                </div>
+                <div class="mui-textfield">
+                    <input type="text" id="artwork_literature">
+                    <label>Literatur</label>
+                </div>
+                <div class="mui-textfield">
+                    <textarea id="artwork_text"></textarea>
+                    <label>Text</label>
+                </div>
+                <button type="submit" class="mui-btn mui-btn--raised" id="artwork_save">Speichern</button>
+                <button  class="mui-btn" onclick="closeArtwork()">Zurück</button>
+            </form>
+        </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
     <script>
@@ -89,44 +165,171 @@
         };
         firebase.initializeApp(config);
 
-
         var database = firebase.database();
         var museumRef = database.ref('Museum');
         var numOfCatalogues=0;
-        var currentID=0;
-        function show_catalogues(id){
+        var numOfMuseums=0;
+        var numOfEssays=0;
+        var numOfArtworks=0;
+        var currentMusID=0;
+        var currentCatID=0;
+        var currentEssayID=0;
+        var currentArtworkID=0;
+
+        function loadCatalogues(id){
+            clearTable()
+            clearDropdown()
+            hideCatDetail()
+            hideCatDD()
+            numOfCatalogues=0;
             database.ref('Museum/'+id).once('value').then(function(snapshot) {
                 document.querySelector("#dropdown_title").innerHTML= snapshot.val().Name + " <span class='mui-caret'></span>";
-
             })
             database.ref('Museum/'+id+'/Kataloge').once('value').then(function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var childData = childSnapshot.val();
                     console.log(childData)
+                    document.querySelector('#dropdown_cat').innerHTML += "<li><a href='#' onclick=openCatalogue("+childData.ID+")>"+childData.Titel+"</a></li>"
                     numOfCatalogues++;
                     document.querySelector("#tbody").innerHTML += "<tr onclick=openCatalogue("+childData.ID+")><td>"+childData.Titel+"</td><td>"+childData.Autor+"</td></tr>"
                 });
             })
             document.querySelector("#catalogue_table").classList.remove("hidden")
-            currentID=id;
+            currentMusID=id;
         }
-        var numOfMuseums=0;
-
         function loadMuseums(){
+            numOfMuseums=0;
             museumRef.once('value').then(function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var childData = childSnapshot.val();
                     numOfMuseums++;
-                    document.querySelector('#dropdown_museen').innerHTML+= "<li><a href='#' onclick='show_catalogues("+childData.ID+")'>"+childData.Name+" ("+childData.Ort+")</a></li>"
-                    console.log(childData)
+                    document.querySelector('#dropdown_museen').innerHTML+= "<li><a href='#' onclick='loadCatalogues("+childData.ID+")'>"+childData.Name+" ("+childData.Ort+")</a></li>"
                 });
             })
         }
-        function AddMuseumDialog(){
-            console.log(numOfMuseums);
-            document.querySelector("#add_mus").classList.remove("hidden");
+        function openCatalogue(id){
+            clearDetailTables();
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+id).once('value').then(function(snapshot) {
+                numOfEssays=0;
+                numOfArtworks=0;
+                document.querySelector("#dropdown_title_cat").innerHTML= snapshot.val().Titel + " <span class='mui-caret'></span>";
+                document.querySelector("#cat_title").innerHTML = snapshot.val().Titel;
+                var essays = snapshot.val().Aufsätze
+                var artworks = snapshot.val().Kunstwerke
+                for(var i in essays){
+                    document.querySelector("#tbody_essay").innerHTML += "<tr onclick=openEssay("+essays[i].ID+")><td>"+essays[i].Titel+"</td><td>"+essays[i].Autor+"</td></tr>"
+                    numOfEssays++;
+                }
+                for(var i in artworks){
+                    document.querySelector("#tbody_artwork").innerHTML += "<tr onclick=openArtwork("+artworks[i].ID+")><td>"+artworks[i].Titel+"</td></tr>"
+                    numOfArtworks++;
+                }
+            })
+            hideCatTable();
+            showCatDetail();
+            showCatDD();
+            currentCatID=id;
         }
 
+        function openEssay(id){
+            console.log(currentMusID,currentCatID,id)
+            hideCatDetail()
+            showEssayDetail()
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Aufsätze/'+id).once('value').then(function(snapshot){
+                console.log(snapshot.val())
+                document.querySelector("#essay_title").value= snapshot.val().Titel;
+                document.querySelector("#essay_author").value= snapshot.val().Autor;
+                document.querySelector("#essay_text").value= snapshot.val().Text;
+                document.querySelector("#essay_save").setAttribute("onClick","saveEssay("+snapshot.val().ID+")")
+            })
+        }
+        function saveEssay(id){
+            var title_input=document.querySelector("#essay_title")
+            var author_input=document.querySelector("#essay_author")
+            var text_input=document.querySelector("#essay_text")
+            var title=title_input.value;
+            var author=author_input.value;
+            var text=text_input.value;
+            title_input.value=""
+            author_input.value=""
+            text_input.value=""
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Aufsätze/'+id).set({
+                ID:id,
+                Autor:author,
+                Titel:title,
+                Medien:{0:"0"},
+                Text:text,
+            });
+            closeEssay()
+        }
+        function closeEssay(){
+            hideEssayDetail()
+            showCatDetail()
+            resetEssayDetail()
+            openCatalogue(currentCatID)
+        }
+        function resetEssayDetail(){
+            document.querySelector("#essay_title").value=""
+            document.querySelector("#essay_author").value=""
+            document.querySelector("#essay_text").value=""
+        }
+        function openArtwork(id){
+            console.log(currentMusID,currentCatID,id)
+            hideCatDetail()
+            showArtworkDetail()
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Kunstwerke/'+id).once('value').then(function(snapshot){
+                console.log(snapshot.val())
+                document.querySelector("#artwork_title").value= snapshot.val().Titel;
+                document.querySelector("#artwork_text").value= snapshot.val().Text;
+                document.querySelector("#artwork_literature").value= snapshot.val().Literatur;
+                document.querySelector("#artwork_save").setAttribute("onClick","saveArtwork("+snapshot.val().ID+")")
+            })
+        }
+        function saveArtwork(id){
+            var title_input=document.querySelector("#artwork_title")
+            var literature_input=document.querySelector("#artwork_literature")
+            var text_input=document.querySelector("#artwork_text")
+            var title=title_input.value;
+            var literature=literature_input.value;
+            var text=text_input.value;
+            title_input.value=""
+            literature_input.value=""
+            text_input.value=""
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Kunstwerke/'+id).set({
+                ID:id,
+                Literatur:literature,
+                Titel:title,
+                Medien:{0:"0"},
+                Text:text,
+            });
+            closeArtwork()
+        }
+        function closeArtwork(){
+            hideArtworkDetail()
+            showCatDetail()
+            resetArtworkDetail()
+            openCatalogue(currentCatID)
+        }
+        function resetArtworkDetail(){
+            document.querySelector("#artwork_title").value=""
+            document.querySelector("#artwork_text").value=""
+            document.querySelector("#artwork_literature").value=""
+        }
+        function addMuseumDialog(){
+            showMuseumPanel()
+            hideCatDD()
+            hideCatDetail()
+            hideCatTable()
+        }
+        function addCatDialog(){
+            hideCatTable();
+            hideCatDetail();
+            showCatForm();
+        }
+        function closeCatPanel(){
+            showCatTable()
+            hideCatForm()
+        }
         function writeNewMuseum(){
             name_input = document.querySelector("#add_mus_input")
             place_input = document.querySelector("#add_mus_input_place")
@@ -141,28 +344,7 @@
                 Ort:place
             });
             updateDropdownMuseum()
-            closeMuseumPanel()
-        }
-        function closeMuseumPanel(){
-            document.querySelector("#add_mus").classList.add("hidden");
-
-        }
-        function updateDropdownMuseum(){
-            document.querySelector('#dropdown_museen').innerHTML= "<li><a href='#' onclick='AddMuseumDialog()'>Museum hinzufügen</a></li>";
-            loadMuseums()
-        }
-
-        function openCatalogue(id){
-        }
-
-        function showCatForm(){
-            document.querySelector("#catalogue_table").classList.add("hidden");
-            document.querySelector("#add_cat").classList.remove("hidden");
-        }
-
-        function closeCatPanel(){
-            document.querySelector("#catalogue_table").classList.remove("hidden");
-            document.querySelector("#add_cat").classList.add("hidden");
+            hideMuseumPanel()
         }
         function writeNewCat(){
             title_input = document.querySelector("#add_cat_title")
@@ -172,20 +354,84 @@
             title_input.value = ""
             author_input.value = ""
             var catID=numOfCatalogues+1;
-            database.ref('Museum/'+currentID+'/Kataloge/'+catID).set({
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+catID).set({
                 ID:catID,
                 Autor:author,
                 Titel:title,
-                Aufsätze: {},
-                Kunstwerke: {}
+                Aufsätze: {0:"0"},
+                Kunstwerke: {0:"0"}
             });
-
             closeCatPanel()
             clearTable()
-            show_catalogues(currentID)
+            loadCatalogues(currentMusID)
+        }
+        function writeNewEssay(){
+            var essayID = numOfEssays+1;
+            showEssayDetail();
+            hideCatDetail();
+            document.querySelector("#essay_save").setAttribute("onClick","saveEssay("+essayID+")")
+        }
+        function writeNewArtwork(){
+            var artworkID = numOfArtworks+1;
+            showArtworkDetail()
+            hideCatDetail()
+            document.querySelector("#artwork_save").setAttribute("onClick","saveArtwork("+artworkID+")")
+        }
+        function showEssayDetail(){
+            document.querySelector("#essay_detail").classList.remove("hidden")
+        }
+        function hideEssayDetail(){
+            document.querySelector("#essay_detail").classList.add("hidden")
+        }
+        function showArtworkDetail(){
+            document.querySelector("#artwork_detail").classList.remove("hidden")
+        }
+        function hideArtworkDetail(){
+            document.querySelector("#artwork_detail").classList.add("hidden")
+        }
+        function updateDropdownMuseum(){
+            document.querySelector('#dropdown_museen').innerHTML= "<li><a href='#' onclick='addMuseumDialog()'>Museum hinzufügen</a></li>";
+            loadMuseums()
+        }
+        function showCatTable(){
+            document.querySelector("#catalogue_table").classList.remove("hidden");
+        }
+        function hideCatTable(){
+            document.querySelector("#catalogue_table").classList.add("hidden")
+        }
+        function showCatForm(){
+            document.querySelector("#add_cat").classList.remove("hidden");
+        }
+        function hideCatForm(){
+            document.querySelector("#add_cat").classList.add("hidden");
+        }
+        function showMuseumPanel(){
+            document.querySelector("#add_mus").classList.remove("hidden");
+        }
+        function hideMuseumPanel(){
+            document.querySelector("#add_mus").classList.add("hidden");
+        }
+        function showCatDD(){
+            document.querySelector('#dropdown_cat_div').classList.remove("hidden")
+        }
+        function hideCatDD(){
+            document.querySelector('#dropdown_cat_div').classList.add("hidden")
+        }
+        function showCatDetail(){
+            document.querySelector("#catalogue_detail").classList.remove("hidden")
+        }
+        function hideCatDetail(){
+            document.querySelector("#catalogue_detail").classList.add("hidden")
         }
         function clearTable(){
             document.querySelector('#tbody').innerHTML =""
+        }
+        function clearDetailTables(){
+            document.querySelector("#tbody_essay").innerHTML =""
+            document.querySelector("#tbody_artwork").innerHTML =""
+        }
+        function clearDropdown(){
+            document.querySelector("#dropdown_cat").innerHTML = "<li><a href='#' onclick='addCatDialog()'>Katalog hinzufügen</a></li>"
         }
         loadMuseums()
     </script>
