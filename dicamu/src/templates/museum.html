@@ -3,10 +3,10 @@
         <section class="section container-fluid">
             <p>Ort: {{einMuseum.Ort}}</p>
             <div ng-repeat="catalog in catalogues" ng-if="!$first">
-                <div ng-click="setSelection(catalog);">
+                <a ng-click="setCatalog(catalog)" ng-href="#/catalog">
                     <i class="fa fa-book" aria-hidden="true" id="museum"></i>
                     <span class="name">{{catalog.Titel}}</span>
-                </div>
+                </a>
             </div>
         </section>
     </div>
