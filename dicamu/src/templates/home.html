@@ -2,12 +2,10 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <div ng-repeat="museum in museums" ng-if="!$first">
-                <div ng-controller="Clicked">
-                    <div ng-click="clicked($event)">
-                        <i class="fa fa-home" aria-hidden="true" id="museum"></i>
-                        <span class="name">{{museum.Name}}</span>
-                    </div>
-                </div>
+                <a ng-click="setMuseum(museum)" ng-href="#/museum">
+                    <i class="fa fa-home" aria-hidden="true" id="museum"></i>
+                    <span class="name">{{museum.Name}}</span>
+                </a>
             </div>
         </section>
     </div>
