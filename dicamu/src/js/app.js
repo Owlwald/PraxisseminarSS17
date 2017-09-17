@@ -11,8 +11,8 @@
     app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
 
         $scope.data = {};
+        $rootScope.museum = {};
 
-        //firebase.database().ref('Museum').on('value', function (snapshot) {
         firebase.database().ref().on('value', function (snapshot) {
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
@@ -27,6 +27,12 @@
             //console.log(allcatalogues);
             $scope.$apply();
         });
+
+        //set selected museum
+        $scope.setMuseum = function (museum) {
+            console.log("hi")
+            $rootScope.museum = museum;
+        }
     });
 
     app.config(function ($routeProvider) {
@@ -37,6 +43,10 @@
             })
             .when('/home', {
                 templateUrl: "home.html",
+                reloadOnSearch: false
+            })
+            .when('/museum', {
+                templateUrl: "museum.html",
                 reloadOnSearch: false
             })
             .when('/my-catalogues', {

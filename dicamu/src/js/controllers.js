@@ -14,24 +14,16 @@
         $rootScope.topTitle = 'Name Katalog';
     });
 
+    app.controller("MuseumCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = 'Name Museum';
+    });
+
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
     });
 
     app.controller("HomeCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Museen';
-    });
-
-    app.controller("Clicked", function ($scope, $rootScope) {
-        $scope.clicked = function ($event) {
-            var clickedTarget = $event.currentTarget
-            console.log(clickedTarget)
-            var element = clickedTarget.querySelector("span")
-            var content = element.firstChild.textContent
-
-            alert("Clicked:" + content)
-
-        }
     });
 
 }());
