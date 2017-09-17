@@ -1,0 +1,13 @@
+<div class="scrollable" ng-controller="MuseumCtrl">
+    <div class="scrollable-content">
+        <section class="section container-fluid">
+            <p>Ort: {{einMuseum.Ort}}</p>
+            <div ng-repeat="catalog in catalogues" ng-if="!$first">
+                <a ng-click="setCatalog(catalog)" ng-href="#/catalog">
+                    <i class="fa fa-book" aria-hidden="true" id="museum"></i>
+                    <span class="name">{{catalog.Titel}}</span>
+                </a>
+            </div>
+        </section>
+    </div>
+</div>

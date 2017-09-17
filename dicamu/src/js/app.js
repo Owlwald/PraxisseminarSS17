@@ -12,12 +12,26 @@
 
         $scope.data = {};
 
-        firebase.database().ref('Museum').on('value', function (snapshot) {
+        firebase.database().ref().on('value', function (snapshot) {
             var data = snapshot.val();
-            $scope.museums = data;
-            console.log(data);
+            var museums = snapshot.child("Museum").val()
+            $scope.museums = museums;
+            var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
+            $scope.allcatalogues = allcatalogues
+            var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
+            $scope.mycatalogues = mycatalogues;
+            //TODO delete when development finished:
+            //console.log(data);
+            //console.log(museums);
+            //console.log(mycatalogues);
+            //console.log(allcatalogues);
             $scope.$apply();
         });
+
+        //set selected museum
+        $scope.setMuseum = function (museum) {
+            $rootScope.einMuseum = museum;
+        }
     });
 
     app.config(function ($routeProvider) {
@@ -28,6 +42,10 @@
             })
             .when('/home', {
                 templateUrl: "home.html",
+                reloadOnSearch: false
+            })
+            .when('/museum', {
+                templateUrl: "museum.html",
                 reloadOnSearch: false
             })
             .when('/my-catalogues', {
@@ -44,6 +62,14 @@
             })
             .when('/art', {
                 templateUrl: "art.html",
+                reloadOnSearch: false
+            })
+            .when('/essay', {
+                templateUrl: "essay.html",
+                reloadOnSearch: false
+            })
+            .when('/all-catalogues', {
+                templateUrl: "all-catalogues.html",
                 reloadOnSearch: false
             });
     });
