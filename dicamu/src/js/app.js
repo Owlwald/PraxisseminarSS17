@@ -11,7 +11,6 @@
     app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
 
         $scope.data = {};
-        $rootScope.museum = {};
 
         firebase.database().ref().on('value', function (snapshot) {
             var data = snapshot.val();
