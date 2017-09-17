@@ -3,7 +3,7 @@
     var app = angular.module("dcm");
 
     app.controller("ArtCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Name Kunstwerk';
+        $rootScope.topTitle = $rootScope.singleItem.Titel;
     });
 
     app.controller("ArtListCtrl", function ($scope, $rootScope) {
@@ -11,12 +11,23 @@
     });
 
     app.controller("CatCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Name Katalog';
+        $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
+        $scope.artworks = $rootScope.einKatalog.Kunstwerke;
+        $scope.essays = $rootScope.einKatalog.Essays;
+
+        $scope.setItem = function (item) {
+            $rootScope.singleItem = item;
+        }
+
     });
 
     app.controller("MuseumCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.einMuseum.Name;
         $scope.catalogues = $rootScope.einMuseum.Kataloge;
+
+        $scope.setCatalog = function (catalog) {
+            $rootScope.einKatalog = catalog;
+        }
     });
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {

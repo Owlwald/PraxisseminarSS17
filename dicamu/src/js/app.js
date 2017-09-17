@@ -64,6 +64,10 @@
                 templateUrl: "art.html",
                 reloadOnSearch: false
             })
+            .when('/essay', {
+                templateUrl: "essay.html",
+                reloadOnSearch: false
+            })
             .when('/all-catalogues', {
                 templateUrl: "all-catalogues.html",
                 reloadOnSearch: false
