@@ -30,7 +30,6 @@
 
         //set selected museum
         $scope.setMuseum = function (museum) {
-            console.log("hi")
             $rootScope.einMuseum = museum;
         }
     });

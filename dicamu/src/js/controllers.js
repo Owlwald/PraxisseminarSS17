@@ -16,6 +16,7 @@
 
     app.controller("MuseumCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.einMuseum.Name;
+        $scope.catalogues = $rootScope.einMuseum.Kataloge;
     });
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {

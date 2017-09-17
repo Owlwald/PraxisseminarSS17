@@ -2,12 +2,12 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <p>Ort: {{einMuseum.Ort}}</p>
-            <!-- <div ng-repeat="museum in museums" ng-if="!$first">
-                <div ng-click="setSelection(museum);">
-                    <i class="fa fa-home" aria-hidden="true" id="museum"></i>
-                    <span class="name">{{museum.Name}}</span>
+            <div ng-repeat="catalog in catalogues" ng-if="!$first">
+                <div ng-click="setSelection(catalog);">
+                    <i class="fa fa-book" aria-hidden="true" id="museum"></i>
+                    <span class="name">{{catalog.Titel}}</span>
                 </div>
-            </div>-->
+            </div>
         </section>
     </div>
 </div>
