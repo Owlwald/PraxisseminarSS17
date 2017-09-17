@@ -15,7 +15,7 @@
     });
 
     app.controller("MuseumCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Name Museum';
+        $rootScope.topTitle = $rootScope.einMuseum.Name;
     });
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {

@@ -21,7 +21,8 @@
             $scope.allcatalogues = allcatalogues
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
-            console.log(data);
+            //TODO delete when development finished:
+            //console.log(data);
             //console.log(museums);
             //console.log(mycatalogues);
             //console.log(allcatalogues);
@@ -31,7 +32,7 @@
         //set selected museum
         $scope.setMuseum = function (museum) {
             console.log("hi")
-            $rootScope.museum = museum;
+            $rootScope.einMuseum = museum;
         }
     });
 
