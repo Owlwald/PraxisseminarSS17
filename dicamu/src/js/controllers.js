@@ -32,6 +32,10 @@
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
+
+        $scope.setChosenCatalog = function (catalog) {
+            $rootScope.einKatalog = catalog;
+        }
     });
 
     app.controller("HomeCtrl", function ($scope, $rootScope) {

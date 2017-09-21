@@ -4,16 +4,18 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <div ng-repeat="catalogue in allcatalogues" ng-if="!$first">
-                <i class="fa fa-book" aria-hidden="true" id="all-catalogues" ng-click="clicked()"></i>
-                <span class="title" id="title">
+                <a ng-click="setChosenCatalog(catalogue)" ng-href="#/catalog">
+                    <i class="fa fa-book" aria-hidden="true" id="all-catalogues" ng-click="clicked()"></i>
+                    <span class="title" id="title">
                             {{catalogue.Titel}}
                         </span>
-                <br>
-                <i class="fa fa-users" aria-hidden="true" id="authors"></i>
-                <span class="authors">
+                    <br>
+                    <i class="fa fa-users" aria-hidden="true" id="authors"></i>
+                    <span class="authors">
                             {{catalogue.Autor}}
                         </span>
-                <div class="line"></div>
+                    <div class="line"></div>
+                </a>
             </div>
         </section>
     </div>

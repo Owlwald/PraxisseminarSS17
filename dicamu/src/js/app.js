@@ -32,6 +32,9 @@
         $scope.setMuseum = function (museum) {
             $rootScope.einMuseum = museum;
         }
+        $scope.setMyCatalog = function (catalog) {
+            $rootScope.chosenCatalog = catalog;
+        }
     });
 
     app.config(function ($routeProvider) {
