@@ -42,4 +42,8 @@
         $rootScope.topTitle = 'Museen';
     });
 
+    app.controller("EssayCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = $rootScope.singleItem.Titel;
+    });
+
 }());
