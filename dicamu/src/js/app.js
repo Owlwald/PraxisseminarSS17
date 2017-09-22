@@ -16,8 +16,11 @@
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
             $scope.museums = museums;
+            // das hier ist noch bissl problematisch
             var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
             $scope.allcatalogues = allcatalogues
+            // ------
+
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
             //TODO delete when development finished:

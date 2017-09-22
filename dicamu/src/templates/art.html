@@ -2,7 +2,9 @@
     <div class="scrollable-content">
 
         <section class="section container-fluid">
-            <img src="../images/1.PNG" />
+            <!-- hier gehört eigentlich kein image hin 
+            <img src="..." />
+            -->
             <div ui-state="activeTab" default="1">
                 <ul class="nav nav-tabs">
                     <li ui-class="{'active': activeTab == 1}">
@@ -11,6 +13,9 @@
                     <li ui-class="{'active': activeTab == 2}">
                         <a ui-set="{'activeTab': 2}">Details</a>
                     </li>
+                    <li ui-class="{'active': activeTab == 3}">
+                        <a ui-set="{'activeTab': 3}">Bestandteile</a>
+                    </li>
                 </ul>
 
                 <div ui-if="activeTab == 1">
@@ -18,7 +23,22 @@
                 </div>
 
                 <div ui-if="activeTab == 2">
-                    <p>Facts</p>
+                    <p>Titel: {{singleItem.Titel}}</p>
+                    <p>Literatur: {{singleItem.Literatur}}</p>
+
+                </div>
+                <div ui-if="activeTab == 3">
+                    <div ng-repeat="media in itemMedia" ng-if="!$first">
+                    
+                    <p>Titel: {{media.Titel}}</p>
+
+                        
+                        
+                    <div ng-repeat="detail1 in media.Details" ng-if="!$first">
+                        <p>{{detail1.Typ}}: {{detail1.Detail}}</p>
+                    </div>
+                    <img src={{media.Medien}}>
+                    </div>
                 </div>
             </div>
         </section>

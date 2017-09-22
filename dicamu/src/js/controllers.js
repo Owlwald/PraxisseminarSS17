@@ -4,6 +4,7 @@
 
     app.controller("ArtCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.singleItem.Titel;
+        $scope.itemMedia = $rootScope.singleItem.Medien
     });
 
     app.controller("ArtListCtrl", function ($scope, $rootScope) {
