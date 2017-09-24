@@ -87,7 +87,7 @@
         </form>
         <div id="catalogue_detail" class="hidden">
         <h1 class="mui--text-center" id="cat_title"></h1>
-        <h2>Aufsätze</h2>
+        <h2>Essays</h2>
         <table class="mui-table">
           <thead>
             <tr>
@@ -111,6 +111,7 @@
         </table>
         <button class="mui-btn mui-btn--primary" onclick="writeNewArtwork()">Kunstwerk hinzufügen</button>
         </div>
+
         <div id="essay_detail" class="hidden">
             <form class="mui-form">
                 <br>
@@ -127,9 +128,25 @@
                     <textarea id="essay_text"></textarea>
                     <label>Text</label>
                 </div>
-                <button type="submit" class="mui-btn mui-btn--raised" id="essay_save">Speichern</button>
+                <div id="essay_detail_media">
+                    <h2>Medien</h2>
+                    <table class="mui-table">
+                        <thead>
+                            <tr>
+                                <th>Titel</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_essay_media">
+                        </tbody>
+                    </table>
+                    <button class="mui-btn mui-btn--primary" style="float:right;" onclick="writeNewMedia()">Medien hinzufügen</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <button  type="submit" class="mui-btn mui-btn--raised" id="essay_save">Speichern</button>
                 <button  class="mui-btn" onclick="closeEssay()">Zurück</button>
             </form>
+
         </div>
         <div id="artwork_detail" class="hidden">
             <form class="mui-form">
@@ -140,19 +157,69 @@
                     <label>Titel</label>
                 </div>
                 <div class="mui-textfield">
+                    <input type="text" id="artwork_author">
+                    <label>Autor</label>
+                </div>
+                <div class="mui-textfield">
                     <input type="text" id="artwork_literature">
                     <label>Literatur</label>
                 </div>
                 <div class="mui-textfield">
                     <textarea id="artwork_text"></textarea>
                     <label>Text</label>
+                    <div id="artwork_detail_media">
+                        <h2>Medien</h2>
+                        <table class="mui-table">
+                            <thead>
+                                <tr>
+                                    <th>Titel</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_artwork_media">
+                            </tbody>
+                        </table>
+                        <button class="mui-btn mui-btn--primary" style="float:right;" onclick="writeNewMedia()">Medien hinzufügen</button>
+                        <div style="clear: both;"></div>
+                    </div>
+
                 </div>
                 <button type="submit" class="mui-btn mui-btn--raised" id="artwork_save">Speichern</button>
                 <button  class="mui-btn" onclick="closeArtwork()">Zurück</button>
             </form>
         </div>
+        <div id="media_detail" class="hidden">
+            <form class="mui-form">
+                <br>
+                <legend>Medien</legend><br>
+                <div class="mui-textfield">
+                    <input type="text" id="media_title">
+                    <label>Titel</label>
+                </div>
+                <div class="mui-textfield">
+                    <input type="text" id="media_link">
+                    <label>Link</label>
+                </div>
+                <input type="file" id="file" name="file"/>
+                <table class="mui-table" id="table_details">
+                    <h2>Details</h2>
+                    <thead>
+                      <tr>
+                        <th>Detailtyp</th>
+                        <th>Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbody_media"></tbody>
+                </table>
+                <button class="mui-btn mui-btn--primary" style="float:right;" onclick="writeNewDetail()">Detail hinzufügen</button>
+                <div style="clear: both;"></div>
+                <button type="submit" class="mui-btn mui-btn--raised" id="media_save">Speichern</button>
+                <button class="mui-btn" onclick="closeMedia()">Zurück</button>
+            </form>
+        </div>
+
     </div>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-storage.js"></script>
     <script>
         // Initialize Firebase
         var config = {
@@ -167,20 +234,71 @@
 
         var database = firebase.database();
         var museumRef = database.ref('Museum');
+        var storageRef = firebase.storage().ref();
         var numOfCatalogues=0;
         var numOfMuseums=0;
         var numOfEssays=0;
         var numOfArtworks=0;
+        var numOfMedia=0;
+        var numOfDetails=0;
         var currentMusID=0;
         var currentCatID=0;
         var currentEssayID=0;
         var currentArtworkID=0;
+        var EssayOrArtwork=0;
+
+        window.onload = function() {
+          document.getElementById('file').addEventListener('change', handleFileSelect, false);
+         }
+        function handleFileSelect(evt) {
+        console.log("y<o")
+          evt.stopPropagation();
+          evt.preventDefault();
+          var file = evt.target.files[0];
+
+          var metadata = {
+            'contentType': file.type
+          };
+
+
+          if(EssayOrArtwork==1){
+              storageRef.child('Museum_'+currentMusID+'/Katalog_'+currentCatID+'/Aufsätze/'+currentEssayID+'/'+ file.name).put(file, metadata).then(function(snapshot) {
+            // console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+            // console.log(snapshot.metadata);
+            var url = snapshot.downloadURL;
+            // console.log('File available at', url);
+            // [START_EXCLUDE]
+            document.getElementById('media_link').value =url ;            // [END_EXCLUDE]
+          }).catch(function(error) {
+            // [START onfailure]
+            console.error('Upload failed:', error);
+            // [END onfailure]
+        });}
+          // [END oncomplete]
+          else if(EssayOrArtwork==2){
+
+
+          storageRef.child('Museum_'+currentMusID+'/Katalog_'+currentCatID+'/Kunstwerke/'+currentArtworkID+'/'+ file.name).put(file, metadata).then(function(snapshot) {
+            console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+            console.log(snapshot.metadata);
+            var url = snapshot.downloadURL;
+            console.log('File available at', url);
+            // [START_EXCLUDE]
+            document.getElementById('media_link').value =url ;            // [END_EXCLUDE]
+          }).catch(function(error) {
+            // [START onfailure]
+            console.error('Upload failed:', error);
+            // [END onfailure]
+          });
+          }
+        }
 
         function loadCatalogues(id){
             clearTable()
             clearDropdown()
             hideCatDetail()
             hideCatDD()
+            hideMuseumPanel()
             numOfCatalogues=0;
             database.ref('Museum/'+id).once('value').then(function(snapshot) {
                 document.querySelector("#dropdown_title").innerHTML= snapshot.val().Name + " <span class='mui-caret'></span>";
@@ -188,7 +306,7 @@
             database.ref('Museum/'+id+'/Kataloge').once('value').then(function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                     var childData = childSnapshot.val();
-                    console.log(childData)
+                    // console.log(childData)
                     document.querySelector('#dropdown_cat').innerHTML += "<li><a href='#' onclick=openCatalogue("+childData.ID+")>"+childData.Titel+"</a></li>"
                     numOfCatalogues++;
                     document.querySelector("#tbody").innerHTML += "<tr onclick=openCatalogue("+childData.ID+")><td>"+childData.Titel+"</td><td>"+childData.Autor+"</td></tr>"
@@ -209,12 +327,14 @@
         }
         function openCatalogue(id){
             clearDetailTables();
+            hideEssayDetail();
+            hideArtworkDetail();
             database.ref('Museum/'+currentMusID+'/Kataloge/'+id).once('value').then(function(snapshot) {
                 numOfEssays=0;
                 numOfArtworks=0;
                 document.querySelector("#dropdown_title_cat").innerHTML= snapshot.val().Titel + " <span class='mui-caret'></span>";
                 document.querySelector("#cat_title").innerHTML = snapshot.val().Titel;
-                var essays = snapshot.val().Aufsätze
+                var essays = snapshot.val().Essays
                 var artworks = snapshot.val().Kunstwerke
                 for(var i in essays){
                     document.querySelector("#tbody_essay").innerHTML += "<tr onclick=openEssay("+essays[i].ID+")><td>"+essays[i].Titel+"</td><td>"+essays[i].Autor+"</td></tr>"
@@ -230,18 +350,116 @@
             showCatDD();
             currentCatID=id;
         }
-
         function openEssay(id){
-            console.log(currentMusID,currentCatID,id)
+            // console.log(currentMusID,currentCatID,id)
             hideCatDetail()
             showEssayDetail()
-            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Aufsätze/'+id).once('value').then(function(snapshot){
-                console.log(snapshot.val())
+            resetMediaTable()
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Essays/'+id).once('value').then(function(snapshot){
+                // console.log(snapshot.val())
+                numOfMedia=0;
                 document.querySelector("#essay_title").value= snapshot.val().Titel;
                 document.querySelector("#essay_author").value= snapshot.val().Autor;
                 document.querySelector("#essay_text").value= snapshot.val().Text;
                 document.querySelector("#essay_save").setAttribute("onClick","saveEssay("+snapshot.val().ID+")")
+                // console.log(snapshot.val().Medien)
+                var media = snapshot.val().Medien
+                for(var i in media){
+                    numOfMedia++;
+                    if(i!=0){
+                        document.querySelector("#tbody_essay_media").innerHTML += "<tr onclick=openMedia("+media[i].ID+",\"Essay\")><td>"+media[i].Titel+"</td><tr>"
+                    }
+                }
             })
+            currentEssayID=id;
+            EssayOrArtwork=1
+        }
+        function openMedia(id,type){
+            showMediaPanel()
+            if(type=="Essay"){
+                // console.log(currentMusID,currentCatID,currentEssayID,id)
+                hideEssayDetail()
+                database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Essays/'+currentEssayID+'/Medien/'+id).once('value').then(function(snapshot){
+                    // console.log(snapshot.val())
+                    numOfDetails= 0;
+                    document.querySelector("#media_title").value = snapshot.val().Titel;
+                    document.querySelector("#media_link").value = snapshot.val().Medien;
+                    document.querySelector("#media_save").setAttribute("onClick","saveMedia("+snapshot.val().ID+")")
+                    var details = snapshot.val().Details
+                    for(var i in details){
+
+                        if(i!=0){
+                            numOfDetails++
+                            // document.querySelector("#tbody_media").innerHTML += "<tr> <input type=\"text\">"+details[i].Typ+"</input></tr>"
+                            var div_1 = document.createElement("div")
+                            var div_2 = document.createElement("div")
+                            var input_1 = document.createElement("input");
+                            var input_2 = document.createElement("input");
+                            var tr = document.createElement("tr");
+                            var td_1 = document.createElement("td");
+                            var td_2 = document.createElement("td");
+
+                            input_1.type="text"
+                            input_2.type="text"
+
+                            input_1.value=details[i].Typ
+                            input_2.value=details[i].Detail
+                            div_1.classList.add("mui-textfield")
+                            div_1.appendChild(input_1)
+                            div_2.classList.add("mui-textfield")
+                            div_2.appendChild(input_2)
+                            td_1.appendChild(div_1)
+                            td_2.appendChild(div_2)
+                            tr.appendChild(td_1)
+                            tr.appendChild(td_2)
+                            document.querySelector("#tbody_media").appendChild(tr)
+                        }
+                    }
+                })
+            }
+            else if(type=="Artwork"){
+                hideArtworkDetail()
+                // console.log(currentMusID,currentCatID,currentArtworkID,id)
+                database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Kunstwerke/'+currentArtworkID+'/Medien/'+id).once('value').then(function(snapshot){
+                    // console.log(snapshot.val())
+                    numOfDetails=0;
+                    document.querySelector("#media_title").value = snapshot.val().Titel;
+                    document.querySelector("#media_link").value = snapshot.val().Medien;
+                    document.querySelector("#media_save").setAttribute("onClick","saveMedia("+snapshot.val().ID+")")
+
+                    var details = snapshot.val().Details
+                    for(var i in details){
+
+                        if(i!=0){
+                            numOfDetails++
+                            // document.querySelector("#tbody_media").innerHTML += "<tr> <input type=\"text\">"+details[i].Typ+"</input></tr>"
+                            var div_1 = document.createElement("div")
+                            var div_2 = document.createElement("div")
+                            var input_1 = document.createElement("input");
+                            var input_2 = document.createElement("input");
+                            var tr = document.createElement("tr");
+                            var td_1 = document.createElement("td");
+                            var td_2 = document.createElement("td");
+
+                            input_1.type="text"
+                            input_2.type="text"
+
+                            input_1.value=details[i].Typ
+                            input_2.value=details[i].Detail
+                            div_1.classList.add("mui-textfield")
+                            div_1.appendChild(input_1)
+                            div_2.classList.add("mui-textfield")
+                            div_2.appendChild(input_2)
+                            td_1.appendChild(div_1)
+                            td_2.appendChild(div_2)
+                            tr.appendChild(td_1)
+                            tr.appendChild(td_2)
+                            document.querySelector("#tbody_media").appendChild(tr)
+                        }
+                    }
+                })
+            }
+            else{console.log("error opening media. you should not be able to get here.")}
         }
         function saveEssay(id){
             var title_input=document.querySelector("#essay_title")
@@ -253,7 +471,7 @@
             title_input.value=""
             author_input.value=""
             text_input.value=""
-            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Aufsätze/'+id).set({
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Essays/'+id).set({
                 ID:id,
                 Autor:author,
                 Titel:title,
@@ -272,43 +490,133 @@
             document.querySelector("#essay_title").value=""
             document.querySelector("#essay_author").value=""
             document.querySelector("#essay_text").value=""
+            document.querySelector("#tbody_essay_media").value=""
         }
         function openArtwork(id){
-            console.log(currentMusID,currentCatID,id)
+            // console.log(currentMusID,currentCatID,id)
             hideCatDetail()
             showArtworkDetail()
+            resetMediaTable()
             database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Kunstwerke/'+id).once('value').then(function(snapshot){
-                console.log(snapshot.val())
+                // console.log(snapshot.val())
+                numOfMedia=0;
                 document.querySelector("#artwork_title").value= snapshot.val().Titel;
                 document.querySelector("#artwork_text").value= snapshot.val().Text;
+                document.querySelector("#artwork_author").value= snapshot.val().Autor;
                 document.querySelector("#artwork_literature").value= snapshot.val().Literatur;
                 document.querySelector("#artwork_save").setAttribute("onClick","saveArtwork("+snapshot.val().ID+")")
+                var media = snapshot.val().Medien
+                for(var i in media){
+                    numOfMedia++;
+
+                    if(i!=0){
+                        document.querySelector('#tbody_artwork_media').innerHTML += "<tr onclick=openMedia("+media[i].ID+",\"Artwork\")><td>"+media[i].Titel+"</td><tr>"
+                    }
+                }
             })
+            currentArtworkID=id;
+            EssayOrArtwork=2;
         }
         function saveArtwork(id){
             var title_input=document.querySelector("#artwork_title")
             var literature_input=document.querySelector("#artwork_literature")
             var text_input=document.querySelector("#artwork_text")
+            var author_input=document.querySelector("#artwork_author")
             var title=title_input.value;
             var literature=literature_input.value;
             var text=text_input.value;
+            var author=author_input.value;
             title_input.value=""
             literature_input.value=""
             text_input.value=""
+            author_input.value=""
             database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Kunstwerke/'+id).set({
                 ID:id,
                 Literatur:literature,
                 Titel:title,
                 Medien:{0:"0"},
                 Text:text,
+                Autor:author
             });
             closeArtwork()
+        }
+        function saveMedia(id){
+            // console.log("saving media:",id)
+            var title_input = document.querySelector("#media_title")
+            var link_input = document.querySelector("#media_link")
+            var title= title_input.value;
+            var link = link_input.value;
+            var table = document.querySelector("#tbody_media")
+            var children = table.childNodes;
+            table.innerHTML = "";
+            var detailArray = [];
+
+            for (var i=0;i<children.length;i++){
+                    // console.log(children[i])
+                    var type= children[i].children[0].children[0].children[0].value
+                    var detailtext = children[i].children[1].children[0].children[0].value
+                    var detail = {"Typ":type,"Detail":detailtext}
+                    detailArray.push(detail)
+
+            }
+
+            title_input.value="";
+            link_input.value="";
+            // console.log("Medien:",link,"Titel:",title)
+            hideMediaPanel()
+            if(EssayOrArtwork==1){
+                database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Essays/'+currentEssayID+'/Medien/'+id).set({
+                    ID:id,
+                    Titel:title,
+                    Medien:link,
+                    Details:detailArray
+                })
+                showEssayDetail()
+                openEssay(currentEssayID)
+            }
+            else if(EssayOrArtwork==2){
+                database.ref('Museum/'+currentMusID+'/Kataloge/'+currentCatID+'/Kunstwerke/'+currentArtworkID+'/Medien/'+id).set({
+                    ID:id,
+                    Titel:title,
+                    Medien:link,
+                    Details:detailArray
+                })
+                showArtworkDetail()
+                openArtwork(currentArtworkID)
+            }
+
+
         }
         function closeArtwork(){
             hideArtworkDetail()
             showCatDetail()
             resetArtworkDetail()
             openCatalogue(currentCatID)
+        }
+        function closeMedia(){
+            hideMediaPanel();
+            resetMediaPanel();
+            if(EssayOrArtwork==1){
+                openEssay(currentEssayID)
+            }
+            else if(EssayOrArtwork==2){
+                openArtwork(currentArtworkID)
+            }
+        }
+        function hideMediaPanel(){
+            document.querySelector("#media_detail").classList.add("hidden")
+        }
+        function showMediaPanel(){
+            document.querySelector("#media_detail").classList.remove("hidden")
+        }
+        function resetMediaPanel(){
+            document.querySelector("#media_title").value =""
+            document.querySelector("#media_link").value = ""
+            document.querySelector("#tbody_media").innerHTML = ""
+        }
+        function resetMediaTable(){
+            document.querySelector("#tbody_essay_media").innerHTML=""
+            document.querySelector("#tbody_artwork_media").innerHTML=""
         }
         function resetArtworkDetail(){
             document.querySelector("#artwork_title").value=""
@@ -358,7 +666,7 @@
                 ID:catID,
                 Autor:author,
                 Titel:title,
-                Aufsätze: {0:"0"},
+                Essays: {0:"0"},
                 Kunstwerke: {0:"0"}
             });
             closeCatPanel()
@@ -369,13 +677,44 @@
             var essayID = numOfEssays+1;
             showEssayDetail();
             hideCatDetail();
+            resetMediaTable();
             document.querySelector("#essay_save").setAttribute("onClick","saveEssay("+essayID+")")
         }
         function writeNewArtwork(){
             var artworkID = numOfArtworks+1;
             showArtworkDetail()
             hideCatDetail()
+            resetMediaTable()
             document.querySelector("#artwork_save").setAttribute("onClick","saveArtwork("+artworkID+")")
+        }
+        function writeNewMedia(){
+            var mediaID = numOfMedia+1;
+            showMediaPanel()
+            hideEssayDetail()
+            hideArtworkDetail()
+            document.querySelector("#media_save").setAttribute("onClick","saveMedia("+mediaID+")")
+        }
+        function writeNewDetail(){
+            var div_1 = document.createElement("div")
+            var div_2 = document.createElement("div")
+            var input_1 = document.createElement("input");
+            var input_2 = document.createElement("input");
+            var tr = document.createElement("tr");
+            var td_1 = document.createElement("td");
+            var td_2 = document.createElement("td");
+
+            input_1.type="text"
+            input_2.type="text"
+
+            div_1.classList.add("mui-textfield")
+            div_1.appendChild(input_1)
+            div_2.classList.add("mui-textfield")
+            div_2.appendChild(input_2)
+            td_1.appendChild(div_1)
+            td_2.appendChild(div_2)
+            tr.appendChild(td_1)
+            tr.appendChild(td_2)
+            document.querySelector("#tbody_media").appendChild(tr)
         }
         function showEssayDetail(){
             document.querySelector("#essay_detail").classList.remove("hidden")
