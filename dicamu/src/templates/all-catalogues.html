@@ -1,17 +1,17 @@
 <!-- This is all temporary stuff to setup a list of catalogues with titles and stuff. -->
 
-<div class="scrollable" ng-controller="MyCatCtrl">
+<div class="scrollable" ng-controller="AllCatCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
             <div ng-repeat="catalogue in allcatalogues" ng-if="!$first">
                 <a ng-click="setChosenCatalog(catalogue)" ng-href="#/catalog">
-                    <i class="fa fa-book" aria-hidden="true" id="all-catalogues" ng-click="clicked()"></i>
-                    <span class="title" id="title">
+                    <i class="fa fa-book" aria-hidden="true" id="listenicons" ng-click="clicked()"></i>
+                    <span class="allcatalogname" id="title">
                             {{catalogue.Titel}}
                         </span>
                     <br>
-                    <i class="fa fa-users" aria-hidden="true" id="authors"></i>
-                    <span class="authors">
+                    <i class="fa fa-users" aria-hidden="true" id="listenicons"></i>
+                    <span class="allcatalogname">
                             {{catalogue.Autor}}
                         </span>
                     <div class="line"></div>
