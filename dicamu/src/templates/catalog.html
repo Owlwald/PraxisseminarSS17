@@ -4,15 +4,15 @@
             <p class="lead">Aufsätze:</p>
             <div ng-repeat="essay in essays" ng-if="!$first">
                 <a ng-click="setItem(essay)" ng-href="#/essay">
-                    <i class="fa fa-file-text" aria-hidden="true" id="museum"></i>
-                    <span class="name">{{essay.Titel}}</span>
+                    <i class="fa fa-file-text" aria-hidden="true" id="listenicons"></i>
+                    <span class="artname">{{essay.Titel}}</span>
                 </a>
             </div>
             <p class="lead">Kunstwerke:</p>
             <div ng-repeat="art in artworks" ng-if="!$first">
                 <a ng-click="setItem(art)" ng-href="#/art">
-                    <i class="fa fa-spoon" aria-hidden="true" id="museum"></i>
-                    <span class="name">{{art.Titel}}</span>
+                    <i class="fa fa-paint-brush" aria-hidden="true" id="listenicons"></i>
+                    <span class="artname">{{art.Titel}}</span>
                 </a>
             </div>
         </section>
