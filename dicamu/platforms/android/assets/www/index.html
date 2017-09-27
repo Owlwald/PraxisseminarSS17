@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>dicamu</title>
 
@@ -10,54 +11,64 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
     <link rel="stylesheet" href="css/app.min.css" />
     <link rel="stylesheet" href="css/responsive.min.css" />
-    <script src="http://localhost:8001/target/target-script-min.js"></script>
-    <script src="cordova.js"></script>
-    <script src="js/app.min.js"></script>
-  </head>
-  <body ng-app="Dicamu" ng-controller="MainController">
 
-    <!-- Sidebars -->
-    <div ng-include="'sidebar.html'" 
-            ui-track-as-search-param='true'
-            class="sidebar sidebar-left"></div>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.min.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js">
+    </script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.0.3/firebase.js"></script>
+
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+
+
+    <!-- MAUI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-angular-ui/1.3.4/js/mobile-angular-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-angular-ui/1.3.4/js/mobile-angular-ui.core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-angular-ui/1.3.4/js/mobile-angular-ui.gestures.js"></script>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyDx888a0huvJQCpklJsDdf4Sq2mddAxbhk",
+            authDomain: "dicamu-1ed50.firebaseapp.com",
+            databaseURL: "https://dicamu-1ed50.firebaseio.com",
+            projectId: "dicamu-1ed50",
+            storageBucket: "dicamu-1ed50.appspot.com",
+            messagingSenderId: "181342973516"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <!-- App -->
+    <!--<script src="js/services.js"></script>-->
+    <script src="js/app.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+
+</head>
+
+<body ng-app="dcm" ng-controller="MainCtrl">
+
+    <!-- Navigation -->
+    <div ng-include="'sidebar.html'" ui-track-as-search-param='true' class="sidebar sidebar-left"></div>
+    <div ng-include="'topbar.html'"></div>
 
     <div class="app">
 
-      <!-- Navbars -->
+        <div class="app-body">
+            <div class="app-content">
+                <ng-view></ng-view>
+            </div>
+        </div>
 
-      <div class="navbar navbar-app navbar-absolute-top">
-        <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-          Mobile Angular UI
-        </div>
-        <div class="btn-group pull-left">
-          <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
-            <i class="fa fa-bars"></i> Menu
-          </div>
-        </div>
-        <div class="btn-group pull-right" ui-yield-to="navbarAction">
-          <div ui-toggle="uiSidebarRight" class="btn">
-            <i class="fa fa-comment"></i> Chat
-          </div>
-        </div>
-      </div>
-
-      <div class="navbar navbar-app navbar-absolute-bottom">
-        <div class="btn-group justified">
-          <a href="http://mobileangularui.com/" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> Docs</a>
-          <a href="https://github.com/mcasimir/mobile-angular-ui" class="btn btn-navbar"><i class="fa fa-github fa-navbar"></i> Sources</a>
-          <a href="https://github.com/mcasimir/mobile-angular-ui/issues" class="btn btn-navbar"><i class="fa fa-exclamation-circle fa-navbar"></i> Issues</a>
-        </div>
-      </div>
-
-      <!-- App Body -->
-      <div class="app-body">
-        <div class="app-content">
-          <ng-view></ng-view>  
-        </div>
-      </div>
-
-    </div><!-- ~ .app -->
+    </div>
+    <!-- ~ .app -->
 
     <div ui-yield-to="modals"></div>
-  </body>
+</body>
+
 </html>

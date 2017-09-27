@@ -16,8 +16,11 @@
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
             $scope.museums = museums;
+            // das hier ist noch bissl problematisch
             var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
             $scope.allcatalogues = allcatalogues
+            // ------
+
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
             //TODO delete when development finished:
@@ -31,6 +34,9 @@
         //set selected museum
         $scope.setMuseum = function (museum) {
             $rootScope.einMuseum = museum;
+        }
+        $scope.setMyCatalog = function (catalog) {
+            $rootScope.chosenCatalog = catalog;
         }
     });
 
@@ -70,6 +76,14 @@
             })
             .when('/all-catalogues', {
                 templateUrl: "all-catalogues.html",
+                reloadOnSearch: false
+            })
+            .when('/options', {
+                templateUrl: "options.html",
+                reloadOnSearch: false
+            })
+            .when('/login', {
+                templateUrl: "login.html",
                 reloadOnSearch: false
             });
     });

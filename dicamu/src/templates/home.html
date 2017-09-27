@@ -3,8 +3,8 @@
         <section class="section container-fluid">
             <div ng-repeat="museum in museums" ng-if="!$first">
                 <a ng-click="setMuseum(museum)" ng-href="#/museum">
-                    <i class="fa fa-home" aria-hidden="true" id="museum"></i>
-                    <span class="name">{{museum.Name}}</span>
+                    <i class="fa fa-building-o" aria-hidden="true" id="listenicons"></i>
+                    <span class="museumname">{{museum.Name}}</span>
                 </a>
             </div>
         </section>
