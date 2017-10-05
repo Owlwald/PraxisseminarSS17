@@ -1,0 +1,72 @@
+{
+	"Autor" : "Katalog-Autor",
+	"ID" : 1,
+	"Titel" : "Katalog-Titel",
+	"Essays" : 
+	[ 
+		{
+			"Autor" : "Essay-Autor",
+			"ID" : 1,
+			"Text" : "Essay-Text",
+			"Titel" : "Essay-Titel",
+			"Medien": 
+			[
+				{
+					"ID":1,
+					"Titel":"Medium-Titel",
+					"Medien":"Link zum Bild",
+					"Details":
+					[
+						{
+							"Detail":"Detail-Text",
+							"Typ":"Typ des Details"
+						},
+						{
+							[Weitere Details]
+						}
+					]
+				},
+				{
+					[Weitere Medien]
+				}
+			]
+		},
+		{
+			[Weitere Essays]
+		}
+	],
+	"Kunstwerke" : 
+	[ 
+		{
+			"Autor" : "Kunstwerk-Autor",
+			"ID" : 1,
+			"Literatur" : "Kunstwerk-Literatur",
+			"Text" : "Kunstwerk-Text",
+			"Titel" : "Kunstwerk-Titel"
+			"Medien" :
+			[
+				{
+					"ID" : 1,
+					"Medien" : "Link zum Bild",
+					"Titel" : "Medium-Titel",
+					"Details" :
+					[ 
+						{
+							"Detail" : "Detail-Text",
+							"Typ" : "Detail-Typ"
+						},
+						{
+							[Weitere Details]
+						}
+					]
+				},
+				{
+					[Weitere Medien]
+				}
+			]
+		},
+		{
+			[Weitere Kunstwerke]
+		}
+	]
+}
