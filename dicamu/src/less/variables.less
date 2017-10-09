@@ -1,207 +1,167 @@
-    /// Leiste oben mit Icons
-    .navbar-absolute-top {
-        background: @tawnyport;
+/************************* Allgemein **************************/
+
+body {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 14sp;
+}
+
+.has-navbar-top .app-body {
+    padding: 56px 0px;
+    background: white;
+}
+
+#listenicon {
+    padding: 16px 8px;
+    color: @balletslipper !important;
+    font-size: 21px;
+}
+
+.listeneintrag {
+    font-size: 16px;
+    color: black;
+    padding: 20px 0;
+}
+
+// ----- momentan irrelevant ----
+.scrollable-header app-name {
+    weight: 900;
+    font-size: 20px;
+    padding: 300px;
+}
+
+.scrollable-header user-name,
+.scrollable-header user-email {
+    padding: 8px;
+}
+
+//----- wieder relevant------
+// Titel in leiste oben
+.navbar-brand {
+    width: 50%;
+    height: 39px;
+    font-size: 20px;
+    padding: 18px 0 16px 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+// Abstand des Logos von oben
+.our-menu {
+    top: 56px;
+    background: white;
+}
+
+
+/************************* Topbar **************************/
+
+.navbar-absolute-top {
+    background: @tawnyport;
+    color: white;
+    height: 56px;
+    // Icons;
+    i {
         color: white;
-        height: 56px;
-        // Icons;
-        i {
-            color: white;
-            padding-top: 16px;
-            padding-bottom: 16px;
-            padding-left: 8px;
-            padding-right: 8px;
-            font-size: 24px;
-        }
-    }
-    
-    // App Hintergrund
-    .has-navbar-top .app-body {
-        padding: 56px 0px;
-        background: white;
-    }
-    
-    // ----- momentan irrelevant ----
-    .scrollable-header app-name {
-        font-family: 'Roboto-Black';
-        font-size: 20px;
-        padding: 300px;
-    }
-    
-    .scrollable-header user-name {
-        font-family: 'Roboto-Medium';
-        font-size: 14px;
-        padding: 8px;
-    }
-    
-    .scrollable-header user-email {
-        font-family: 'Roboto-Regular';
-        font-size: 14px;
-        padding: 8px;
-    }
-    
-    //----- wieder relevant------
-    // Titel in leiste oben
-    .navbar-brand {
-        width: 50%;
-        height: 39px;
-        font-family: 'Roboto-Medium';
-        font-size: 20px;
-        padding-top: 18px;
-        padding-left: 16px;
-        padding-bottom: 16px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-    
-    // Abstand des Logos von oben
-    .our-menu {
-        top: 56px;
-        background: white;
-    }
-    
-    // Menüpunkte in der Sidebar
-    .list-group-item {
-        background: white;
-        font-family: 'Roboto-Medium';
-        font-size: 14px;
-        padding: 20px;
-    }
-    
-    .list-group-item.active {
-        background: @balletslipper !important;
-        border-bottom-color: @balletslipper !important;
-    }
-    
-    .list-group-item.focus {
-        background: @balletslipper;
-        border-bottom-color: @balletslipper;
-    }
-    
-    .list-group-item.hover {
-        background: @balletslipper;
-        border-bottom-color: @balletslipper;
-    }
-    
-    #menuicon {
-        color: @palette-Grey-600;
-        padding-bottom: 8px;
-        padding-right: 16px;
-        font-size: 21px;
-    }
-    
-    // Listeneinträge in Museen
-    .museumname {
-        font-size: 16px;
-        font-family: 'Roboto-Regular';
-        color: black;
-        padding: 16px;
-    }
-    
-    // Icons der Listen (Museum, Kataloge, etc)
-    #listenicons {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        padding-right: 8px;
-        padding-left: 8px;
-        color: @balletslipper;
-        font-size: 21px;
-    }
-    
-    // Listeneinträge in Kataloge
-    .catalogname {
-        font-size: 16px;
-        font-family: 'Roboto-Regular';
-        color: black;
-        padding: 16px;
-    }
-    
-    // Listeneinträge in Kunstwerke
-    .artname {
-        font-size: 16px;
-        font-family: 'Roboto-Regular';
-        color: black;
-        padding: 16px;
-    }
-    
-    // Listeneinträge in meine Kataloge
-    .mycatalogname {
-        font-size: 16px;
-        font-family: 'Roboto-Regular';
-        color: black;
-        padding: 16px;
-    }
-    
-    // Listeneinträge in alle Kataloge
-    .allcatalogname {
-        font-size: 16px;
-        font-family: 'Roboto-Regular';
-        color: black;
-        padding: 16px;
-    }
-    
-    // Linie in der Sidebar
-    .line {
-        width: 100%;
-        height: 0px;
-        border-bottom: 1px solid black;
-        position: relative;
-    }
-    
-    // Zwischenüberschriften bei Auflistungen
-    .lead {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        padding-right: 8px;
-        padding-left: 8px;
-        color: @tawnyport;
+        padding: 16px 8px;
         font-size: 24px;
-        font-family: 'Roboto-Black'
     }
-    
-    // Login Remember Switch
-    .switch.active {
-        background: @balletslipper;
-        border-color: @tawnyport;
-    }
-    
-    // Login Remeber Switch Rand
-    .switch switch-handle.active {
-        border-color: @tawnyport;
-    }
-    
-    // Login Button
-    .btn {
-        background: @tawnyport !important;
-        border-color: @tawnyport !important;
-    }
-    
-    .tabs {
-        color: black;
-        font-size: 16px;
-        font-family: 'Roboto-Regular';
-        padding: 16px;
-        //background: @balletslipper;
-    }
-    
-    .tabnames {
-        color: @tawnyport !important;
-        font-size: 20px;
-        font-family: 'Roboto-Black'
-    }
-    
-    //art-page
-    .carousel-inner > .item > img,
-    .carousel-inner > .item > a > img {
-        margin-left: 0px;
-        margin-right: 0px;
-        width: 100%;
-    }
-    
-    .crop {
-        max-height: 150px !important;
-        overflow: hidden !important;
-    }
-    
-    .art-chevron {
-        margin-top: 60px;
-    }
+}
+
+.top-icon {
+    color: white !important;
+    font-size: 1.5em;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+
+/************************* Sidebar **************************/
+
+.list-group-item {
+    background: white;
+    padding: 20px;
+}
+
+.list-group-item.active,
+.list-group-item.focus,
+.list-group-item.hover {
+    background: @balletslipper !important;
+    border-bottom-color: @balletslipper !important;
+}
+
+#menuicon {
+    color: @palette-Grey-600;
+    padding-bottom: 8px;
+    padding-right: 16px;
+    font-size: 21px;
+}
+
+.line {
+    width: 100%;
+    height: 0px;
+    border-bottom: 1px solid black;
+    position: relative;
+}
+
+
+/************************* ? **************************/
+
+// Zwischenüberschriften bei Auflistungen
+.lead {
+    padding: 8px;
+    color: @tawnyport;
+    font-size: 24px;
+    weight: 900;
+}
+
+
+/************************* Login **************************/
+
+// Login Remember Switch
+.switch.active {
+    background: @balletslipper;
+    border-color: @tawnyport;
+}
+
+// Login Remeber Switch Rand
+.switch switch-handle.active {
+    border-color: @tawnyport;
+}
+
+// Login Button
+.btn {
+    background: @tawnyport !important;
+    border-color: @tawnyport !important;
+}
+
+
+/************************* Single-Art? **************************/
+
+.tabs {
+    color: black;
+    font-size: 16px;
+    padding: 16px;
+    //background: @balletslipper;
+}
+
+.tabnames {
+    color: @tawnyport !important;
+    font-size: 20px;
+    weight: 900;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+}
+
+.crop {
+    max-height: 150px !important;
+    overflow: hidden !important;
+}
+
+.art-chevron {
+    margin-top: 60px;
+}
