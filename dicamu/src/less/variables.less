@@ -1,28 +1,28 @@
+/************************* Allgemein **************************/
+
 body {
     font-family: "Roboto";
     font-weight: 400;
 }
 
-// Leiste oben mit Icons
-.navbar-absolute-top {
-    background: @tawnyport;
-    color: white;
-    height: 56px;
-    // Icons;
-    i {
-        color: white;
-        padding-top: 16px;
-        padding-bottom: 16px;
-        padding-left: 8px;
-        padding-right: 8px;
-        font-size: 24px;
-    }
-}
-
-// App Hintergrund
 .has-navbar-top .app-body {
     padding: 56px 0px;
     background: white;
+}
+
+.listenicons {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+    color: @balletslipper;
+    font-size: 21px;
+}
+
+.listeneintrag {
+    font-size: 16px;
+    color: black;
+    padding: 16px;
 }
 
 // ----- momentan irrelevant ----
@@ -61,7 +61,34 @@ body {
     background: white;
 }
 
-// Menüpunkte in der Sidebar
+
+/************************* Topbar **************************/
+
+.navbar-absolute-top {
+    background: @tawnyport;
+    color: white;
+    height: 56px;
+    // Icons;
+    i {
+        color: white;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
+        font-size: 24px;
+    }
+}
+
+.top-icon {
+    color: white !important;
+    font-size: 1.5em;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+
+/************************* Sidebar **************************/
+
 .list-group-item {
     background: white;
     font-size: 14px;
@@ -90,50 +117,8 @@ body {
     font-size: 21px;
 }
 
-// Listeneinträge in Museen
-.museumname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
 
-// Icons der Listen (Museum, Kataloge, etc)
-#listenicons {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-right: 8px;
-    padding-left: 8px;
-    color: @balletslipper;
-    font-size: 21px;
-}
-
-// Listeneinträge in Kataloge
-.catalogname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Listeneinträge in Kunstwerke
-.artname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Listeneinträge in meine Kataloge
-.mycatalogname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Listeneinträge in alle Kataloge
-.allcatalogname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
+/************************* Museen **************************/
 
 // Linie in der Sidebar
 .line {
@@ -182,12 +167,4 @@ body {
     color: @tawnyport !important;
     font-size: 20px;
     weight: 900;
-}
-
-//top-bar
-.top-icon {
-    color: white !important;
-    font-size: 1.5em;
-    margin-left: 30px;
-    margin-top: 20px;
 }
