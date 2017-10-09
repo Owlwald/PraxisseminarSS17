@@ -1,11 +1,10 @@
 <div class="navbar navbar-app navbar-absolute-top">
 
     <div class="btn-group pull-left">
-
-        <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle" *ngIf="notart; else elseBlock">
+        <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle" ng-if="notart">
             <i class="fa fa-bars"></i>
         </div>
-        <a #elseBlock ng-href="#/catalog" class="fa fa-chevron-left"></a>
+        <a ng-if="!notart" ng-href="#/catalog" class="fa fa-chevron-left"></a>
     </div>
 
     <div class="navbar-brand navbar-brand-pull-left" ui-yield-to="title">

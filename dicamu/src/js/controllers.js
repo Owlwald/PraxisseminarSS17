@@ -4,7 +4,8 @@
 
     app.controller("ArtCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.singleItem.Titel;
-        $scope.itemMedia = $rootScope.singleItem.Medien
+        $scope.itemMedia = $rootScope.singleItem.Medien;
+        $rootScope.notart = false;
     });
 
     app.controller("ArtListCtrl", function ($scope, $rootScope) {
@@ -15,11 +16,10 @@
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
-
+        $rootScope.notart = true;
         $scope.setItem = function (item) {
             $rootScope.singleItem = item;
         }
-
     });
 
     app.controller("MuseumCtrl", function ($scope, $rootScope) {
@@ -50,6 +50,7 @@
 
     app.controller("HomeCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Museen';
+        $rootScope.notart = true;
     });
 
     app.controller("EssayCtrl", function ($scope, $rootScope) {
