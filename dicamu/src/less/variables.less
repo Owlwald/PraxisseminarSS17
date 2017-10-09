@@ -1,28 +1,26 @@
+/************************* Allgemein **************************/
+
 body {
     font-family: "Roboto";
     font-weight: 400;
+    font-size: 14sp;
 }
 
-// Leiste oben mit Icons
-.navbar-absolute-top {
-    background: @tawnyport;
-    color: white;
-    height: 56px;
-    // Icons;
-    i {
-        color: white;
-        padding-top: 16px;
-        padding-bottom: 16px;
-        padding-left: 8px;
-        padding-right: 8px;
-        font-size: 24px;
-    }
-}
-
-// App Hintergrund
 .has-navbar-top .app-body {
     padding: 56px 0px;
     background: white;
+}
+
+#listenicon {
+    padding: 16px 8px;
+    color: @balletslipper !important;
+    font-size: 21px;
+}
+
+.listeneintrag {
+    font-size: 16px;
+    color: black;
+    padding: 20px 0;
 }
 
 // ----- momentan irrelevant ----
@@ -32,13 +30,8 @@ body {
     padding: 300px;
 }
 
-.scrollable-header user-name {
-    font-size: 14px;
-    padding: 8px;
-}
-
+.scrollable-header user-name,
 .scrollable-header user-email {
-    font-size: 14px;
     padding: 8px;
 }
 
@@ -48,9 +41,7 @@ body {
     width: 50%;
     height: 39px;
     font-size: 20px;
-    padding-top: 18px;
-    padding-left: 16px;
-    padding-bottom: 16px;
+    padding: 18px 0 16px 16px;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -61,26 +52,41 @@ body {
     background: white;
 }
 
-// Menüpunkte in der Sidebar
+
+/************************* Topbar **************************/
+
+.navbar-absolute-top {
+    background: @tawnyport;
+    color: white;
+    height: 56px;
+    // Icons;
+    i {
+        color: white;
+        padding: 16px 8px;
+        font-size: 24px;
+    }
+}
+
+.top-icon {
+    color: white !important;
+    font-size: 1.5em;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+
+/************************* Sidebar **************************/
+
 .list-group-item {
     background: white;
-    font-size: 14px;
     padding: 20px;
 }
 
-.list-group-item.active {
+.list-group-item.active,
+.list-group-item.focus,
+.list-group-item.hover {
     background: @balletslipper !important;
     border-bottom-color: @balletslipper !important;
-}
-
-.list-group-item.focus {
-    background: @balletslipper;
-    border-bottom-color: @balletslipper;
-}
-
-.list-group-item.hover {
-    background: @balletslipper;
-    border-bottom-color: @balletslipper;
 }
 
 #menuicon {
@@ -90,52 +96,6 @@ body {
     font-size: 21px;
 }
 
-// Listeneinträge in Museen
-.museumname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Icons der Listen (Museum, Kataloge, etc)
-#listenicons {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-right: 8px;
-    padding-left: 8px;
-    color: @balletslipper;
-    font-size: 21px;
-}
-
-// Listeneinträge in Kataloge
-.catalogname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Listeneinträge in Kunstwerke
-.artname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Listeneinträge in meine Kataloge
-.mycatalogname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Listeneinträge in alle Kataloge
-.allcatalogname {
-    font-size: 16px;
-    color: black;
-    padding: 16px;
-}
-
-// Linie in der Sidebar
 .line {
     width: 100%;
     height: 0px;
@@ -143,16 +103,19 @@ body {
     position: relative;
 }
 
+
+/************************* ? **************************/
+
 // Zwischenüberschriften bei Auflistungen
 .lead {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-right: 8px;
-    padding-left: 8px;
+    padding: 8px;
     color: @tawnyport;
     font-size: 24px;
     weight: 900;
 }
+
+
+/************************* Login **************************/
 
 // Login Remember Switch
 .switch.active {
@@ -171,6 +134,9 @@ body {
     border-color: @tawnyport !important;
 }
 
+
+/************************* Single-Art? **************************/
+
 .tabs {
     color: black;
     font-size: 16px;
@@ -182,12 +148,4 @@ body {
     color: @tawnyport !important;
     font-size: 20px;
     weight: 900;
-}
-
-//top-bar
-.top-icon {
-    color: white !important;
-    font-size: 1.5em;
-    margin-left: 30px;
-    margin-top: 20px;
 }

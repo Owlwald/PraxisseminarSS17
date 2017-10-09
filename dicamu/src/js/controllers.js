@@ -55,6 +55,7 @@
 
     app.controller("EssayCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.singleItem.Titel;
+        $rootScope.notart = false;
     });
 
     app.controller("OptionsCtrl", function ($scope, $rootScope) {
