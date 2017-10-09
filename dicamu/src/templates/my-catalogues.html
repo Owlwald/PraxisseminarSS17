@@ -2,7 +2,7 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <div ng-repeat="catalogue in mycatalogues" ng-if="!$first">
-                <a ng-click="setChosenCatalog(catalogue)" ng-href="#/catalog"> <i class="fa fa-book" aria-hidden="true" class="listenicons"></i>
+                <a ng-click="setChosenCatalog(catalogue)" ng-href="#/catalog"> <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
                     <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
                     <span class="listeneintrag">
                     {{catalogue.Titel}}"

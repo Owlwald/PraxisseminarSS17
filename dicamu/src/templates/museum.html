@@ -4,7 +4,7 @@
             <p class="lead">Ort: {{einMuseum.Ort}}</p>
             <div ng-repeat="catalog in catalogues" ng-if="!$first">
                 <a ng-click="setCatalog(catalog)" ng-href="#/catalog">
-                    <i class="fa fa-book" aria-hidden="true" class="listenicons"></i>
+                    <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
                     <span class="listeneintrag">{{catalog.Titel}}</span>
                 </a>
             </div>
