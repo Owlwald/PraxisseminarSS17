@@ -5,7 +5,7 @@
         <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle" *ngIf="notart; else elseBlock">
             <i class="fa fa-bars"></i>
         </div>
-        <i #elseBlock class="fa fa-chevron-left"></i>
+        <a #elseBlock ng-href="#/catalog" class="fa fa-chevron-left"></a>
     </div>
 
     <div class="navbar-brand navbar-brand-pull-left" ui-yield-to="title">
