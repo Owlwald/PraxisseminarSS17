@@ -2,9 +2,12 @@
     <div class="scrollable-content">
 
         <section class="section container-fluid">
-            <!-- hier gehört eigentlich kein image hin 
-            <img src="..." />
-            -->
+
+            <div ng-repeat="media in itemMedia" ng-if="!$first">
+                <img src={{media.Medien}}>
+                <p>{{media.Titel}}</p>
+            </div>
+
             <div class="tabs" ui-state="activeTab" default="1">
                 <ul class="nav nav-tabs">
                     <li ui-class="{'active': activeTab == 1}">
@@ -29,11 +32,7 @@
                 </div>
                 <div ui-if="activeTab == 3">
                     <div ng-repeat="media in itemMedia" ng-if="!$first">
-
                         <p>Titel: {{media.Titel}}</p>
-
-
-
                         <div ng-repeat="detail1 in media.Details" ng-if="!$first">
                             <p>{{detail1.Typ}}: {{detail1.Detail}}</p>
                         </div>
