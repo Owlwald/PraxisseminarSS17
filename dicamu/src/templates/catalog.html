@@ -1,18 +1,18 @@
 <div class="scrollable" ng-controller="CatCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
-            <p class="lead">Aufsätze:</p>
-            <div ng-repeat="essay in essays track by $index" ng-if="!$first">
-                <a ng-click="setItem(essay)" ng-href="#/essay">
-                    <i class="fa fa-file-text" aria-hidden="true" id="listenicons"></i>
-                    <span class="artname">{{essay.Titel}}</span>
-                </a>
-            </div>
             <p class="lead">Exponate:</p>
             <div ng-repeat="art in artworks" ng-if="!$first">
                 <a ng-click="setItem(art)" ng-href="#/art">
                     <i class="fa fa-paint-brush" aria-hidden="true" id="listenicons"></i>
                     <span class="artname">{{art.Titel}}</span>
+                </a>
+            </div>
+            <p class="lead">Aufsätze:</p>
+            <div ng-repeat="essay in essays track by $index" ng-if="!$first">
+                <a ng-click="setItem(essay)" ng-href="#/essay">
+                    <i class="fa fa-file-text" aria-hidden="true" id="listenicons"></i>
+                    <span class="artname">{{essay.Titel}}</span>
                 </a>
             </div>
         </section>
