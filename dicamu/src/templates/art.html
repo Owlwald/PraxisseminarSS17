@@ -45,13 +45,13 @@
     </div>
 </div>
 
-<div ui-content-for="modals">
+<div ui-content-for="modals" class="scrollable">
     <div class="modal modal-overlay" ui-if='modal2' ui-shared-state='modal2'>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" ui-turn-off="modal2">&times;</button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title">{{singleItem.Medien[1].Titel}}</h4>
                 </div>
                 <div class="modal-body">
                     <div id="art-carousel" class="carousel slide" data-ride="carousel">
@@ -63,7 +63,7 @@
                             <div class="item active">
                                 <img src={{singleItem.Medien[1].Medien}}>
                                 <div class="carousel-caption">
-                                    <h3>{{singleItem.Medien[1].Titel}}</h3>
+                                    <h3></h3>
                                     <!-- <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
                                 </div>
                             </div>
