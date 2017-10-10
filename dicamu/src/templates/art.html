@@ -3,10 +3,13 @@
 
         <section class="section container-fluid">
             <div class="container">
+
+
                 <a href="" ui-turn-on="modal2" aria-hidden="true">
                     <i class="fa fa-eye top-icon zoom"></i>
                     <div class="crop">
-                        <img src="../images/1.PNG" class="crop">
+                        <img src={{singleItem.Medien[1].Medien}} class="crop">
+                        <!--<img src="../images/1.PNG" class="crop">-->
                     </div>
                 </a>
             </div>
@@ -53,8 +56,8 @@
                 <div class="modal-body">
                     <div id="art-carousel" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#art-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#art-carousel" data-slide-to="1"></li>
                         </ol>
                         <div class="carousel-inner">
                             <div class="item active">
