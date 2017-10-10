@@ -2,14 +2,14 @@
     <div class="scrollable-content">
 
         <section class="section container-fluid">
-
-            <!-- carousel start -->
             <div class="container">
-                <div class="crop">
-                    <img src="../images/1.PNG" class="crop" onclick="openModal();currentSlide(1)">
-                </div>
+                <a href="" ui-turn-on="modal2" aria-hidden="true">
+                    <i class="fa fa-eye top-icon zoom"></i>
+                    <div class="crop">
+                        <img src="../images/1.PNG" class="crop">
+                    </div>
+                </a>
             </div>
-            <!-- carousel end -->
 
             <div class="tabs" ui-state="activeTab" default="1">
                 <ul class="nav nav-tabs">
@@ -39,5 +39,24 @@
             </div>
         </section>
 
+    </div>
+</div>
+
+<div ui-content-for="modals">
+    <div class="modal modal-overlay" ui-if='modal2' ui-shared-state='modal2'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" ui-turn-off="modal2">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum ...</p>
+                </div>
+                <div class="modal-footer">
+                    <button ui-turn-off="modal2" class="btn btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
