@@ -5,30 +5,8 @@
 
             <!-- carousel start -->
             <div class="container">
-                <br>
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox" ng-repeat="media in itemMedia" ng-if="!$first">
-
-                        <div class="item active crop">
-                            <img src={{media.Medien}} alt="Chania" width="460" height="345">
-                            <div class="carousel-caption">
-                                <h3>{{media.Titel}}</h3>
-                                <!--<p>{{media.Titel}}</p>-->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control" role="button" data-slide="prev">
-                        <i class="fa fa-chevron-left art-chevron" aria-hidden="true"></i>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" role="button" data-slide="next">
-                        <i class="fa fa-chevron-right art-chevron" aria-hidden="true"></i>
-                        <span class="sr-only">Next</span>
-                    </a>
+                <div class="crop">
+                    <img src="../images/1.PNG" class="crop" onclick="openModal();currentSlide(1)">
                 </div>
             </div>
             <!-- carousel end -->
@@ -41,9 +19,6 @@
                     <li ui-class="{'active': activeTab == 2}">
                         <a class="tabnames" ui-set="{'activeTab': 2}">Details</a>
                     </li>
-                    <li ui-class="{'active': activeTab == 3}">
-                        <a class="tabnames" ui-set="{'activeTab': 3}">Bestandteile</a>
-                    </li>
                 </ul>
 
                 <div ui-if="activeTab == 1">
@@ -53,9 +28,6 @@
                 <div ui-if="activeTab == 2">
                     <p>Titel: {{singleItem.Titel}}</p>
                     <p>Literatur: {{singleItem.Literatur}}</p>
-
-                </div>
-                <div ui-if="activeTab == 3">
                     <div ng-repeat="media in itemMedia" ng-if="!$first">
                         <p>Titel: {{media.Titel}}</p>
                         <div ng-repeat="detail1 in media.Details" ng-if="!$first">
