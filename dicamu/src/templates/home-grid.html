@@ -3,9 +3,13 @@
         <section class="section container-fluid">
             <div ng-repeat="museum in museums" ng-if="!$first">
                 <a ng-click="setMuseum(museum)" ng-href="#/museum">
-                    <i class="fa fa-building-o" aria-hidden="true" id="listenicon"></i>
-                    <span class="listeneintrag">{{museum.Name}}</span>
-                    <!--yo-->
+                    <ul class="bg-grid">
+                        <li><img src={{museum.Bild}} class="img-grid">
+                        </li>
+                        <li class="text-grid"><span class="listeneintrag-grid">
+                        {{museum.Name}}</span></li>
+
+                    </ul>
                 </a>
             </div>
         </section>

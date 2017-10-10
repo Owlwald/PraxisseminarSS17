@@ -50,6 +50,10 @@
                 templateUrl: "home.html",
                 reloadOnSearch: false
             })
+            .when('/home-grid', {
+                templateUrl: "home-grid.html",
+                reloadOnSearch: false
+            })
             .when('/museum', {
                 templateUrl: "museum.html",
                 reloadOnSearch: false
