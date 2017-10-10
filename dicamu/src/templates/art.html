@@ -51,7 +51,27 @@
                     <h4 class="modal-title">Modal title</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Lorem ipsum ...</p>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="../images/1.PNG">
+                                <div class="carousel-caption">
+                                    <!-- <h3>First slide</h3>
+                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <i class="fa fa-chevron-left art-chevron" aria-hidden="true"></i>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <i class="fa fa-chevron-right art-chevron" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button ui-turn-off="modal2" class="btn btn-primary">Close</button>
