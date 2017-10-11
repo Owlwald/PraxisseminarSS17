@@ -12,6 +12,17 @@
         $rootScope.topTitle = 'Kunstwerke in Name Katalog';
     });
 
+    app.controller("TopCtrl", function ($scope, $rootScope) {
+
+        $scope.setStatus = function () {
+            if ($rootScope.notgrid) {
+                $rootScope.notgrid = false;
+            } else {
+                $rootScope.notgrid = true;
+            }
+        }
+    });
+
     app.controller("CatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
@@ -51,6 +62,7 @@
     app.controller("HomeCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Museen';
         $rootScope.notart = true;
+        $rootScope.notgrid = true;
     });
 
     app.controller("EssayCtrl", function ($scope, $rootScope) {

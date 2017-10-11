@@ -38,6 +38,7 @@
         $scope.setMyCatalog = function (catalog) {
             $rootScope.chosenCatalog = catalog;
         }
+        $rootScope.notgrid = true;
     });
 
     app.config(function ($routeProvider) {
@@ -48,10 +49,6 @@
             })
             .when('/home', {
                 templateUrl: "home.html",
-                reloadOnSearch: false
-            })
-            .when('/home-grid', {
-                templateUrl: "home-grid.html",
                 reloadOnSearch: false
             })
             .when('/museum', {
