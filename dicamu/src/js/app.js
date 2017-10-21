@@ -38,6 +38,7 @@
         $scope.setMyCatalog = function (catalog) {
             $rootScope.chosenCatalog = catalog;
         }
+        $rootScope.notgrid = true;
     });
 
     app.config(function ($routeProvider) {
