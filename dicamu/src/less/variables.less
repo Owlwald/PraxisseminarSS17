@@ -19,6 +19,7 @@ body {
     padding: 16px 8px;
     color: @neutralgrey !important;
     font-size: 21px;
+    //-webkit-font-smoothing: antialiased;
 }
 
 .listeneintrag {
@@ -37,13 +38,6 @@ body {
 .scrollable-header user-name,
 .scrollable-header user-email {
     padding: 8px;
-}
-
-//----- wieder relevant------
-// Abstand des Logos von oben
-.our-menu {
-    top: 56px;
-    background: white;
 }
 
 
@@ -67,24 +61,19 @@ body {
     width: 60%;
     height: 39px;
     display: block;
-    //font-size: @text_title;
-    //padding: 18px 0 16px 16px;
-    //text-overflow: ellipsis;
     overflow: hidden;
-    animation: marquee 5s linear infinite;
-}
-
-@keyframes marquee {
-    0% {
-        left: 0;
-    }
-    100% {
-        left: -100%;
-    }
 }
 
 
 /************************* Sidebar **************************/
+
+.sidebar {
+    background: white;
+    top: 50px;
+    img {
+        margin-bottom: -2px;
+    }
+}
 
 .list-group-item {
     background: white;
