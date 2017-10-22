@@ -1,212 +1,240 @@
-/************************* Allgemein **************************/
-
-body {
-    font-family: "Roboto";
-    font-weight: 400;
-    font-size: 14sp;
-}
-
-.has-navbar-top .app-body {
-    padding: 56px 0px;
-    background: white;
-}
-
-#listenicon {
-    padding: 16px 8px;
-    color: @balletslipper !important;
-    font-size: 21px;
-}
-
-.listeneintrag {
-    font-size: 16px;
-    color: black;
-    padding: 20px 0;
-}
-
-// ----- momentan irrelevant ----
-.scrollable-header app-name {
-    weight: 900;
-    font-size: 20px;
-    padding: 300px;
-}
-
-.scrollable-header user-name,
-.scrollable-header user-email {
-    padding: 8px;
-}
-
-//----- wieder relevant------
-// Titel in leiste oben
-.navbar-brand {
-    width: 50%;
-    height: 39px;
-    font-size: 20px;
-    padding: 18px 0 16px 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-// Abstand des Logos von oben
-.our-menu {
-    top: 56px;
-    background: white;
-}
-
-
-/************************* Topbar **************************/
-
-.navbar-absolute-top {
-    background: @tawnyport;
-    color: white;
-    height: 56px;
-    // Icons;
-    i {
-        color: white;
-        padding: 16px 8px;
-        font-size: 24px;
+    /************************* Allgemein **************************/
+    
+    body {
+        font-family: "Roboto";
+        font-weight: @regular;
+        font-size: @text_body;
     }
-}
-
-.top-icon {
-    color: white !important;
-    font-size: 1.5em;
-    margin-left: 30px;
-    margin-top: 20px;
-}
-
-
-/************************* Sidebar **************************/
-
-.list-group-item {
-    background: white;
-    padding: 20px;
-}
-
-.list-group-item.active,
-.list-group-item.focus,
-.list-group-item.hover {
-    background: @balletslipper !important;
-    border-bottom-color: @balletslipper !important;
-}
-
-#menuicon {
-    color: @palette-Grey-600;
-    padding-bottom: 8px;
-    padding-right: 16px;
-    font-size: 21px;
-}
-
-.line {
-    width: 100%;
-    height: 0px;
-    border-bottom: 1px solid black;
-    position: relative;
-}
-
-
-/************************* ? **************************/
-
-// Zwischenüberschriften bei Auflistungen
-.lead {
-    padding: 8px;
-    color: @tawnyport;
-    font-size: 24px;
-    weight: 900;
-}
-
-
-/************************* Login **************************/
-
-// Login Remember Switch
-.switch.active {
-    background: @balletslipper;
-    border-color: @tawnyport;
-}
-
-// Login Remeber Switch Rand
-.switch switch-handle.active {
-    border-color: @tawnyport;
-}
-
-// Login Button
-.btn {
-    background: @tawnyport !important;
-    border-color: @tawnyport !important;
-}
-
-.img-grid {
-    max-height: auto;
-    max-width: auto;
-    align-self: center;
-}
-
-.bg-grid {
-    background: @balletslipper;
-    border-color: white;
-    border-width: 8px;
-    border-style: solid;
-    float: left;
-    width: 50%;
-    height: 40%;
-    padding: 10px;
-}
-
-.text-grid {
-    background: @tawnyport !important;
-    width: auto;
-    height: auto;
-}
-
-.listeneintrag-grid {
-    font-size: 16px;
-    color: white;
-    padding: 20px 0;
-}
-
-.li {
-    display: inline-block;
-    width: 50%;
-}
-
-
-/************************* Single-Art? **************************/
-
-.tabs {
-    color: black;
-    font-size: 16px;
-    padding: 16px;
-    //background: @balletslipper;
-}
-
-.tabnames {
-    color: @tawnyport !important;
-    font-size: 20px;
-    weight: 900;
-}
-
-.crop {
-    height: 150px !important;
-    overflow: hidden !important;
-    object-fit: cover;
-}
-
-.crop img {
-    width: 100%;
-    position: relative;
-    z-index: 1;
-}
-
-#zoom {
-    position: absolute;
-    right: 40px;
-    font-size: 2em;
-    top: 130px;
-    z-index: 10;
-    color: white;
-    text-shadow: 1px 1px 1px #ccc;
-}
-
-.art-chevron {
-    margin-top: 200px;
-    font-size: 2em;
-}
+    
+    h1 {
+        font-size: @text_title;
+    }
+    
+    .has-navbar-top .app-body {
+        padding: 50px 0px;
+        background: white;
+    }
+    
+    .white {
+        color: white !important;
+    }
+    
+    .shadow,
+    #lens {
+        z-index: 10;
+        color: white;
+        text-shadow: 1px 1px 1px #ccc;
+    }
+    
+    #listenicon {
+        padding: 16px 8px;
+        color: @neutralgrey !important;
+        font-size: 21px;
+    }
+    
+    .listeneintrag {
+        font-size: @text_menu;
+        color: black;
+        padding: 20px 0;
+    }
+    
+    // ----- momentan irrelevant ----
+    .scrollable-header app-name {
+        weight: 900;
+        font-size: 20px;
+        padding: 300px;
+    }
+    
+    .scrollable-header user-name,
+    .scrollable-header user-email {
+        padding: 8px;
+    }
+    /************************* Topbar **************************/
+    
+    .navbar-absolute-top {
+        background: @navypeony;
+        padding: 0 16px;
+        border-style: none !important;
+        // Icons;
+        i {
+            color: white;
+            font-size: @text_button;
+        }
+        i.left {
+            margin-left: 32px;
+        }
+    }
+    
+    // Titel in leiste oben
+    .navbar-brand {
+        width: 60%;
+        height: 39px;
+        display: block;
+        overflow: hidden;
+    }
+    /************************* Sidebar **************************/
+    
+    .sidebar {
+        background: white;
+        top: 50px;
+        img {
+            margin-bottom: -2px;
+        }
+    }
+    
+    .list-group-item {
+        background: white;
+        padding: 20px;
+    }
+    
+    .list-group-item.active,
+    .list-group-item.focus,
+    .list-group-item.hover {
+        background: @neutralgrey !important;
+        border-bottom-color: @neutralgrey !important;
+    }
+    
+    #menuicon {
+        color: @navypeony;
+        padding-bottom: 8px;
+        padding-right: 16px;
+        font-size: 21px;
+    }
+    
+    .line {
+        width: 100%;
+        height: 0px;
+        border-bottom: 1px solid black;
+        position: relative;
+    }
+    
+    #dicamu {
+        position: absolute;
+        top: 120px;
+        left: 20px;
+        color: white;
+        font-weight: 900;
+        font-size: 40pt;
+    }
+    /************************* ? **************************/
+    
+    // Zwischenüberschriften bei Auflistungen
+    .lead {
+        padding: 8px;
+        color: @navypeony;
+        font-size: @text_subheading;
+        weight: @medium;
+        margin-bottom: -10px;
+    }
+    /************************* Login **************************/
+    
+    // Login Remember Switch
+    .switch.active {
+        background: @neutralgrey;
+        border-color: @navypeony;
+    }
+    
+    // Login Remeber Switch Rand
+    .switch switch-handle.active {
+        border-color: @navypeony;
+    }
+    
+    // Login Button
+    .btn {
+        background: @navypeony !important;
+        border-color: @navypeony !important;
+    }
+    
+    .img-grid {
+        max-height: auto;
+        max-width: auto;
+        align-self: center;
+    }
+    
+    .bg-grid {
+        background: @neutralgrey;
+        border-color: white;
+        border-width: 8px;
+        border-style: solid;
+        float: left;
+        width: 50%;
+        height: 40%;
+        padding: 10px;
+    }
+    
+    .text-grid {
+        background: @navypeony !important;
+        width: auto;
+        height: auto;
+    }
+    
+    .listeneintrag-grid {
+        font-size: @text_body;
+        color: white;
+        padding: 20px 0;
+    }
+    
+    .li {
+        display: inline-block;
+        width: 50%;
+    }
+    /************************* Single-Art **************************/
+    
+    .sa-fluid {
+        padding: 0;
+        .container {
+            padding: 0;
+        }
+    }
+    
+    .sa-header {
+        .crop {
+            height: 150px !important;
+            overflow: hidden !important;
+            object-fit: cover;
+            img {
+                width: 100%;
+                position: relative;
+                z-index: 1;
+            }
+        }
+        i {
+            position: absolute;
+            right: 40px;
+            font-size: @text_button;
+            top: 100px;
+        }
+    }
+    
+    .sa-text {
+        background: @navypeony;
+        h1 {
+            padding: 16px;
+            color: white;
+            margin: 0;
+        }
+        .text {
+            background-color: white;
+            padding: 16px;
+        }
+    }
+    
+    .nav-tabs {
+        border-style: none !important;
+        a {
+            color: white;
+            font-size: @text_caption;
+            padding: 0;
+            border-style: none !important;
+        }
+    }
+    /****************** Single-Art-Modal **************************/
+    
+    .modal-body {
+        padding: 0px;
+    }
+    
+    .art-chevron {
+        margin-top: 200px;
+        font-size: 2em;
+    }
