@@ -15,7 +15,7 @@
             </div>
             <div class="sa-text">
 
-                <h1>Heiliger Urban nicht</h1>
+                <h1>{{singleItem.Titel}}</h1>
 
                 <div class="tabs" ui-state="activeTab" default="1">
                     <ul class="nav nav-tabs">
@@ -32,8 +32,7 @@
                     </div>
 
                     <div ui-if="activeTab == 2" class="text">
-                        <p>Titel: {{singleItem.Titel}}
-                            <br /> Literatur: {{singleItem.Literatur}}</p>
+                        <p>Literatur: {{singleItem.Literatur}}</p>
                         <div ng-repeat="media in itemMedia" ng-if="!$first">
                             <p>Titel: {{media.Titel}}</p>
                             <div ng-repeat="detail1 in media.Details" ng-if="!$first">
@@ -60,34 +59,11 @@
                     <h4 class="modal-title">{{singleItem.Medien[1].Titel}}</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="art-carousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#art-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#art-carousel" data-slide-to="1"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src={{singleItem.Medien[1].Medien}}>
-                                <div class="carousel-caption">
-                                    <h3></h3>
-                                    <!-- <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
-                                </div>
-                            </div>
-                            <div class="item" ng-repeat="media in itemMedia" ng-if="!$first">
-                                <img src={{media.Medien}}>
-                                <div class="carousel-caption">
-                                    <h3>{{media.Titel}}</h3>
-                                    <!-- <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
-                                </div>
-                            </div>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src={{singleItem.Medien[1].Medien}}>
                         </div>
                     </div>
-                    <a class="left carousel-control" data-target="#art-carousel" data-slide="prev">
-                        <i class="fa fa-chevron-left art-chevron" aria-hidden="true"></i>
-                    </a>
-                    <a class="right carousel-control" data-target="#art-carousel" data-slide="next">
-                        <i class="fa fa-chevron-right art-chevron" aria-hidden="true"></i>
-                    </a>
                 </div>
             </div>
             <div class="modal-footer">
@@ -95,5 +71,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

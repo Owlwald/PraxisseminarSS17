@@ -3,12 +3,8 @@
     var app = angular.module("dcm");
 
     app.controller("ArtCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = $rootScope.singleItem.Titel;
         $scope.itemMedia = $rootScope.singleItem.Medien;
         $rootScope.notart = false;
-        $(document).ready(function () {
-            console.log("ready!");
-        });
     });
 
     app.controller("ArtListCtrl", function ($scope, $rootScope) {
