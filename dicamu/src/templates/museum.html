@@ -2,11 +2,22 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <p class="lead">Ort: {{einMuseum.Ort}}</p>
-            <div ng-repeat="catalog in catalogues" ng-if="!$first">
-                <a ng-click="setCatalog(catalog)" ng-href="#/catalog">
-                    <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
-                    <span class="listeneintrag">{{catalog.Titel}}</span>
-                </a>
+            <div ng-if="notgrid">
+                <div ng-repeat="catalog in catalogues" ng-if="!$first">
+                    <a ng-click="setCatalog(catalog)" ng-href="#/catalog">
+                        <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
+                        <span class="listeneintrag">{{catalog.Titel}}</span>
+                    </a>
+                </div>
+            </div>
+            <div ng-if="!notgrid">
+                <div ng-repeat="catalog in catalogues" ng-if="!$first">
+                    <a ng-click="setCatalog(catalog)" ng-href="#/catalog" class="bg-grid">
+                        <img src={{catalog.Bild}} class="img-grid">
+                        <div class="text-grid"><span class="listeneintrag-grid">
+                        {{catalog.Titel}}</span></div>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
