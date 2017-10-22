@@ -1,262 +1,240 @@
-/************************* Allgemein **************************/
-
-body {
-    font-family: "Roboto";
-    font-weight: @regular;
-    font-size: @text_body;
-}
-
-h1 {
-    font-size: @text_title;
-}
-
-.has-navbar-top .app-body {
-    padding: 50px 0px;
-    background: white;
-}
-
-.white {
-    color: white !important;
-}
-
-.shadow,
-#lens {
-    z-index: 10;
-    color: white;
-    text-shadow: 1px 1px 1px #ccc;
-}
-
-#listenicon {
-    padding: 16px 8px;
-    color: @neutralgrey !important;
-    font-size: 21px;
-}
-
-.listeneintrag {
-    font-size: @text_menu;
-    color: black;
-    padding: 20px 0;
-}
-
-// ----- momentan irrelevant ----
-.scrollable-header app-name {
-    weight: 900;
-    font-size: 20px;
-    padding: 300px;
-}
-
-.scrollable-header user-name,
-.scrollable-header user-email {
-    padding: 8px;
-}
-
-
-/************************* Topbar **************************/
-
-.navbar-absolute-top {
-    background: @navypeony;
-    padding: 0 16px;
-    border-style: none !important;
-    // Icons;
-    i {
-        color: white;
-        font-size: @text_button;
+    /************************* Allgemein **************************/
+    
+    body {
+        font-family: "Roboto";
+        font-weight: @regular;
+        font-size: @text_body;
     }
-    i.left {
-        margin-left: 32px;
-    }
-}
-
-// Titel in leiste oben
-.navbar-brand {
-    width: 60%;
-    height: 39px;
-    display: block;
-    overflow: hidden;
-}
-
-
-/************************* Sidebar **************************/
-
-.sidebar {
-    background: white;
-    top: 50px;
-    img {
-        margin-bottom: -2px;
-    }
-}
-
-.list-group-item {
-    background: white;
-    padding: 20px;
-}
-
-.list-group-item.active,
-.list-group-item.focus,
-.list-group-item.hover {
-    background: @neutralgrey !important;
-    border-bottom-color: @neutralgrey !important;
-}
-
-#menuicon {
-    color: @navypeony;
-    padding-bottom: 8px;
-    padding-right: 16px;
-    font-size: 21px;
-}
-
-.line {
-    width: 100%;
-    height: 0px;
-    border-bottom: 1px solid black;
-    position: relative;
-}
-
-#dicamu {
-    position: absolute;
-    top: 120px;
-    left: 20px;
-    color: white;
-    font-weight: 900;
-    font-size: 40pt;
-}
-
-
-/************************* ? **************************/
-
-// Zwischenüberschriften bei Auflistungen
-.lead {
-    padding: 8px;
-    color: @navypeony;
-    font-size: @text_subheading;
-    weight: @medium;
-    margin-bottom: -10px;
-}
-
-
-/************************* Login **************************/
-
-// Login Remember Switch
-.switch.active {
-    background: @neutralgrey;
-    border-color: @navypeony;
-}
-
-// Login Remeber Switch Rand
-.switch switch-handle.active {
-    border-color: @navypeony;
-}
-
-// Login Button
-.btn {
-    background: @navypeony !important;
-    border-color: @navypeony !important;
-}
-
-.img-grid {
-    max-height: auto;
-    max-width: auto;
-    align-self: center;
-}
-
-.bg-grid {
-    background: @neutralgrey;
-    border-color: white;
-    border-width: 8px;
-    border-style: solid;
-    float: left;
-    width: 50%;
-    height: 40%;
-    padding: 10px;
-}
-
-.text-grid {
-    background: @navypeony !important;
-    width: auto;
-    height: auto;
-}
-
-.listeneintrag-grid {
-    font-size: @text_body;
-    color: white;
-    padding: 20px 0;
-}
-
-.li {
-    display: inline-block;
-    width: 50%;
-}
-
-
-/************************* Single-Art **************************/
-
-.crop {
-    height: 150px !important;
-    overflow: hidden !important;
-    object-fit: cover;
-}
-
-.crop img {
-    width: 100%;
-    position: relative;
-    z-index: 1;
-}
-
-#lens {
-    position: absolute;
-    right: 40px;
-    font-size: 2em;
-    top: 100px;
-}
-
-.sa-text {
-    background: @navypeony;
-    .text {
-        background-color: white;
-        padding: 16px;
-    }
-}
-
-.sa-title {
-    padding: 16px;
-    background-color: @navypeony;
-    color: white;
+    
     h1 {
-        margin: 0;
+        font-size: @text_title;
     }
-}
-
-.nav-tabs {
-    background: @navypeony;
-    border-style: none !important;
-    a {
+    
+    .has-navbar-top .app-body {
+        padding: 50px 0px;
+        background: white;
+    }
+    
+    .white {
+        color: white !important;
+    }
+    
+    .shadow,
+    #lens {
+        z-index: 10;
         color: white;
-        font-size: @text_caption;
-        padding: 0;
+        text-shadow: 1px 1px 1px #ccc;
+    }
+    
+    #listenicon {
+        padding: 16px 8px;
+        color: @neutralgrey !important;
+        font-size: 21px;
+    }
+    
+    .listeneintrag {
+        font-size: @text_menu;
+        color: black;
+        padding: 20px 0;
+    }
+    
+    // ----- momentan irrelevant ----
+    .scrollable-header app-name {
+        weight: 900;
+        font-size: 20px;
+        padding: 300px;
+    }
+    
+    .scrollable-header user-name,
+    .scrollable-header user-email {
+        padding: 8px;
+    }
+    /************************* Topbar **************************/
+    
+    .navbar-absolute-top {
+        background: @navypeony;
+        padding: 0 16px;
         border-style: none !important;
+        // Icons;
+        i {
+            color: white;
+            font-size: @text_button;
+        }
+        i.left {
+            margin-left: 32px;
+        }
     }
-}
-
-
-/*.tabnames {
-    color: white !important;
-    font-size: @text_button;
-    weight: @medium;
-}*/
-
-.sa-fluid {
-    padding: 0;
-    .container {
+    
+    // Titel in leiste oben
+    .navbar-brand {
+        width: 60%;
+        height: 39px;
+        display: block;
+        overflow: hidden;
+    }
+    /************************* Sidebar **************************/
+    
+    .sidebar {
+        background: white;
+        top: 50px;
+        img {
+            margin-bottom: -2px;
+        }
+    }
+    
+    .list-group-item {
+        background: white;
+        padding: 20px;
+    }
+    
+    .list-group-item.active,
+    .list-group-item.focus,
+    .list-group-item.hover {
+        background: @neutralgrey !important;
+        border-bottom-color: @neutralgrey !important;
+    }
+    
+    #menuicon {
+        color: @navypeony;
+        padding-bottom: 8px;
+        padding-right: 16px;
+        font-size: 21px;
+    }
+    
+    .line {
+        width: 100%;
+        height: 0px;
+        border-bottom: 1px solid black;
+        position: relative;
+    }
+    
+    #dicamu {
+        position: absolute;
+        top: 120px;
+        left: 20px;
+        color: white;
+        font-weight: 900;
+        font-size: 40pt;
+    }
+    /************************* ? **************************/
+    
+    // Zwischenüberschriften bei Auflistungen
+    .lead {
+        padding: 8px;
+        color: @navypeony;
+        font-size: @text_subheading;
+        weight: @medium;
+        margin-bottom: -10px;
+    }
+    /************************* Login **************************/
+    
+    // Login Remember Switch
+    .switch.active {
+        background: @neutralgrey;
+        border-color: @navypeony;
+    }
+    
+    // Login Remeber Switch Rand
+    .switch switch-handle.active {
+        border-color: @navypeony;
+    }
+    
+    // Login Button
+    .btn {
+        background: @navypeony !important;
+        border-color: @navypeony !important;
+    }
+    
+    .img-grid {
+        max-height: auto;
+        max-width: auto;
+        align-self: center;
+    }
+    
+    .bg-grid {
+        background: @neutralgrey;
+        border-color: white;
+        border-width: 8px;
+        border-style: solid;
+        float: left;
+        width: 50%;
+        height: 40%;
+        padding: 10px;
+    }
+    
+    .text-grid {
+        background: @navypeony !important;
+        width: auto;
+        height: auto;
+    }
+    
+    .listeneintrag-grid {
+        font-size: @text_body;
+        color: white;
+        padding: 20px 0;
+    }
+    
+    .li {
+        display: inline-block;
+        width: 50%;
+    }
+    /************************* Single-Art **************************/
+    
+    .sa-fluid {
         padding: 0;
+        .container {
+            padding: 0;
+        }
     }
-}
-
-//modal
-.modal-body {
-    padding: 0px;
-}
-
-.art-chevron {
-    margin-top: 200px;
-    font-size: 2em;
-}
+    
+    .sa-header {
+        .crop {
+            height: 150px !important;
+            overflow: hidden !important;
+            object-fit: cover;
+            img {
+                width: 100%;
+                position: relative;
+                z-index: 1;
+            }
+        }
+        i {
+            position: absolute;
+            right: 40px;
+            font-size: @text_button;
+            top: 100px;
+        }
+    }
+    
+    .sa-text {
+        background: @navypeony;
+        h1 {
+            padding: 16px;
+            color: white;
+            margin: 0;
+        }
+        .text {
+            background-color: white;
+            padding: 16px;
+        }
+    }
+    
+    .nav-tabs {
+        border-style: none !important;
+        a {
+            color: white;
+            font-size: @text_caption;
+            padding: 0;
+            border-style: none !important;
+        }
+    }
+    /****************** Single-Art-Modal **************************/
+    
+    .modal-body {
+        padding: 0px;
+    }
+    
+    .art-chevron {
+        margin-top: 200px;
+        font-size: 2em;
+    }
