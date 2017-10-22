@@ -6,6 +6,10 @@ body {
     font-size: @text_body;
 }
 
+h1 {
+    font-size: @text_title;
+}
+
 .has-navbar-top .app-body {
     padding: 56px 0px;
     background: white;
@@ -15,7 +19,8 @@ body {
     color: white !important;
 }
 
-.shadow {
+.shadow,
+#lens {
     z-index: 10;
     color: white;
     text-shadow: 1px 1px 1px #ccc;
@@ -182,20 +187,7 @@ body {
 }
 
 
-/************************* Single-Art? **************************/
-
-.tabs {
-    color: black;
-    font-size: @text_subheading;
-    padding: 16px;
-    //background: @balletslipper;
-}
-
-.tabnames {
-    color: @navypeony !important;
-    font-size: @text_button;
-    weight: @medium;
-}
+/************************* Single-Art **************************/
 
 .crop {
     height: 150px !important;
@@ -209,19 +201,56 @@ body {
     z-index: 1;
 }
 
-#zoom {
+#lens {
     position: absolute;
     right: 40px;
     font-size: 2em;
-    top: 130px;
+    top: 100px;
 }
 
-.art-chevron {
-    margin-top: 200px;
-    font-size: 2em;
+.sa-text {}
+
+.sa-title {
+    padding: 16px;
+    background-color: @navypeony;
+    color: white;
+    h1 {
+        margin: 0;
+    }
+}
+
+.nav-tabs {
+    background: @navypeony;
+    a {
+        color: white;
+        font-size: @text_subheading;
+        padding: 0;
+        .active {
+            color: pink;
+        }
+    }
+}
+
+
+/*.tabnames {
+    color: white !important;
+    font-size: @text_button;
+    weight: @medium;
+}*/
+
+.sa-fluid {
+    padding: 0;
+    .container {
+        padding: 0;
+    }
 }
 
 //modal
 .modal-body {
     padding: 0px;
+}
+
+.art-chevron {
+    margin-top: 200px;
+    font-size: 2em;
 }
