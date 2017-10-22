@@ -11,6 +11,10 @@ body {
     background: white;
 }
 
+.white {
+    color: white !important;
+}
+
 #listenicon {
     padding: 16px 8px;
     color: @neutralgrey !important;
@@ -57,21 +61,15 @@ body {
 
 .navbar-absolute-top {
     background: @navypeony;
-    color: white;
-    height: 56px;
+    padding: 0 16px;
     // Icons;
     i {
         color: white;
-        padding: 16px 8px;
-        font-size: 24px;
+        font-size: @text_button;
     }
-}
-
-.top-icon {
-    color: white !important;
-    font-size: 1.5em;
-    margin-left: 30px;
-    margin-top: 20px;
+    i.left {
+        margin-left: 32px;
+    }
 }
 
 
