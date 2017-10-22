@@ -7,9 +7,9 @@
         <a ng-if="!notart" ng-href="#/catalog" class="fa fa-chevron-left btn white"></a>
     </div>
 
-    <div class="navbar-brand navbar-brand-pull-left" ui-yield-to="title">
+    <marquee scrollamount="3" class="navbar-brand navbar-brand-pull-left" ui-yield-to="title">
         {{topTitle}}
-    </div>
+    </marquee>
     <div class="btn-group pull-right" ui-yield-to="navbarAction">
         <div class="btn">
             <i ng-class="{'fa fa-th': notgrid, 'fa fa-list': !notgrid }" ng-click="setStatus()"></i>

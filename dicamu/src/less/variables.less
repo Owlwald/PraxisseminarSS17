@@ -40,16 +40,6 @@ body {
 }
 
 //----- wieder relevant------
-// Titel in leiste oben
-.navbar-brand {
-    width: 50%;
-    height: 39px;
-    font-size: @text_title;
-    padding: 18px 0 16px 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
 // Abstand des Logos von oben
 .our-menu {
     top: 56px;
@@ -69,6 +59,27 @@ body {
     }
     i.left {
         margin-left: 32px;
+    }
+}
+
+// Titel in leiste oben
+.navbar-brand {
+    width: 60%;
+    height: 39px;
+    display: block;
+    //font-size: @text_title;
+    //padding: 18px 0 16px 16px;
+    //text-overflow: ellipsis;
+    overflow: hidden;
+    animation: marquee 5s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: -100%;
     }
 }
 
