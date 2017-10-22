@@ -208,7 +208,13 @@ h1 {
     top: 100px;
 }
 
-.sa-text {}
+.sa-text {
+    background: @navypeony;
+    .text {
+        background-color: white;
+        padding: 16px;
+    }
+}
 
 .sa-title {
     padding: 16px;
@@ -221,13 +227,12 @@ h1 {
 
 .nav-tabs {
     background: @navypeony;
+    border-style: none !important;
     a {
         color: white;
-        font-size: @text_subheading;
+        font-size: @text_caption;
         padding: 0;
-        .active {
-            color: pink;
-        }
+        border-style: none !important;
     }
 }
 
