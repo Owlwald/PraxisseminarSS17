@@ -6,35 +6,56 @@
     <title>DiCaMu</title>
 
     <!-- Material Design Theming -->
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-    <link href="./mui.min.css" rel="stylesheet" type="text/css" />
-    <script src="./mui.min.js"></script>
-    <script src="./showhide.js"></script>
-    <script src="./create.js"></script>
-    <script src="./read.js"></script>
-    <script src="./update.js"></script>
-    <script src="./delete.js"></script>
-    <script src="./openclose.js"></script>
-    <script src="./reset.js"></script>
+<link rel="stylesheet" href="./css/material.min.css">
+<script src="./js/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 
-    <link rel="stylesheet" href="main.css">
+    <link href="./css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="./js/mui.min.js"></script>
+    <script src="./js/showhide.js"></script>
+    <script src="./js/create.js"></script>
+    <script src="./js/read.js"></script>
+    <script src="./js/update.js"></script>
+    <script src="./js/delete.js"></script>
+    <script src="./js/openclose.js"></script>
+    <script src="./js/reset.js"></script>
+    <script src="./js/authentication.js"/></script>
+
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
-    <header class="mui-appbar mui--z1">
-        <div class="mui-container">
-            <table width="100%">
-                <tr class="mui--appbar-height">
-                    <td class="mui--text-title"><a>DiCaMu - <b>Di</b>gital <b>Mu</b>seum <b>Ca</b>talogue</a></td>
-                </tr>
-            </table>
+    <div class="mdl-layout__container has-scrolling-header">
+        <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100 is-upgraded" data-upgraded=",MaterialLayout">
+    <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+        <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title"><a>DiCaMu - <b>Di</b>gital <b>Mu</b>seum <b>Ca</b>talogue</a></span>
+                    <div class="mdl-layout-spacer"></div>
         </div>
     </header>
-    <div class="mui--appbar-height"></div><br><br>
-    <div class="mui-container-fluid">
+    <div class="demo-ribbon"></div>
+    <main class="demo-main mdl-layout__content">
+    <div class="demo-container mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+    <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+        <div id="login_form">
 
+            <form class="mui-form" >
+                <div class="mui-textfield mui-textfield--float-label">
+                    <input type="text" id="login_email">
+                    <label>Email</label>
+                </div>
+                <div class="mui-textfield mui-textfield--float-label">
+                    <input type="password" id="login_password">
+                    <label>Passwort</label>
+                </div>
+                <button class="mui-btn mui-btn--primary" type="button" id="login_button">Abschicken</button>
+                <button class="mui-btn mui-btn--danger" type="button" id="login_lost_password">Passwort vergessen?</button>
+            </form><br>
+            <span>Haben Sie keinen Account? Melden Sie sich bitte unter <a href="mailto:ewald.reinhardt@stud.uni-regensburg.de">hier</a>, damit wir Ihnen einen erstellen können.</span>
+        </div>
+        <div class="hidden" id="content">
         <!-- dropdown for choosing a museum -->
 
         <div class="mui-dropdown">
@@ -254,19 +275,16 @@
                 <button class="mui-btn mui-btn--danger" type="button" onclick="deleteMedia()">Medium entfernen</button>
             </form>
         </div>
+    </div>
+    </div>
 
     </div>
+</main>
+    <footer class="demo-footer mdl-mini-footer"></footer>
+</div></div>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-storage.js"></script>
 
-    <script src="./init.js"></script>
-    <!-- Import and configure the Firebase SDK -->
-    <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
-    <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <script src="./js/init.js"></script>
 
 
 </body>
