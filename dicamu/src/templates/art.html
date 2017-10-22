@@ -2,9 +2,18 @@
     <div class="scrollable-content">
 
         <section class="section container-fluid">
-            <!-- hier gehört eigentlich kein image hin 
-            <img src="..." />
-            -->
+            <div class="container">
+
+
+                <a href="" ui-turn-on="modal2" aria-hidden="true">
+                    <i class="fa fa-eye" id="zoom"></i>
+                    <div class="crop">
+                        <img src={{singleItem.Medien[1].Medien}} class="crop">
+                        <!--<img src="../images/1.PNG" class="crop">-->
+                    </div>
+                </a>
+            </div>
+
             <div class="tabs" ui-state="activeTab" default="1">
                 <ul class="nav nav-tabs">
                     <li ui-class="{'active': activeTab == 1}">
@@ -12,9 +21,6 @@
                     </li>
                     <li ui-class="{'active': activeTab == 2}">
                         <a class="tabnames" ui-set="{'activeTab': 2}">Details</a>
-                    </li>
-                    <li ui-class="{'active': activeTab == 3}">
-                        <a class="tabnames" ui-set="{'activeTab': 3}">Bestandteile</a>
                     </li>
                 </ul>
 
@@ -25,15 +31,8 @@
                 <div ui-if="activeTab == 2">
                     <p>Titel: {{singleItem.Titel}}</p>
                     <p>Literatur: {{singleItem.Literatur}}</p>
-
-                </div>
-                <div ui-if="activeTab == 3">
                     <div ng-repeat="media in itemMedia" ng-if="!$first">
-
                         <p>Titel: {{media.Titel}}</p>
-
-
-
                         <div ng-repeat="detail1 in media.Details" ng-if="!$first">
                             <p>{{detail1.Typ}}: {{detail1.Detail}}</p>
                         </div>
@@ -44,4 +43,51 @@
         </section>
 
     </div>
+</div>
+
+<div ui-content-for="modals" class="scrollable">
+    <div class="modal modal-overlay" ui-if='modal2' ui-shared-state='modal2'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" ui-turn-off="modal2">&times;</button>
+                    <h4 class="modal-title">{{singleItem.Medien[1].Titel}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="art-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#art-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#art-carousel" data-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src={{singleItem.Medien[1].Medien}}>
+                                <div class="carousel-caption">
+                                    <h3></h3>
+                                    <!-- <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
+                                </div>
+                            </div>
+                            <div class="item" ng-repeat="media in itemMedia" ng-if="!$first">
+                                <img src={{media.Medien}}>
+                                <div class="carousel-caption">
+                                    <h3>{{media.Titel}}</h3>
+                                    <!-- <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" data-target="#art-carousel" data-slide="prev">
+                        <i class="fa fa-chevron-left art-chevron" aria-hidden="true"></i>
+                    </a>
+                    <a class="right carousel-control" data-target="#art-carousel" data-slide="next">
+                        <i class="fa fa-chevron-right art-chevron" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ui-turn-off="modal2" class="btn btn-primary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
