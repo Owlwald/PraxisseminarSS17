@@ -74,7 +74,29 @@
     });
 
     app.controller("LoginCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = "Login"
+        $rootScope.topTitle = "Login";
+        $scope.email = {};
+        $scope.password = {};
+        $scope.loginCheck = function () {
+
+            console.log($scope.user);
+            console.log("you used this email:" + $scope.email.txt);
+            console.log("you used this password:" + $scope.password.txt);
+
+            for (var i = 1; i < $scope.user.length; i++) {
+                if ($scope.user[i].Name === $scope.email.txt) {
+                    if ($scope.user[i].Passwort === $scope.password.txt) {
+                        console.log("login successful");
+                        $rootScope.loggedin = true;
+                        $rootScope.chosenOne = $scope.user[i];
+                        break;
+                    }
+                } else {
+                    console.log("false login")
+                }
+            }
+
+        }
     });
 
 }());
