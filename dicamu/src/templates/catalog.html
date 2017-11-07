@@ -1,5 +1,17 @@
 <div class="scrollable" ng-controller="CatCtrl">
     <div class="scrollable-content">
+
+        <!-- show this if user is not logged in or user has no access to catalog-->
+        <section class="section container-fluid">
+            <p>Sie haben momentan keine Berechtigung den Katalog zu betrachten.</p>
+            <button class="btn btn-primary btn-block" ng-click="buy()">
+                KAUFEN
+            </button>
+        </section>
+
+        <!-- show this if user has allowance to access catalog-->
+        <!-- list-view -->
+        <!--ng-if Katalog erworben-->
         <section class="section container-fluid">
             <p class="lead">Exponate:</p>
             <div ng-repeat="art in artworks" ng-if="!$first">
@@ -16,5 +28,8 @@
                 </a>
             </div>
         </section>
+
+        <!-- grid-view -->
+        <!-- here? -->
     </div>
 </div>
