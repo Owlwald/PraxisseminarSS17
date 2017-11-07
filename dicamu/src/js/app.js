@@ -23,6 +23,8 @@
 
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
+            var user = snapshot.child("User").val()
+            $scope.user = user;
             //TODO delete when development finished:
             //console.log(data);
             //console.log(museums);
@@ -39,6 +41,7 @@
             $rootScope.chosenCatalog = catalog;
         }
         $rootScope.notgrid = true;
+        $rootScope.loggedin = false;
     });
 
     app.config(function ($routeProvider) {

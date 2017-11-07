@@ -3,7 +3,6 @@
     var app = angular.module("dcm");
 
     app.controller("ArtCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = $rootScope.singleItem.Titel;
         $scope.itemMedia = $rootScope.singleItem.Medien;
         $rootScope.notart = false;
     });
@@ -74,8 +73,74 @@
         $rootScope.topTitle = "Optionen"
     });
 
+    // login magic
     app.controller("LoginCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = "Login"
+        $rootScope.topTitle = "Login";
+        $scope.email = {};
+        $scope.password = {};
+        // checks email and pw
+        $scope.loginCheck = function () {
+            // dev log stuff
+            console.log($scope.user);
+            console.log("you used this email:" + $scope.email.txt);
+            console.log("you used this password:" + $scope.password.txt);
+
+            // compares email and pw to all user data in database
+            for (var i = 1; i < $scope.user.length; i++) {
+                if ($scope.user[i].Name === $scope.email.txt) {
+                    if ($scope.user[i].Passwort === $scope.password.txt) {
+                        console.log("login successful");
+                        $rootScope.loggedin = true;
+                        $scope.chosenOne = $scope.user[i];
+                        console.log($scope.chosenOne);
+                        $scope.connectCatalogs();
+                        break;
+                    }
+                } else {
+                    // wrong pw reaction needs to be implemented
+                    console.log("false login")
+                }
+            }
+
+        };
+
+        // connects user bought catalogs to museums catalogs in firebase
+        $scope.connectCatalogs = function () {
+            var boughtData = [];
+            for (var i = 0; i < $scope.chosenOne["Gekaufte Kataloge"].length; i++) {
+                // so many dev logs
+                // this one goes deep
+                console.log("Museum:" + $scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]);
+                // this one too
+                console.log("Katalog:" + $scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]);
+                // this one goes even deeper
+                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
+                // this one goes the deepest
+                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);
+
+
+                // the stuff from the deepest depths from above gets pushed into this bottomless pit of an array.
+                boughtData.push($scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]]);
+
+
+            }
+            $scope.boughtCatalogs = boughtData;
+
+            // more dev log stuff because why not
+            console.log("finished data: " + boughtData);
+            console.log("magic");
+        };
+
+        $scope.logOut = function () {
+
+            $rootScope.loggedin = false;
+
+        };
+
+        $scope.setBoughtCatalog = function (catalog) {
+            $rootScope.einKatalog = catalog;
+        };
+
     });
 
 }());

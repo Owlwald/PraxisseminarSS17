@@ -1,7 +1,8 @@
 <div class="scrollable" ng-controller="MuseumCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
-            <p class="lead">Ort: {{einMuseum.Ort}}</p>
+
+            <p class="lead">Ort: {{einMuseum.Ort}} <span><i class="fa fa-map-marker" aria-hidden="true" id=""></i></span></p>
             <div ng-if="notgrid">
                 <div ng-repeat="catalog in catalogues" ng-if="!$first">
                     <a ng-click="setCatalog(catalog)" ng-href="#/catalog">
