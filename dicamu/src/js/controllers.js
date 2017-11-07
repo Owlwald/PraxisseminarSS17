@@ -24,20 +24,36 @@
 
     app.controller("CatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
+        $rootScope.notart = true;
+
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
-        $rootScope.notart = true;
+
+
         $scope.setItem = function (item) {
-            $rootScope.singleItem = item;
-        }
+                $rootScope.singleItem = item;
+            }
+            /*TOOD
+                    $scope.buy = function () {
+                        put einKatalog in Gekaufttabelle von logged in User
+                        $rootScope.catalogOwned = true;
+                    }
+            */
     });
 
     app.controller("MuseumCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.einMuseum.Name;
         $scope.catalogues = $rootScope.einMuseum.Kataloge;
+        $rootScope.catalogOwned = false;
 
         $scope.setCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
+
+            /*TOOD
+            if (loggedInUser owns einKatalog) {
+                 $rootScope.catalogOwned = true;
+             }
+            */
         }
     });
 

@@ -2,20 +2,20 @@
     <div class="scrollable-content">
 
         <!-- show this if user is not logged in or user has no access to catalog-->
-        <section class="section container-fluid" ng-if="!loggedin">
+        <section class="section container-fluid" ng-if="!loggedin || !catalogOwned">
             <div class="catprev">
                 <img src={{einKatalog.Bild}} class="catprev_img">
                 <p class="catprev_text">Sie haben momentan keine Berechtigung den Katalog zu betrachten.</p>
             </div>
             <button class="btn btn-primary btn-block" ng-click="buy()">
-                KAUFEN
+                KATALOG KAUFEN
             </button>
         </section>
 
         <!-- show this if user has allowance to access catalog-->
         <!-- list-view -->
         <!--ng-if Katalog erworben-->
-        <section class="section container-fluid" ng-if="loggedin">
+        <section class="section container-fluid" ng-if="loggedin && catalogOwned">
             <p class="lead">Exponate:</p>
             <div ng-repeat="art in artworks" ng-if="!$first">
                 <a ng-click="setItem(art)" ng-href="#/art">
