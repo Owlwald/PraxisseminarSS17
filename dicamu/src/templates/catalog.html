@@ -5,7 +5,11 @@
         <section class="section container-fluid" ng-if="!loggedin || !catalogOwned">
             <div class="catprev">
                 <img src={{einKatalog.Bild}} class="catprev_img">
-                <p class="catprev_text">Sie haben momentan keine Berechtigung den Katalog zu betrachten.</p>
+                <p class="catprev_text">
+                    Eingeloggter User:{{chosenOne}}
+                    <br /> Aktuelle Katalog-ID: {{einKatalog.ID}}
+                    <br />
+                    <br />Sie haben momentan keine Berechtigung den Katalog zu betrachten.</p>
             </div>
             <button class="btn btn-primary btn-block" ng-click="buy()">
                 KATALOG KAUFEN

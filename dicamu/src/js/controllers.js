@@ -48,12 +48,18 @@
 
         $scope.setCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
+            $scope.checkIfBought(catalog);
+        }
 
-            /*TOOD
-            if (loggedInUser owns einKatalog) {
-                 $rootScope.catalogOwned = true;
-             }
-            */
+        $scope.checkIfBought = function (catalog) {
+            if (chosenOne.hasChild(catalog)) {
+                console.log("is bought");
+                /*
+                   $rootScope.catalogOwned = true;
+                */
+            } else {
+                console.log("what?");
+            }
         }
     });
 
@@ -108,6 +114,7 @@
                         console.log("login successful");
                         $rootScope.loggedin = true;
                         $scope.chosenOne = $scope.user[i];
+                        $rootScope.chosenOne = $scope.chosenOne;
                         console.log($scope.chosenOne);
                         $scope.connectCatalogs();
                         break;
