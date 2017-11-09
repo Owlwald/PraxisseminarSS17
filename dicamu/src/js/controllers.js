@@ -31,14 +31,14 @@
 
 
         $scope.setItem = function (item) {
-                $rootScope.singleItem = item;
-            }
-            /*TOOD
-                    $scope.buy = function () {
-                        put einKatalog in Gekaufttabelle von logged in User
-                        $rootScope.catalogOwned = true;
-                    }
-            */
+            $rootScope.singleItem = item;
+        }
+
+        $scope.buy = function () {
+            console.log("buy this!")
+            $rootScope.catalogOwned = true;
+        }
+
     });
 
     app.controller("MuseumCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
