@@ -6,16 +6,20 @@
             <div class="catprev">
                 <img src={{einKatalog.Bild}} class="catprev_img">
                 <p class="catprev_text">
-                    Eingeloggter User:{{chosenOne}}
-                    <br /> Aktuelle Katalog-ID: {{einKatalog.ID}}
-                    <br />
                     <br />Sie haben momentan keine Berechtigung den Katalog zu betrachten.
                     <br />
-                    <br /><span ng-if="!loggedin">Folgendes könnte ein Grund dafür sein: Sie sind nicht eingeloggt.</span></p>
+                </p>
+                <p ng-if="!loggedin">Bitte loggen Sie sich zum Ansehen oder Kaufen ein.</p>
             </div>
-            <button class="btn btn-primary btn-block" ng-click="buy()">
+            <button class="btn btn-primary btn-block" ng-click="buy()" ng-if="loggedin">
                 KATALOG KAUFEN
             </button>
+
+            <button class="btn btn-primary btn-block" ng-if="!loggedin" disabled>
+                KATALOG KAUFEN
+            </button>
+
+
         </section>
 
         <!-- show this if user has allowance to access catalog-->
