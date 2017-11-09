@@ -55,7 +55,8 @@
             var currentUser = $rootScope.chosenOne;
 
             for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
-                if (currentUser["Gekaufte Kataloge"][i]["Museum-ID"] == catalog.ID) {
+                if (currentUser["Gekaufte Kataloge"][i]["Katalog-ID"] == catalog.ID &&
+                    currentUser["Gekaufte Kataloge"][i]["Museum-ID"] == $rootScope.einMuseum.ID) {
                     $rootScope.catalogOwned = true;
                     console.log("wir haben ein matsch.")
                 } else {
