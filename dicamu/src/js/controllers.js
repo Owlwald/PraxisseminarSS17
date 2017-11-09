@@ -41,7 +41,7 @@
             */
     });
 
-    app.controller("MuseumCtrl", function ($scope, $rootScope) {
+    app.controller("MuseumCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
         $rootScope.topTitle = $rootScope.einMuseum.Name;
         $scope.catalogues = $rootScope.einMuseum.Kataloge;
         $rootScope.catalogOwned = false;
@@ -52,15 +52,18 @@
         }
 
         $scope.checkIfBought = function (catalog) {
-            if (chosenOne.hasChild(catalog)) {
-                console.log("is bought");
-                /*
-                   $rootScope.catalogOwned = true;
-                */
-            } else {
-                console.log("what?");
+            var currentUser = $rootScope.chosenOne;
+
+            for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
+                if (currentUser["Gekaufte Kataloge"][i]["Museum-ID"] == catalog.ID) {
+                    $rootScope.catalogOwned = true;
+                    console.log("wir haben ein matsch.")
+                } else {
+                    console.log('user does not own this catalog');
+                }
             }
         }
+
     });
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {

@@ -9,7 +9,9 @@
                     Eingeloggter User:{{chosenOne}}
                     <br /> Aktuelle Katalog-ID: {{einKatalog.ID}}
                     <br />
-                    <br />Sie haben momentan keine Berechtigung den Katalog zu betrachten.</p>
+                    <br />Sie haben momentan keine Berechtigung den Katalog zu betrachten.
+                    <br />
+                    <br /><span ng-if="!loggedin">Folgendes könnte ein Grund dafür sein: Sie sind nicht eingeloggt.</span></p>
             </div>
             <button class="btn btn-primary btn-block" ng-click="buy()">
                 KATALOG KAUFEN
