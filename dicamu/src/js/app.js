@@ -19,7 +19,7 @@
             // das hier ist noch bissl problematisch
             var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
             $scope.allcatalogues = allcatalogues
-            // ------
+                // ------
 
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
@@ -42,6 +42,15 @@
         }
         $rootScope.notgrid = true;
         $rootScope.loggedin = false;
+
+
+        $scope.writeBoughtCat = function (userId, museumId, catalogId, indiz) {
+            firebase.database().ref('User/' + userId + '/Gekaufte Kataloge/' + i).set({
+                Katalog-ID: catalogId,
+                Museum-ID: museumId
+            });
+        }
+
     });
 
     app.config(function ($routeProvider) {
