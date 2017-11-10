@@ -35,7 +35,8 @@
         }
 
         $scope.buy = function () {
-            console.log("buy this!")
+            console.log("buy this!");
+            $rootScope.buyCatDB();
             $rootScope.catalogOwned = true;
         }
 
@@ -58,6 +59,7 @@
                 if (currentUser["Gekaufte Kataloge"][i]["Katalog-ID"] == catalog.ID &&
                     currentUser["Gekaufte Kataloge"][i]["Museum-ID"] == $rootScope.einMuseum.ID) {
                     $rootScope.catalogOwned = true;
+                    $rootScope.index = i+1;
                     console.log("wir haben ein matsch.")
                 } else {
                     console.log('user does not own this catalog');
