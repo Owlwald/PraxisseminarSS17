@@ -44,11 +44,11 @@
         $rootScope.loggedin = false;
 
 
-        $scope.buyCatDB = function () {
-            console.log("next im trying to write into the db")
+        $rootScope.buyCatDB = function () {
+            console.log("next im trying to write into the db");
             firebase.database().ref('User/' + $rootScope.chosenOne.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
-                Katalog-ID:  $rootScope.einKatalog.ID,
-                Museum-ID: $rootScope.einMuseum.ID
+                'Katalog-ID':  $rootScope.einKatalog.ID,
+                'Museum-ID': $rootScope.einMuseum.ID
             });
         }
 
