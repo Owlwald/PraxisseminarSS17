@@ -45,8 +45,8 @@
 
         $rootScope.buyCatDB = function () {
             console.log("next im trying to write into the db");
-            firebase.database().ref('User/' + $rootScope.chosenOne.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
-                'Katalog-ID':  $rootScope.einKatalog.ID,
+            firebase.database().ref('User/' + $rootScope.loggedInUser.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
+                'Katalog-ID': $rootScope.einKatalog.ID,
                 'Museum-ID': $rootScope.einMuseum.ID
             });
         }
@@ -95,9 +95,9 @@
                 templateUrl: "login.html",
                 reloadOnSearch: false
             })
-           .when('/my-catalogues', {		
-                 templateUrl: "my-catalogues.html",		
-                 reloadOnSearch: false		
-             });
+            .when('/my-catalogues', {
+                templateUrl: "my-catalogues.html",
+                reloadOnSearch: false
+            });
     });
 }());

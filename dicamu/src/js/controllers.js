@@ -54,14 +54,14 @@
 
         $scope.checkIfBought = function (catalog) {
             console.log("Entering the void 1");
-            var currentUser = $rootScope.chosenOne;
+            var currentUser = $rootScope.loggedInUser;
 
             var boughtCats = currentUser["Gekaufte Kataloge"]
             console.log(currentUser["Gekaufte Kataloge"].length);
 
             for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
-            console.log("Entering the void 2");
-                
+                console.log("Entering the void 2");
+
                 if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
                     boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
                     $rootScope.catalogOwned = true;
@@ -69,7 +69,7 @@
                 } else {
                     console.log('user does not own this catalog');
                 }
-                $rootScope.index = i+1;
+                $rootScope.index = i + 1;
             }
         }
 
@@ -125,9 +125,9 @@
                     if ($scope.user[i].Passwort === $scope.password.txt) {
                         console.log("login successful");
                         $rootScope.loggedin = true;
-                        $scope.chosenOne = $scope.user[i];
-                        $rootScope.chosenOne = $scope.chosenOne;
-                        console.log($scope.chosenOne);
+                        $scope.loggedInUser = $scope.user[i];
+                        $rootScope.loggedInUser = $scope.loggedInUser;
+                        console.log($scope.loggedInUser);
                         $scope.connectCatalogs();
                         break;
                     }
@@ -142,20 +142,20 @@
         // connects user bought catalogs to museums catalogs in firebase
         $scope.connectCatalogs = function () {
             var boughtData = [];
-            for (var i = 0; i < $scope.chosenOne["Gekaufte Kataloge"].length; i++) {
+            for (var i = 0; i < $scope.loggedInUser["Gekaufte Kataloge"].length; i++) {
                 // so many dev logs
                 // this one goes deep
-                console.log("Museum:" + $scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]);
+                console.log("Museum:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]);
                 // this one too
-                console.log("Katalog:" + $scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]);
+                console.log("Katalog:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]);
                 // this one goes even deeper
-                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
+                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
                 // this one goes the deepest
-                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);
+                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);
 
 
                 // the stuff from the deepest depths from above gets pushed into this bottomless pit of an array.
-                boughtData.push($scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]]);
+                boughtData.push($scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]]);
 
 
             }
