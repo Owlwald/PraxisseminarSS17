@@ -53,7 +53,7 @@
         $scope.checkIfBought = function (catalog) {
             var currentUser = $rootScope.loggedInUser;
             var boughtCats = currentUser["Gekaufte Kataloge"];
-            // the following loop checks if the currently opened catalog is bought by logged in user
+            // check if the currently opened catalog is bought by logged in user
             for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
                 if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
                     boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
@@ -72,10 +72,8 @@
     app.controller("CatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
         $rootScope.notart = true;
-
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
-
 
         $scope.setItem = function (item) {
             $rootScope.singleItem = item;
@@ -86,9 +84,6 @@
             $rootScope.buyCatDB();
             $rootScope.catalogOwned = true;
         }
-
-
-
     });
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
@@ -135,7 +130,7 @@
                         break;
                     }
                 } else {
-                    // wrong pw reaction needs to be implemented
+                    // TODO wrong pw reaction needs to be implemented
                     console.log("false login")
                 }
             }
@@ -143,23 +138,16 @@
 
         $scope.connectCatalogs = function () {
             var boughtData = [];
-
             for (var i = 0; i < $scope.loggedInUser["Gekaufte Kataloge"].length; i++) {
-                // so many dev logs
-                // this one goes deep
-                console.log("Museum:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]);
-                // this one too
-                console.log("Katalog:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]);
-                // this one goes even deeper
-                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
-                // this one goes the deepest
-                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);
-                // push the data to the database
                 boughtData.push($scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]]);
+                // the following are useful dev logs - activate if needed
+                /*console.log("Museum:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]);
+                console.log("Katalog:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]);
+                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
+                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);*/
+                // push information about bought catalogs into empty boughtData-Array
             }
             $rootScope.boughtCatalogs = boughtData;
-            console.log("finished data: " + boughtData);
-            console.log("magic");
         };
 
     });
