@@ -53,18 +53,23 @@
         }
 
         $scope.checkIfBought = function (catalog) {
+            console.log("Entering the void 1");
             var currentUser = $rootScope.chosenOne;
-            $rootScope.index= currentUser["Gekaufte Kataloge"].length;
+
+            var boughtCats = currentUser["Gekaufte Kataloge"]
+            console.log(currentUser["Gekaufte Kataloge"].length);
 
             for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
-                if (currentUser["Gekaufte Kataloge"][i]["Katalog-ID"] == catalog.ID &&
-                    currentUser["Gekaufte Kataloge"][i]["Museum-ID"] == $rootScope.einMuseum.ID) {
+            console.log("Entering the void 2");
+                
+                if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
+                    boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
                     $rootScope.catalogOwned = true;
-                   // $rootScope.index = i+1;
                     console.log("wir haben ein matsch.")
                 } else {
                     console.log('user does not own this catalog');
                 }
+                $rootScope.index = i+1;
             }
         }
 
