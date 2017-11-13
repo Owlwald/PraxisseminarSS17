@@ -61,6 +61,7 @@
         }
 
         //is in this controller because db is defined here
+        //can be outsourced to a database service in a bigger refactoring
         //writes bought catalog persistent to database
         $rootScope.buyCatDB = function () {
             firebase.database().ref('User/' + $rootScope.loggedInUser.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
