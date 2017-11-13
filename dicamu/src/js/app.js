@@ -16,20 +16,14 @@
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
             $scope.museums = museums;
-            // das hier ist noch bissl problematisch
+            // TODO das hier ist noch bissl problematisch
             var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
             $scope.allcatalogues = allcatalogues
-                // ------
 
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
             var user = snapshot.child("User").val()
             $scope.user = user;
-            //TODO delete when development finished:
-            //console.log(data);
-            //console.log(museums);
-            //console.log(mycatalogues);
-            //console.log(allcatalogues);
             $scope.$apply();
         });
 
@@ -42,6 +36,10 @@
         }
         $rootScope.notgrid = true;
         $rootScope.loggedin = false;
+
+        $scope.logOut = function () {
+            $rootScope.loggedin = false;
+        };
 
         $rootScope.buyCatDB = function () {
             console.log("next im trying to write into the db");
