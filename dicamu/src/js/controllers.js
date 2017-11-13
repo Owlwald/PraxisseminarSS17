@@ -24,21 +24,55 @@
 
     app.controller("CatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
+        $rootScope.notart = true;
+
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
-        $rootScope.notart = true;
+
+
         $scope.setItem = function (item) {
             $rootScope.singleItem = item;
         }
+
+        $scope.buy = function () {
+            console.log("buy this!");
+            $rootScope.buyCatDB();
+            $rootScope.catalogOwned = true;
+        }
+
     });
 
-    app.controller("MuseumCtrl", function ($scope, $rootScope) {
+    app.controller("MuseumCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
         $rootScope.topTitle = $rootScope.einMuseum.Name;
         $scope.catalogues = $rootScope.einMuseum.Kataloge;
+        $rootScope.catalogOwned = false;
 
         $scope.setCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
+            $scope.checkIfBought(catalog);
         }
+
+        $scope.checkIfBought = function (catalog) {
+            console.log("Entering the void 1");
+            var currentUser = $rootScope.chosenOne;
+
+            var boughtCats = currentUser["Gekaufte Kataloge"]
+            console.log(currentUser["Gekaufte Kataloge"].length);
+
+            for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
+            console.log("Entering the void 2");
+                
+                if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
+                    boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
+                    $rootScope.catalogOwned = true;
+                    console.log("wir haben ein matsch.")
+                } else {
+                    console.log('user does not own this catalog');
+                }
+                $rootScope.index = i+1;
+            }
+        }
+
     });
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
@@ -92,6 +126,7 @@
                         console.log("login successful");
                         $rootScope.loggedin = true;
                         $scope.chosenOne = $scope.user[i];
+                        $rootScope.chosenOne = $scope.chosenOne;
                         console.log($scope.chosenOne);
                         $scope.connectCatalogs();
                         break;

@@ -19,7 +19,7 @@
             // das hier ist noch bissl problematisch
             var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
             $scope.allcatalogues = allcatalogues
-            // ------
+                // ------
 
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
@@ -42,6 +42,16 @@
         }
         $rootScope.notgrid = true;
         $rootScope.loggedin = false;
+
+
+        $rootScope.buyCatDB = function () {
+            console.log("next im trying to write into the db");
+            firebase.database().ref('User/' + $rootScope.chosenOne.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
+                'Katalog-ID':  $rootScope.einKatalog.ID,
+                'Museum-ID': $rootScope.einMuseum.ID
+            });
+        }
+
     });
 
     app.config(function ($routeProvider) {
