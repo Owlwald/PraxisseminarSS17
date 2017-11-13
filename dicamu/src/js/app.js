@@ -94,6 +94,10 @@
             .when('/login', {
                 templateUrl: "login.html",
                 reloadOnSearch: false
-            });
+            })
+           .when('/my-catalogues', {		
+                 templateUrl: "my-catalogues.html",		
+                 reloadOnSearch: false		
+             });
     });
 }());
