@@ -43,7 +43,6 @@
         $rootScope.notgrid = true;
         $rootScope.loggedin = false;
 
-
         $rootScope.buyCatDB = function () {
             console.log("next im trying to write into the db");
             firebase.database().ref('User/' + $rootScope.chosenOne.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
@@ -66,10 +65,6 @@
             })
             .when('/museum', {
                 templateUrl: "museum.html",
-                reloadOnSearch: false
-            })
-            .when('/my-catalogues', {
-                templateUrl: "my-catalogues.html",
                 reloadOnSearch: false
             })
             .when('/catalog', {
