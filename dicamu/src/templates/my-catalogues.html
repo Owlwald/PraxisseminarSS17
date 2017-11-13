@@ -3,7 +3,7 @@
         <section class="section container-fluid">
 
             <div ng-repeat="boughtCat in boughtCats">
-                <a ng-href="#/catalog">
+                <a ng-href="#/catalog" ng-click="setCatalog(boughtCat)">
                     <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
                     <span class="listeneintrag">
                     {{boughtCat.Titel}}

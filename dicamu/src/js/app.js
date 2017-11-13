@@ -41,6 +41,10 @@
             $rootScope.loggedin = false;
         };
 
+        $scope.setCatalog = function (catalog) {
+            $rootScope.einKatalog = catalog;
+        };
+
         $rootScope.buyCatDB = function () {
             console.log("next im trying to write into the db");
             firebase.database().ref('User/' + $rootScope.loggedInUser.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({

@@ -53,18 +53,12 @@
         $scope.checkIfBought = function (catalog) {
             var currentUser = $rootScope.loggedInUser;
             var boughtCats = currentUser["Gekaufte Kataloge"];
-
-            console.log(currentUser["Gekaufte Kataloge"].length);
-
+            // the following loop checks if the currently opened catalog is bought by logged in user
             for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
-                console.log("Entering the void 2");
-
                 if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
                     boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
                     $rootScope.catalogOwned = true;
                     console.log("wir haben ein matsch.")
-                } else {
-                    console.log('user does not own this catalog');
                 }
                 $rootScope.index = i + 1;
             }
@@ -93,9 +87,7 @@
             $rootScope.catalogOwned = true;
         }
 
-        $scope.setCatalog = function (catalog) {
-            $rootScope.einKatalog = catalog;
-        };
+
 
     });
 
