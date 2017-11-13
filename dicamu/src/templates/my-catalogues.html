@@ -1,27 +1,16 @@
 <div class="scrollable" ng-controller="MyCatCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
-            <!-- <div ng-repeat="catalogue in mycatalogues" ng-if="!$first">
-                <a ng-click="setChosenCatalog(catalogue)" ng-href="#/catalog"> <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
-                     HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN 
-                    <span class="listeneintrag">
-                    {{catalogue.Titel}}"
-                </span>
-                </a>
-            </div>-->
 
-            <div class="test">
-                <section class="section container-fluid">
-                    <div ng-repeat="catalogue in boughtCatalogs">
-                        <a ng-click="setBoughtCatalog(catalogue)" ng-href="#/catalog"> <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
-                            <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
-                            <span class="listeneintrag">
-                                {{catalogue.Titel}}           
-                            </span></a>
-                    </div>
-                </section>
-                {{loggedInUser["Gekaufte Kataloge"]}}
+            <div ng-repeat="boughtCat in boughtCats">
+                <a ng-href="#/catalog">
+                    <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
+                    <span class="listeneintrag">
+                    {{boughtCat.Titel}}
+                    </span>
+                </a>
             </div>
+
         </section>
     </div>
 </div>

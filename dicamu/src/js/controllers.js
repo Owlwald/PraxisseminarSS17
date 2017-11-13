@@ -51,10 +51,9 @@
         }
 
         $scope.checkIfBought = function (catalog) {
-            console.log("Entering the void 1");
             var currentUser = $rootScope.loggedInUser;
+            var boughtCats = currentUser["Gekaufte Kataloge"];
 
-            var boughtCats = currentUser["Gekaufte Kataloge"]
             console.log(currentUser["Gekaufte Kataloge"].length);
 
             for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
@@ -94,7 +93,7 @@
             $rootScope.catalogOwned = true;
         }
 
-        $scope.setBoughtCatalog = function (catalog) {
+        $scope.setCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
         };
 
@@ -102,6 +101,7 @@
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
+        $scope.boughtCats = $rootScope.boughtCatalogs;
 
         $scope.setChosenCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
@@ -147,6 +147,27 @@
                     console.log("false login")
                 }
             }
+        };
+
+        $scope.connectCatalogs = function () {
+            var boughtData = [];
+
+            for (var i = 0; i < $scope.loggedInUser["Gekaufte Kataloge"].length; i++) {
+                // so many dev logs
+                // this one goes deep
+                console.log("Museum:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]);
+                // this one too
+                console.log("Katalog:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]);
+                // this one goes even deeper
+                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
+                // this one goes the deepest
+                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);
+                // push the data to the database
+                boughtData.push($scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]]);
+            }
+            $rootScope.boughtCatalogs = boughtData;
+            console.log("finished data: " + boughtData);
+            console.log("magic");
         };
 
     });
