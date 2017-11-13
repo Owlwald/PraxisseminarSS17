@@ -2,15 +2,14 @@
     'use strict';
     var app = angular.module("dcm");
 
-    app.controller("ArtCtrl", function ($scope, $rootScope) {
-        $scope.itemMedia = $rootScope.singleItem.Medien;
-        $rootScope.notart = false;
+    app.controller("HomeCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = 'Museen';
+        $rootScope.notart = true;
+        $rootScope.notgrid = true;
     });
 
-    app.controller("ArtListCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Kunstwerke in Name Katalog';
-    });
 
+    /********************* Menü-Controller ********************/
     app.controller("TopCtrl", function ($scope, $rootScope) {
 
         $scope.setStatus = function () {
@@ -22,26 +21,25 @@
         }
     });
 
-    app.controller("CatCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
-        $rootScope.notart = true;
 
-        $scope.artworks = $rootScope.einKatalog.Kunstwerke;
-        $scope.essays = $rootScope.einKatalog.Essays;
+    /********************* Exponat-/Essay-Controller ********************/
 
-
-        $scope.setItem = function (item) {
-            $rootScope.singleItem = item;
-        }
-
-        $scope.buy = function () {
-            console.log("buy this!");
-            $rootScope.buyCatDB();
-            $rootScope.catalogOwned = true;
-        }
-
+    app.controller("ArtListCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = 'Kunstwerke in Name Katalog';
     });
 
+    app.controller("ArtCtrl", function ($scope, $rootScope) {
+        $scope.itemMedia = $rootScope.singleItem.Medien;
+        $rootScope.notart = false;
+    });
+
+    app.controller("EssayCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = $rootScope.singleItem.Titel;
+        $rootScope.notart = false;
+    });
+
+
+    /********************* Museum-Controller ********************/
     app.controller("MuseumCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
         $rootScope.topTitle = $rootScope.einMuseum.Name;
         $scope.catalogues = $rootScope.einMuseum.Kataloge;
@@ -75,6 +73,33 @@
 
     });
 
+
+    /********************* Katalog-Controller ********************/
+
+    app.controller("CatCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
+        $rootScope.notart = true;
+
+        $scope.artworks = $rootScope.einKatalog.Kunstwerke;
+        $scope.essays = $rootScope.einKatalog.Essays;
+
+
+        $scope.setItem = function (item) {
+            $rootScope.singleItem = item;
+        }
+
+        $scope.buy = function () {
+            console.log("buy this!");
+            $rootScope.buyCatDB();
+            $rootScope.catalogOwned = true;
+        }
+
+        $scope.setBoughtCatalog = function (catalog) {
+            $rootScope.einKatalog = catalog;
+        };
+
+    });
+
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
 
@@ -82,7 +107,6 @@
             $rootScope.einKatalog = catalog;
         }
     });
-
 
     app.controller("AllCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Alle Kataloge';
@@ -92,22 +116,9 @@
         }
     });
 
-    app.controller("HomeCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Museen';
-        $rootScope.notart = true;
-        $rootScope.notgrid = true;
-    });
 
-    app.controller("EssayCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = $rootScope.singleItem.Titel;
-        $rootScope.notart = false;
-    });
+    /********************* Login-Controller ********************/
 
-    app.controller("OptionsCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = "Optionen"
-    });
-
-    // login magic
     app.controller("LoginCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = "Login";
         $scope.email = {};
@@ -136,46 +147,14 @@
                     console.log("false login")
                 }
             }
-
         };
 
-        // connects user bought catalogs to museums catalogs in firebase
-        $scope.connectCatalogs = function () {
-            var boughtData = [];
-            for (var i = 0; i < $scope.loggedInUser["Gekaufte Kataloge"].length; i++) {
-                // so many dev logs
-                // this one goes deep
-                console.log("Museum:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]);
-                // this one too
-                console.log("Katalog:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]);
-                // this one goes even deeper
-                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
-                // this one goes the deepest
-                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);
+    });
 
+    /********************* Option-Controller ********************/
 
-                // the stuff from the deepest depths from above gets pushed into this bottomless pit of an array.
-                boughtData.push($scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]]);
-
-
-            }
-            $scope.boughtCatalogs = boughtData;
-
-            // more dev log stuff because why not
-            console.log("finished data: " + boughtData);
-            console.log("magic");
-        };
-
-        $scope.logOut = function () {
-
-            $rootScope.loggedin = false;
-
-        };
-
-        $scope.setBoughtCatalog = function (catalog) {
-            $rootScope.einKatalog = catalog;
-        };
-
+    app.controller("OptionsCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = "Optionen"
     });
 
 }());
