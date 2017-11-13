@@ -68,6 +68,7 @@
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
+        $rootScope.catalogOwned = true;
         $scope.boughtCats = $rootScope.boughtCatalogs;
 
         $scope.setChosenCatalog = function (catalog) {

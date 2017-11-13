@@ -46,6 +46,7 @@
             $scope.checkIfBought(catalog);
         };
 
+        //is called when catalog is tried to be opened
         $scope.checkIfBought = function (catalog) {
             var currentUser = $rootScope.loggedInUser;
             var boughtCats = currentUser["Gekaufte Kataloge"];
@@ -54,14 +55,14 @@
                 if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
                     boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
                     $rootScope.catalogOwned = true;
-                    console.log("wir haben ein matsch.")
                 }
                 $rootScope.index = i + 1;
             }
         }
 
+        //is in this controller because db is defined here
+        //writes bought catalog persistent to database
         $rootScope.buyCatDB = function () {
-            console.log("next im trying to write into the db");
             firebase.database().ref('User/' + $rootScope.loggedInUser.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
                 'Katalog-ID': $rootScope.einKatalog.ID,
                 'Museum-ID': $rootScope.einMuseum.ID
