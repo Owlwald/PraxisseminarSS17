@@ -18,32 +18,9 @@
             <hr>
 
             <button class="btn btn-primary btn-block" ng-click="loginCheck()">
-      Login
-    </button>
-
-
-
+                Login
+            </button>
         </form>
-        <div class="test" ng-if="loggedin">
-            <section class="section container-fluid">
-                <div ng-repeat="catalogue in boughtCatalogs">
-                    <a ng-click="setBoughtCatalog(catalogue)" ng-href="#/catalog"> <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
-                        <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
-                        <span class="listeneintrag">
-                    {{catalogue.Titel}}"
-                </span>
-                    </a>
-                </div>
 
-            </section>
-
-
-
-            {{chosenOne["Gekaufte Kataloge"]}}
-
-            <button class="btn btn-primary btn-block" ng-click="logOut()">
-      Logout
-    </button>
-        </div>
     </div>
 </div>
