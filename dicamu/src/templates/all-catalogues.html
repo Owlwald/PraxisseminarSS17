@@ -4,7 +4,7 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <div ng-repeat="catalogue in allcatalogues" ng-if="!$first">
-                <a ng-click="setChosenCatalog(catalogue)" ng-href="#/catalog">
+                <a ng-click="setCatalog(catalogue)" ng-href="#/catalog">
                     <i class="fa fa-book" aria-hidden="true" class="listenicons" ng-click="clicked()"></i>
                     <span class="listeneintrag" id="title">
                             {{catalogue.Titel}}
