@@ -2,15 +2,14 @@
     'use strict';
     var app = angular.module("dcm");
 
-    app.controller("ArtCtrl", function ($scope, $rootScope) {
-        $scope.itemMedia = $rootScope.singleItem.Medien;
-        $rootScope.notart = false;
+    app.controller("HomeCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = 'Museen';
+        $rootScope.notart = true;
+        $rootScope.notgrid = true;
     });
 
-    app.controller("ArtListCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Kunstwerke in Name Katalog';
-    });
 
+    /********************* Menü-Controller ********************/
     app.controller("TopCtrl", function ($scope, $rootScope) {
 
         $scope.setStatus = function () {
@@ -22,13 +21,39 @@
         }
     });
 
+
+    /********************* Exponat-/Essay-Controller ********************/
+
+    app.controller("ArtListCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = 'Kunstwerke in Name Katalog';
+    });
+
+    app.controller("ArtCtrl", function ($scope, $rootScope) {
+        $scope.itemMedia = $rootScope.singleItem.Medien;
+        $rootScope.notart = false;
+    });
+
+    app.controller("EssayCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = $rootScope.singleItem.Titel;
+        $rootScope.notart = false;
+    });
+
+
+    /********************* Museum-Controller ********************/
+    app.controller("MuseumCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
+        $rootScope.topTitle = $rootScope.einMuseum.Name;
+        $scope.catalogues = $rootScope.einMuseum.Kataloge;
+        $rootScope.catalogOwned = false;
+    });
+
+
+    /********************* Katalog-Controller ********************/
+
     app.controller("CatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
         $rootScope.notart = true;
-
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
-
 
         $scope.setItem = function (item) {
             $rootScope.singleItem = item;
@@ -39,143 +64,74 @@
             $rootScope.buyCatDB();
             $rootScope.catalogOwned = true;
         }
-
-    });
-
-    app.controller("MuseumCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
-        $rootScope.topTitle = $rootScope.einMuseum.Name;
-        $scope.catalogues = $rootScope.einMuseum.Kataloge;
-        $rootScope.catalogOwned = false;
-
-        $scope.setCatalog = function (catalog) {
-            $rootScope.einKatalog = catalog;
-            $scope.checkIfBought(catalog);
-        }
-
-        $scope.checkIfBought = function (catalog) {
-            console.log("Entering the void 1");
-            var currentUser = $rootScope.chosenOne;
-
-            var boughtCats = currentUser["Gekaufte Kataloge"]
-            console.log(currentUser["Gekaufte Kataloge"].length);
-
-            for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
-            console.log("Entering the void 2");
-                
-                if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
-                    boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
-                    $rootScope.catalogOwned = true;
-                    console.log("wir haben ein matsch.")
-                } else {
-                    console.log('user does not own this catalog');
-                }
-                $rootScope.index = i+1;
-            }
-        }
-
     });
 
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
+        $rootScope.catalogOwned = true;
+        $scope.boughtCats = $rootScope.boughtCatalogs;
 
         $scope.setChosenCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
         }
     });
-
 
     app.controller("AllCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Alle Kataloge';
-
-        $scope.setChosenCatalog = function (catalog) {
-            $rootScope.einKatalog = catalog;
-        }
     });
 
-    app.controller("HomeCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Museen';
-        $rootScope.notart = true;
-        $rootScope.notgrid = true;
-    });
 
-    app.controller("EssayCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = $rootScope.singleItem.Titel;
-        $rootScope.notart = false;
-    });
+    /********************* Login-Controller ********************/
 
-    app.controller("OptionsCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = "Optionen"
-    });
-
-    // login magic
-    app.controller("LoginCtrl", function ($scope, $rootScope) {
+    app.controller("LoginCtrl", function ($scope, $rootScope, $location) {
         $rootScope.topTitle = "Login";
         $scope.email = {};
         $scope.password = {};
         // checks email and pw
         $scope.loginCheck = function () {
-            // dev log stuff
-            console.log($scope.user);
-            console.log("you used this email:" + $scope.email.txt);
-            console.log("you used this password:" + $scope.password.txt);
-
-            // compares email and pw to all user data in database
+            // searches for username + pw match in database
             for (var i = 1; i < $scope.user.length; i++) {
                 if ($scope.user[i].Name === $scope.email.txt) {
                     if ($scope.user[i].Passwort === $scope.password.txt) {
                         console.log("login successful");
                         $rootScope.loggedin = true;
-                        $scope.chosenOne = $scope.user[i];
-                        $rootScope.chosenOne = $scope.chosenOne;
-                        console.log($scope.chosenOne);
+                        $scope.loggedInUser = $scope.user[i];
+                        $rootScope.loggedInUser = $scope.loggedInUser;
+                        console.log($scope.loggedInUser);
+                        //call: get contents of owned catalogs
                         $scope.connectCatalogs();
+                        //change from login-screen to my-catalogs-screen if login successfull
+                        $location.path('/my-catalogues');
+                        //interrupt this for-loop if correct credentials are found
                         break;
                     }
                 } else {
-                    // wrong pw reaction needs to be implemented
+                    // TODO wrong pw reaction needs to be implemented
                     console.log("false login")
                 }
             }
-
         };
 
-        // connects user bought catalogs to museums catalogs in firebase
         $scope.connectCatalogs = function () {
             var boughtData = [];
-            for (var i = 0; i < $scope.chosenOne["Gekaufte Kataloge"].length; i++) {
-                // so many dev logs
-                // this one goes deep
-                console.log("Museum:" + $scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]);
-                // this one too
-                console.log("Katalog:" + $scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]);
-                // this one goes even deeper
-                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
-                // this one goes the deepest
-                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);
-
-
-                // the stuff from the deepest depths from above gets pushed into this bottomless pit of an array.
-                boughtData.push($scope.museums[$scope.chosenOne["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.chosenOne["Gekaufte Kataloge"][i]["Katalog-ID"]]);
-
-
+            for (var i = 0; i < $scope.loggedInUser["Gekaufte Kataloge"].length; i++) {
+                boughtData.push($scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]]);
+                // the following are useful dev logs - activate if needed
+                /*console.log("Museum:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]);
+                console.log("Katalog:" + $scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]);
+                console.log("hier sollte das museum stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Name);
+                console.log("hier sollte der Katalog stehen: " + $scope.museums[$scope.loggedInUser["Gekaufte Kataloge"][i]["Museum-ID"]].Kataloge[$scope.loggedInUser["Gekaufte Kataloge"][i]["Katalog-ID"]].Titel);*/
+                // push information about bought catalogs into empty boughtData-Array
             }
-            $scope.boughtCatalogs = boughtData;
-
-            // more dev log stuff because why not
-            console.log("finished data: " + boughtData);
-            console.log("magic");
+            $rootScope.boughtCatalogs = boughtData;
         };
 
-        $scope.logOut = function () {
+    });
 
-            $rootScope.loggedin = false;
+    /********************* Option-Controller ********************/
 
-        };
-
-        $scope.setBoughtCatalog = function (catalog) {
-            $rootScope.einKatalog = catalog;
-        };
-
+    app.controller("OptionsCtrl", function ($scope, $rootScope) {
+        $rootScope.topTitle = "Optionen"
     });
 
 }());

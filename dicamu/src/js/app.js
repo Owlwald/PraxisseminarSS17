@@ -8,7 +8,7 @@
         'firebase',
     ]);
 
-    app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
+    app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject, $location) {
 
         $scope.data = {};
 
@@ -16,20 +16,14 @@
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
             $scope.museums = museums;
-            // das hier ist noch bissl problematisch
+            // TODO das hier ist noch bissl problematisch
             var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
             $scope.allcatalogues = allcatalogues
-                // ------
 
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
             var user = snapshot.child("User").val()
             $scope.user = user;
-            //TODO delete when development finished:
-            //console.log(data);
-            //console.log(museums);
-            //console.log(mycatalogues);
-            //console.log(allcatalogues);
             $scope.$apply();
         });
 
@@ -43,10 +37,35 @@
         $rootScope.notgrid = true;
         $rootScope.loggedin = false;
 
+        $scope.logOut = function () {
+            $rootScope.loggedin = false;
+        };
+
+        $scope.setCatalog = function (catalog) {
+            $rootScope.einKatalog = catalog;
+            $scope.checkIfBought(catalog);
+        };
+
+        //is called when catalog is tried to be opened
+        $scope.checkIfBought = function (catalog) {
+            var currentUser = $rootScope.loggedInUser;
+            var boughtCats = currentUser["Gekaufte Kataloge"];
+            // check if the currently opened catalog is bought by logged in user
+            for (var i = 0; i < currentUser["Gekaufte Kataloge"].length; i++) {
+                if (boughtCats[i]["Katalog-ID"] == catalog.ID &&
+                    boughtCats[i]["Museum-ID"] == $rootScope.einMuseum.ID) {
+                    $rootScope.catalogOwned = true;
+                }
+                $rootScope.index = i + 1;
+            }
+        }
+
+        //is in this controller because db is defined here
+        //can be outsourced to a database service in a bigger refactoring
+        //writes bought catalog persistent to database
         $rootScope.buyCatDB = function () {
-            console.log("next im trying to write into the db");
-            firebase.database().ref('User/' + $rootScope.chosenOne.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
-                'Katalog-ID':  $rootScope.einKatalog.ID,
+            firebase.database().ref('User/' + $rootScope.loggedInUser.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
+                'Katalog-ID': $rootScope.einKatalog.ID,
                 'Museum-ID': $rootScope.einMuseum.ID
             });
         }
@@ -93,6 +112,10 @@
             })
             .when('/login', {
                 templateUrl: "login.html",
+                reloadOnSearch: false
+            })
+            .when('/my-catalogues', {
+                templateUrl: "my-catalogues.html",
                 reloadOnSearch: false
             });
     });
