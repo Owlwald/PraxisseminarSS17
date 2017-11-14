@@ -8,7 +8,7 @@
         'firebase',
     ]);
 
-    app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject) {
+    app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject, $location) {
 
         $scope.data = {};
 

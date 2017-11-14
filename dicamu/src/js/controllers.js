@@ -78,10 +78,6 @@
 
     app.controller("AllCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Alle Kataloge';
-
-        $scope.setChosenCatalog = function (catalog) {
-            $rootScope.einKatalog = catalog;
-        }
     });
 
 
@@ -93,12 +89,7 @@
         $scope.password = {};
         // checks email and pw
         $scope.loginCheck = function () {
-            // dev log stuff
-            console.log($scope.user);
-            console.log("you used this email:" + $scope.email.txt);
-            console.log("you used this password:" + $scope.password.txt);
-
-            // compares email and pw to all user data in database
+            // searches for username + pw match in database
             for (var i = 1; i < $scope.user.length; i++) {
                 if ($scope.user[i].Name === $scope.email.txt) {
                     if ($scope.user[i].Passwort === $scope.password.txt) {
@@ -107,9 +98,11 @@
                         $scope.loggedInUser = $scope.user[i];
                         $rootScope.loggedInUser = $scope.loggedInUser;
                         console.log($scope.loggedInUser);
+                        //call: get contents of owned catalogs
                         $scope.connectCatalogs();
-
+                        //change from login-screen to my-catalogs-screen if login successfull
                         $location.path('/my-catalogues');
+                        //interrupt this for-loop if correct credentials are found
                         break;
                     }
                 } else {
