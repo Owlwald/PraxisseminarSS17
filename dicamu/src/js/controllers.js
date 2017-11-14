@@ -87,7 +87,7 @@
 
     /********************* Login-Controller ********************/
 
-    app.controller("LoginCtrl", function ($scope, $rootScope) {
+    app.controller("LoginCtrl", function ($scope, $rootScope, $location) {
         $rootScope.topTitle = "Login";
         $scope.email = {};
         $scope.password = {};
@@ -108,6 +108,8 @@
                         $rootScope.loggedInUser = $scope.loggedInUser;
                         console.log($scope.loggedInUser);
                         $scope.connectCatalogs();
+
+                        $location.path('/my-catalogues');
                         break;
                     }
                 } else {
