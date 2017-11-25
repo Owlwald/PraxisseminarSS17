@@ -6,6 +6,7 @@
         $rootScope.topTitle = 'Museen';
         $rootScope.notart = true;
         $rootScope.notgrid = false;
+        $rootScope.notcatalog = true;
     });
 
 
@@ -26,18 +27,16 @@
 
     /********************* Exponat-/Essay-Controller ********************/
 
-    app.controller("ArtListCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Kunstwerke in Name Katalog';
-    });
-
     app.controller("ArtCtrl", function ($scope, $rootScope) {
         $scope.itemMedia = $rootScope.singleItem.Medien;
         $rootScope.notart = false;
+        $rootScope.notcatalog = false;
     });
 
     app.controller("EssayCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.singleItem.Titel;
         $rootScope.notart = false;
+        $rootScope.notcatalog = false;
     });
 
 
@@ -46,6 +45,8 @@
         $rootScope.topTitle = $rootScope.einMuseum.Name;
         $scope.catalogues = $rootScope.einMuseum.Kataloge;
         $rootScope.catalogOwned = false;
+        $rootScope.notart = true;
+        $rootScope.notcatalog = true;
     });
 
 
@@ -54,6 +55,7 @@
     app.controller("CatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
         $rootScope.notart = true;
+        $rootScope.notcatalog = false;
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
 
@@ -71,6 +73,8 @@
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
         $rootScope.catalogOwned = true;
+        $rootScope.notart = true;
+        $rootScope.notcatalog = true;
         $scope.boughtCats = $rootScope.boughtCatalogs;
 
         $scope.setChosenCatalog = function (catalog) {
@@ -78,15 +82,14 @@
         }
     });
 
-    app.controller("AllCatCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Alle Kataloge';
-    });
-
 
     /********************* Login-Controller ********************/
 
     app.controller("LoginCtrl", function ($scope, $rootScope, $location) {
         $rootScope.topTitle = "Login";
+        
+        $rootScope.notart = true;
+        $rootScope.notcatalog = false;
         $scope.email = {};
         $scope.password = {};
         // checks email and pw
