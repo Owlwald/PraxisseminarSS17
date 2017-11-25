@@ -90,24 +90,12 @@
                 templateUrl: "catalog.html",
                 reloadOnSearch: false
             })
-            .when('/artlist', {
-                templateUrl: "artlist.html",
-                reloadOnSearch: false
-            })
             .when('/art', {
                 templateUrl: "art.html",
                 reloadOnSearch: false
             })
             .when('/essay', {
                 templateUrl: "essay.html",
-                reloadOnSearch: false
-            })
-            .when('/all-catalogues', {
-                templateUrl: "all-catalogues.html",
-                reloadOnSearch: false
-            })
-            .when('/options', {
-                templateUrl: "options.html",
                 reloadOnSearch: false
             })
             .when('/login', {

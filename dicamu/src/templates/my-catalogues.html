@@ -16,8 +16,10 @@
                 <div ng-repeat="boughtCat in boughtCats" ng-if="!$first">
                     <a ng-click="setCatalog(boughtCat)" ng-href="#/catalog" class="bg-grid">
                         <img src={{boughtCat.Bild}} class="img-grid">
-                        <div class="text-grid"><span class="listeneintrag-grid">
-                        {{boughtCat.Titel}}</span></div>
+                        <div class="text-grid">
+                            <div class="listeneintrag-grid">
+                                {{boughtCat.Titel}}</div>
+                        </div>
                     </a>
                 </div>
             </div>
