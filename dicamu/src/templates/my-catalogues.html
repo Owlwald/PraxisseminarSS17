@@ -2,13 +2,24 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
 
-            <div ng-repeat="boughtCat in boughtCats">
-                <a ng-href="#/catalog" ng-click="setCatalog(boughtCat)">
-                    <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
-                    <span class="listeneintrag">
+            <div ng-if="notgrid">
+                <div ng-repeat="boughtCat in boughtCats">
+                    <a ng-href="#/catalog" ng-click="setCatalog(boughtCat)">
+                        <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
+                        <span class="listeneintrag">
                     {{boughtCat.Titel}}
                     </span>
-                </a>
+                    </a>
+                </div>
+            </div>
+            <div ng-if="!notgrid">
+                <div ng-repeat="boughtCat in boughtCats" ng-if="!$first">
+                    <a ng-click="setCatalog(boughtCat)" ng-href="#/catalog" class="bg-grid">
+                        <img src={{boughtCat.Bild}} class="img-grid">
+                        <div class="text-grid"><span class="listeneintrag-grid">
+                        {{catalog.Titel}}</span></div>
+                    </a>
+                </div>
             </div>
 
         </section>
