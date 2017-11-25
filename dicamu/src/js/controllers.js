@@ -112,17 +112,19 @@
                             //change from login-screen to my-catalogs-screen if login successfull
                             $location.path('/my-catalogues');
                             //interrupt this for-loop if correct credentials are found
-                            //break;
+                            break;
                         } else {
                             console.log("ganz falsch");
+
                         }
                     } else {
                         // TODO wrong pw reaction needs to be implemented
                         console.log("false login");
-                        //$rootScope.falselogin = true;
+                        $rootScope.falselogin = true;
                     }
                 } else {
                     console.log("undefined");
+                    $rootScope.falselogin = true;
 
                 }
             }
