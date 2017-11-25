@@ -91,7 +91,7 @@
         $scope.loginCheck = function () {
             // searches for username + pw match in database
             for (var i = 1; i < $scope.user.length; i++) {
-                if ($scope.user[i].Name === $scope.email.txt) {
+                if ($scope.user[i].Name.toLowerCase === $scope.email.txt.toLowerCase) {
                     if ($scope.user[i].Passwort === $scope.password.txt) {
                         console.log("login successful");
                         $rootScope.loggedin = true;
