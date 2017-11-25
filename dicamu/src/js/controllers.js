@@ -87,7 +87,7 @@
 
     app.controller("LoginCtrl", function ($scope, $rootScope, $location) {
         $rootScope.topTitle = "Login";
-        
+
         $rootScope.notart = true;
         $rootScope.notcatalog = false;
         $scope.email = {};
@@ -96,23 +96,34 @@
         $scope.loginCheck = function () {
             // searches for username + pw match in database
             for (var i = 1; i < $scope.user.length; i++) {
-                if ($scope.user[i].Name.toLowerCase === $scope.email.txt.toLowerCase) {
-                    if ($scope.user[i].Passwort === $scope.password.txt) {
-                        console.log("login successful");
-                        $rootScope.loggedin = true;
-                        $scope.loggedInUser = $scope.user[i];
-                        $rootScope.loggedInUser = $scope.loggedInUser;
-                        console.log($scope.loggedInUser);
-                        //call: get contents of owned catalogs
-                        $scope.connectCatalogs();
-                        //change from login-screen to my-catalogs-screen if login successfull
-                        $location.path('/my-catalogues');
-                        //interrupt this for-loop if correct credentials are found
-                        break;
+                console.log($scope.user[i].Name);
+                console.log($scope.email.txt);
+                if (angular.isDefined($scope.email.txt)) {
+                    if ($scope.user[i].Name.toLowerCase() === $scope.email.txt.toLowerCase()) {
+                        if ($scope.user[i].Passwort === $scope.password.txt) {
+                            console.log("login successful");
+                            $rootScope.falselogin = false;
+                            $rootScope.loggedin = true;
+                            $scope.loggedInUser = $scope.user[i];
+                            $rootScope.loggedInUser = $scope.loggedInUser;
+                            console.log($scope.loggedInUser);
+                            //call: get contents of owned catalogs
+                            $scope.connectCatalogs();
+                            //change from login-screen to my-catalogs-screen if login successfull
+                            $location.path('/my-catalogues');
+                            //interrupt this for-loop if correct credentials are found
+                            //break;
+                        } else {
+                            console.log("ganz falsch");
+                        }
+                    } else {
+                        // TODO wrong pw reaction needs to be implemented
+                        console.log("false login");
+                        //$rootScope.falselogin = true;
                     }
                 } else {
-                    // TODO wrong pw reaction needs to be implemented
-                    console.log("false login")
+                    console.log("undefined");
+
                 }
             }
         };

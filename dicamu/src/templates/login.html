@@ -6,14 +6,14 @@
         <form role="form" ng-submit='login()' ng-if="!loggedin">
 
             <fieldset>
-                <div class="form-group has-success has-feedback">
+                <div class="form-group">
                     <label>Email</label>
-                    <input type="email" ng-model="email.txt" class="form-control" placeholder="Enter email">
+                    <input type="email" ng-model="email.txt" class="form-control" placeholder="Email">
                 </div>
 
                 <div class="form-group">
                     <label>Passwort</label>
-                    <input type="password" ng-model="password.txt" class="form-control" placeholder="Password">
+                    <input type="password" ng-model="password.txt" class="form-control" placeholder="Passwort">
                 </div>
 
             </fieldset>
@@ -21,6 +21,10 @@
             <hr>
 
             <a class="btn btn-primary btn-block" ng-click="loginCheck()">Login</a>
+
+            <div ng-if="falselogin">
+                FALSCHE DATEN!!!
+            </div>
         </form>
 
     </div>

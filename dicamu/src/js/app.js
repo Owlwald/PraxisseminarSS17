@@ -36,6 +36,7 @@
         }
         $rootScope.notgrid = true;
         $rootScope.loggedin = false;
+        $rootScope.falselogin = false;
 
         $scope.logOut = function () {
             $rootScope.loggedin = false;
