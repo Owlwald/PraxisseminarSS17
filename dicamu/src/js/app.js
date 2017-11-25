@@ -16,10 +16,6 @@
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
             $scope.museums = museums;
-            // TODO das hier ist noch bissl problematisch
-            var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
-            $scope.allcatalogues = allcatalogues
-
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
             var user = snapshot.child("User").val()
