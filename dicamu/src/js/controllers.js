@@ -128,10 +128,4 @@
 
     });
 
-    /********************* Option-Controller ********************/
-
-    app.controller("OptionsCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = "Optionen"
-    });
-
 }());
