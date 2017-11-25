@@ -5,13 +5,15 @@
     app.controller("HomeCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Museen';
         $rootScope.notart = true;
-        $rootScope.notgrid = true;
+        $rootScope.notgrid = false;
     });
 
 
     /********************* Menü-Controller ********************/
-    app.controller("TopCtrl", function ($scope, $rootScope) {
-
+    app.controller("TopCtrl", function ($scope, $rootScope, $window) {
+        $scope.go_back = function () {
+            $window.history.back();
+        };
         $scope.setStatus = function () {
             if ($rootScope.notgrid) {
                 $rootScope.notgrid = false;

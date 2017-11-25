@@ -4,7 +4,8 @@
         <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle" ng-if="notart">
             <i class="fa fa-bars"></i>
         </div>
-        <a ng-if="!notart" ng-href="#/catalog" class="fa fa-chevron-left btn white"></a>
+        <!-- <a ng-if="!notart" ng-href="#/catalog" class="fa fa-chevron-left btn white"></a> -->
+        <a ng-href="javascript:void(0);" class="fa fa-chevron-left btn white" ng-click="go_back()"></a>
     </div>
 
     <marquee scrollamount="3" class="navbar-brand navbar-brand-pull-left" ui-yield-to="title">
