@@ -16,10 +16,6 @@
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
             $scope.museums = museums;
-            // TODO das hier ist noch bissl problematisch
-            var allcatalogues = snapshot.child("Museum/1/Kataloge").val()
-            $scope.allcatalogues = allcatalogues
-
             var mycatalogues = snapshot.child("Gekaufte Kataloge").val()
             $scope.mycatalogues = mycatalogues;
             var user = snapshot.child("User").val()
@@ -36,6 +32,7 @@
         }
         $rootScope.notgrid = true;
         $rootScope.loggedin = false;
+        $rootScope.falselogin = false;
 
         $scope.logOut = function () {
             $rootScope.loggedin = false;
@@ -90,24 +87,12 @@
                 templateUrl: "catalog.html",
                 reloadOnSearch: false
             })
-            .when('/artlist', {
-                templateUrl: "artlist.html",
-                reloadOnSearch: false
-            })
             .when('/art', {
                 templateUrl: "art.html",
                 reloadOnSearch: false
             })
             .when('/essay', {
                 templateUrl: "essay.html",
-                reloadOnSearch: false
-            })
-            .when('/all-catalogues', {
-                templateUrl: "all-catalogues.html",
-                reloadOnSearch: false
-            })
-            .when('/options', {
-                templateUrl: "options.html",
                 reloadOnSearch: false
             })
             .when('/login', {

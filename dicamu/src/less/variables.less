@@ -166,17 +166,26 @@
         background: @navypeony !important;
         width: auto;
         height: auto;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
     
     .listeneintrag-grid {
         font-size: @text_body;
         color: white;
         padding: 20px 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     
     .li {
         display: inline-block;
         width: 50%;
+    }
+    
+    .loginwarning {
+        color: red;
     }
     /************************* Catalogues **************************/
     
@@ -205,6 +214,7 @@
         padding: 0;
         .container {
             padding: 0;
+            position: relative;
         }
     }
     

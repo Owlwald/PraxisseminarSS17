@@ -5,13 +5,16 @@
     app.controller("HomeCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Museen';
         $rootScope.notart = true;
-        $rootScope.notgrid = true;
+        $rootScope.notgrid = false;
+        $rootScope.notcatalog = true;
     });
 
 
     /********************* Menü-Controller ********************/
-    app.controller("TopCtrl", function ($scope, $rootScope) {
-
+    app.controller("TopCtrl", function ($scope, $rootScope, $window) {
+        $scope.go_back = function () {
+            $window.history.back();
+        };
         $scope.setStatus = function () {
             if ($rootScope.notgrid) {
                 $rootScope.notgrid = false;
@@ -24,18 +27,16 @@
 
     /********************* Exponat-/Essay-Controller ********************/
 
-    app.controller("ArtListCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Kunstwerke in Name Katalog';
-    });
-
     app.controller("ArtCtrl", function ($scope, $rootScope) {
         $scope.itemMedia = $rootScope.singleItem.Medien;
         $rootScope.notart = false;
+        $rootScope.notcatalog = false;
     });
 
     app.controller("EssayCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = $rootScope.singleItem.Titel;
         $rootScope.notart = false;
+        $rootScope.notcatalog = false;
     });
 
 
@@ -44,6 +45,8 @@
         $rootScope.topTitle = $rootScope.einMuseum.Name;
         $scope.catalogues = $rootScope.einMuseum.Kataloge;
         $rootScope.catalogOwned = false;
+        $rootScope.notart = true;
+        $rootScope.notcatalog = true;
     });
 
 
@@ -52,6 +55,7 @@
     app.controller("CatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Katalog: ' + $rootScope.einKatalog.Titel;
         $rootScope.notart = true;
+        $rootScope.notcatalog = false;
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
 
@@ -69,6 +73,8 @@
     app.controller("MyCatCtrl", function ($scope, $rootScope) {
         $rootScope.topTitle = 'Meine Kataloge';
         $rootScope.catalogOwned = true;
+        $rootScope.notart = true;
+        $rootScope.notcatalog = true;
         $scope.boughtCats = $rootScope.boughtCatalogs;
 
         $scope.setChosenCatalog = function (catalog) {
@@ -76,38 +82,50 @@
         }
     });
 
-    app.controller("AllCatCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = 'Alle Kataloge';
-    });
-
 
     /********************* Login-Controller ********************/
 
     app.controller("LoginCtrl", function ($scope, $rootScope, $location) {
         $rootScope.topTitle = "Login";
+
+        $rootScope.notart = true;
+        $rootScope.notcatalog = false;
         $scope.email = {};
         $scope.password = {};
         // checks email and pw
         $scope.loginCheck = function () {
             // searches for username + pw match in database
             for (var i = 1; i < $scope.user.length; i++) {
-                if ($scope.user[i].Name === $scope.email.txt) {
-                    if ($scope.user[i].Passwort === $scope.password.txt) {
-                        console.log("login successful");
-                        $rootScope.loggedin = true;
-                        $scope.loggedInUser = $scope.user[i];
-                        $rootScope.loggedInUser = $scope.loggedInUser;
-                        console.log($scope.loggedInUser);
-                        //call: get contents of owned catalogs
-                        $scope.connectCatalogs();
-                        //change from login-screen to my-catalogs-screen if login successfull
-                        $location.path('/my-catalogues');
-                        //interrupt this for-loop if correct credentials are found
-                        break;
+                console.log($scope.user[i].Name);
+                console.log($scope.email.txt);
+                if (angular.isDefined($scope.email.txt)) {
+                    if ($scope.user[i].Name.toLowerCase() === $scope.email.txt.toLowerCase()) {
+                        if ($scope.user[i].Passwort === $scope.password.txt) {
+                            console.log("login successful");
+                            $rootScope.falselogin = false;
+                            $rootScope.loggedin = true;
+                            $scope.loggedInUser = $scope.user[i];
+                            $rootScope.loggedInUser = $scope.loggedInUser;
+                            console.log($scope.loggedInUser);
+                            //call: get contents of owned catalogs
+                            $scope.connectCatalogs();
+                            //change from login-screen to my-catalogs-screen if login successfull
+                            $location.path('/my-catalogues');
+                            //interrupt this for-loop if correct credentials are found
+                            break;
+                        } else {
+                            console.log("ganz falsch");
+
+                        }
+                    } else {
+                        // TODO wrong pw reaction needs to be implemented
+                        console.log("false login");
+                        $rootScope.falselogin = true;
                     }
                 } else {
-                    // TODO wrong pw reaction needs to be implemented
-                    console.log("false login")
+                    console.log("undefined");
+                    $rootScope.falselogin = true;
+
                 }
             }
         };
@@ -126,12 +144,6 @@
             $rootScope.boughtCatalogs = boughtData;
         };
 
-    });
-
-    /********************* Option-Controller ********************/
-
-    app.controller("OptionsCtrl", function ($scope, $rootScope) {
-        $rootScope.topTitle = "Optionen"
     });
 
 }());
