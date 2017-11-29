@@ -3,7 +3,7 @@
         <section class="section container-fluid">
 
             <div ng-if="notgrid">
-                <div ng-repeat="boughtCat in boughtCats">
+                <div ng-repeat="boughtCat in boughtCats track by $index">
                     <a ng-href="#/catalog" ng-click="setCatalog(boughtCat)">
                         <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
                         <span class="listeneintrag">
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div ng-if="!notgrid">
-                <div ng-repeat="boughtCat in boughtCats" ng-if="!$first">
+                <div ng-repeat="boughtCat in boughtCats track by $index">
                     <a ng-click="setCatalog(boughtCat)" ng-href="#/catalog" class="bg-grid">
                         <img src={{boughtCat.Bild}} class="img-grid">
                         <div class="text-grid">
