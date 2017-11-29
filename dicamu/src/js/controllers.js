@@ -67,6 +67,7 @@
             console.log("buy this!");
             $rootScope.buyCatDB();
             $rootScope.catalogOwned = true;
+            $rootScope.loginCheck();
         }
     });
 
@@ -93,7 +94,7 @@
         $scope.email = {};
         $scope.password = {};
         // checks email and pw
-        $scope.loginCheck = function () {
+        $rootScope.loginCheck = function () {
             // searches for username + pw match in database
             for (var i = 1; i < $scope.user.length; i++) {
                 console.log($scope.user[i].Name);
