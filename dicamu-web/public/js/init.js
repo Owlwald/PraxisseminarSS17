@@ -48,10 +48,12 @@ function handleFileUploadJSON(evt){
         var result = e.target.result;
         var obj = JSON.parse(result)
             console.log(currentMusID)
-            database.ref('Museum/'+currentMusID).set(obj)
+            database.ref('Museum/'+currentMusID+'/Kataloge/'+(numOfCatalogues+1)).set(obj)
       }
 
   fr.readAsText(file);
+  hideCatForm();
+  showCatTable();
 }
 
 function handleFileSelect(evt) {

@@ -2,6 +2,8 @@
 
 function addMuseumDialog(){
     showMuseumPanel()
+    hideMediaPanel()
+    hideArtworkDetail()
     hideCatDD()
     hideCatDetail()
     hideCatTable()

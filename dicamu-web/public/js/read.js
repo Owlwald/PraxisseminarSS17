@@ -48,9 +48,11 @@ function openCatalogue(id) {
     showCatDetail();
     showCatDD();
     currentCatID = id;
+    console.log(currentCatID)
     database.ref('Museum/' + currentMusID + '/Kataloge/' + id).once('value').then(function(snapshot) {
         numOfEssays = 0;
         numOfArtworks = 0;
+        console.log(snapshot.val())
         document.querySelector("#dropdown_title_cat").innerHTML = snapshot.val().Titel + " <span class='mui-caret'></span>";
         document.querySelector("#cat_title").innerHTML = snapshot.val().Titel;
         var essays = snapshot.val().Essays
