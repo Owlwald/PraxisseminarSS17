@@ -1,18 +1,29 @@
 <div class="scrollable" ng-controller="MyCatCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
-            <div ng-repeat="catalogue in mycatalogues" ng-if="!$first">
-                <a ng-click="setChosenCatalog(catalogue)" ng-href="#/catalog"> <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
-                    <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
-                    <span class="listeneintrag">
-                    {{catalogue.Titel}}"
-                </span>
-                </a>
+
+            <div ng-if="notgrid">
+                <div ng-repeat="boughtCat in boughtCats track by $index">
+                    <a ng-href="#/catalog" ng-click="setCatalog(boughtCat)">
+                        <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
+                        <span class="listeneintrag">
+                    {{boughtCat.Titel}}
+                    </span>
+                    </a>
+                </div>
+            </div>
+            <div ng-if="!notgrid">
+                <div ng-repeat="boughtCat in boughtCats track by $index">
+                    <a ng-click="setCatalog(boughtCat)" ng-href="#/catalog" class="bg-grid">
+                        <img src={{boughtCat.Bild}} class="img-grid">
+                        <div class="text-grid">
+                            <span class="listeneintrag-grid">
+                                {{boughtCat.Titel}}</span>
+                        </div>
+                    </a>
+                </div>
             </div>
 
         </section>
     </div>
 </div>
-
-
-<script

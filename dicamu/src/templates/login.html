@@ -4,46 +4,28 @@
     <div class="scrollable-content section">
 
         <form role="form" ng-submit='login()' ng-if="!loggedin">
+
             <fieldset>
-                <div class="form-group has-success has-feedback">
+                <div class="form-group">
                     <label>Email</label>
-                    <input type="email" ng-model="email.txt" class="form-control" placeholder="Enter email">
+                    <input type="email" ng-model="email.txt" class="form-control" placeholder="Email">
                 </div>
 
                 <div class="form-group">
                     <label>Passwort</label>
-                    <input type="password" ng-model="password.txt" class="form-control" placeholder="Password">
+                    <input type="password" ng-model="password.txt" class="form-control" placeholder="Passwort">
                 </div>
+
             </fieldset>
+
             <hr>
 
-            <button class="btn btn-primary btn-block" ng-click="loginCheck()">
-      Login
-    </button>
+            <a class="btn btn-primary btn-block" ng-click="loginCheck()">Login</a>
 
-
-
+            <div ng-if="falselogin" class="warning">
+                Die Emailadresse und / oder ihr Passwort sind nicht korrekt. Bitte überprüfen Sie ihre Zugangsdaten und versuchen Sie es erneut.
+            </div>
         </form>
-        <div class="test" ng-if="loggedin">
-            <section class="section container-fluid">
-                <div ng-repeat="catalogue in boughtCatalogs">
-                    <a ng-click="setBoughtCatalog(catalogue)" ng-href="#/catalog"> <i class="fa fa-book" aria-hidden="true" id="listenicon"></i>
-                        <!-- HIER MUSS NOCH NAME STATT ID EINGESETZT WERDEN, WENN VORHANDEN -->
-                        <span class="listeneintrag">
-                    {{catalogue.Titel}}"
-                </span>
-                    </a>
-                </div>
 
-            </section>
-
-
-
-            {{chosenOne["Gekaufte Kataloge"]}}
-
-            <button class="btn btn-primary btn-block" ng-click="logOut()">
-      Logout
-    </button>
-        </div>
     </div>
 </div>

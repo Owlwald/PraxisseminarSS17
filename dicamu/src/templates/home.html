@@ -2,7 +2,7 @@
     <div class="scrollable-content">
         <section class="section container-fluid">
             <div ng-if="notgrid">
-                <div ng-repeat="museum in museums" ng-if="!$first">
+                <div ng-repeat="museum in museums track by $index" ng-if="!$first">
                     <a ng-click="setMuseum(museum)" ng-href="#/museum">
                         <i class="fa fa-building-o" aria-hidden="true" id="listenicon"></i>
                         <span class="listeneintrag">{{museum.Name}}</span>
@@ -11,14 +11,14 @@
                 </div>
             </div>
             <div ng-if="!notgrid">
-                <div ng-repeat="museum in museums" ng-if="!$first">
-                    <div ng-click="setMuseum(museum)" ng-href="#/museum" class="bg-grid">
+                <div ng-repeat="museum in museums track by $index" ng-if="!$first">
+                    <a ng-click="setMuseum(museum)" ng-href="#/museum" class="bg-grid">
 
                         <img src={{museum.Bild}} class="img-grid">
 
                         <div class="text-grid"><span class="listeneintrag-grid">
                         {{museum.Name}}</span></div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
