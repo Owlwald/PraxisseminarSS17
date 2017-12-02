@@ -53,7 +53,7 @@
                 <button class="mui-btn mui-btn--primary" type="button" id="login_button">Abschicken</button>
                 <button class="mui-btn mui-btn--danger" type="button" id="login_lost_password">Passwort vergessen?</button>
             </form><br>
-            <span>Haben Sie keinen Account? Melden Sie sich bitte unter <a href="mailto:ewald.reinhardt@stud.uni-regensburg.de">hier</a>, damit wir Ihnen einen erstellen können.</span>
+            <span>Haben Sie keinen Account? Melden Sie sich bitte <a href="mailto:ewald.reinhardt@stud.uni-regensburg.de">hier</a>, damit wir Ihnen einen erstellen können.</span>
         </div>
         <div class="hidden" id="content">
         <!-- dropdown for choosing a museum -->
@@ -151,12 +151,12 @@
     },
         {[Weitere Essays]}
     ],
-    "Kunstwerke" : [ {
-      "Autor" : "Kunstwerk-Autor",
+    "Exponate" : [ {
+      "Autor" : "Exponat-Autor",
       "ID" : 1,
-      "Literatur" : "Kunstwerk-Literatur",
-      "Text" : "Kunstwerk-Text",
-      "Titel" : "Kunstwerk-Titel",
+      "Literatur" : "Exponat-Literatur",
+      "Text" : "Exponat-Text",
+      "Titel" : "Exponat-Titel",
       "Medien" : [ {
         "ID" : 1,
         "Medien" : "Link zum Bild",
@@ -165,17 +165,17 @@
           "Detail" : "Detail-Text",
           "Typ" : "Detail-Typ"
         },
-            {[Weitere Details]} 
+            {[Weitere Details]}
         ]
         },
-            {[Weitere Medien]} 
+            {[Weitere Medien]}
         ]
     },
     {
-        [Weitere Kunstwerke]
+        [Weitere Exponate]
     }]
 }</pre>
-            <input type="file" id="file_json" name="file_json" />
+            <input type="file" id="file_json" name="file_json" accept=".json"/>
 
         </form>
 
@@ -193,8 +193,8 @@
                 <tbody id="tbody_essay">
                 </tbody>
             </table>
-            <button class="mui-btn mui-btn--primary" type="button" onclick="writeNewEssay()"> Aufsatz hinzufügen</button>
-            <h2>Kunstwerke</h2>
+            <button class="mui-btn mui-btn--primary" type="button" onclick="writeNewEssay()"> Essay hinzufügen</button>
+            <h2>Exponate</h2>
             <table class="mui-table">
                 <thead>
                     <tr>
@@ -204,7 +204,7 @@
                 <tbody id="tbody_artwork">
                 </tbody>
             </table>
-            <button class="mui-btn mui-btn--primary" type="button" onclick="writeNewArtwork()">Kunstwerk hinzufügen</button>
+            <button class="mui-btn mui-btn--primary" type="button" onclick="writeNewArtwork()">Exponat hinzufügen</button>
             <br><br>
             <button class="mui-btn mui-btn--danger" type="button" onclick="deleteCat()">Katalog entfernen</button>
 
@@ -213,7 +213,7 @@
         <div id="essay_detail" class="hidden">
             <form class="mui-form">
                 <br>
-                <legend> Aufsatz
+                <legend> Essay
                     <legend><br>
                         <div class="mui-textfield">
                             <input type="text" id="essay_title">
@@ -254,7 +254,7 @@
         <div id="artwork_detail" class="hidden">
             <form class="mui-form">
                 <br>
-                <legend>Kunstwerk
+                <legend>Exponat
                     <legend><br>
                         <div class="mui-textfield">
                             <input type="text" id="artwork_title">
@@ -290,7 +290,7 @@
                         <button class="mui-btn mui-btn--raised" type="button" id="artwork_save">Speichern</button>
                         <button class="mui-btn" type="button" onclick="closeArtwork()">Zurück</button>
                         <br><br>
-                        <button class="mui-btn mui-btn--danger" type="button" onclick="deleteArtwork()" id="remove_media_artwork">Kunstwerk entfernen</button>
+                        <button class="mui-btn mui-btn--danger" type="button" onclick="deleteArtwork()" id="remove_media_artwork">Exponat entfernen</button>
 
             </form>
         </div>
