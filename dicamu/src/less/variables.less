@@ -10,6 +10,15 @@
         font-size: @text_title;
     }
     
+    // Zwischenüberschriften bei Auflistungen
+    .lead {
+        padding: 8px;
+        color: @navypeony;
+        font-size: @text_subheading;
+        weight: @medium;
+        margin-bottom: -5px;
+    }
+    
     .has-navbar-top .app-body {
         padding: 50px 0px;
         background: white;
@@ -17,13 +26,6 @@
     
     .white {
         color: white !important;
-    }
-    
-    .shadow,
-    #lens {
-        z-index: 10;
-        color: white;
-        text-shadow: 1px 1px 1px #ccc;
     }
     
     #listenicon {
@@ -45,7 +47,6 @@
         font-size: @text_caption;
     }
     
-    // ----- momentan irrelevant ----
     .scrollable-header app-name {
         weight: 900;
         font-size: 20px;
@@ -123,16 +124,6 @@
         font-weight: 900;
         font-size: 40pt;
     }
-    /************************* ? **************************/
-    
-    // Zwischenüberschriften bei Auflistungen
-    .lead {
-        padding: 8px;
-        color: @navypeony;
-        font-size: @text_subheading;
-        weight: @medium;
-        margin-bottom: -10px;
-    }
     /************************* Login **************************/
     
     // Login Remember Switch
@@ -160,7 +151,7 @@
     
     .bg-grid {
         background: @neutralgrey;
-        border-color: white;
+        border-color: @navypeony;
         border-width: 8px;
         border-style: solid;
         float: left;
@@ -170,20 +161,18 @@
     }
     
     .text-grid {
-        background: @navypeony !important;
         width: auto;
         height: auto;
-        text-overflow: ellipsis;
+        line-height: 90%;
         overflow: hidden;
+        height: 45px;
+        padding-top: 5px;
     }
     
     .listeneintrag-grid {
-        font-size: @text_body;
+        font-size: 11pt;
         color: white;
-        padding: 20px 0;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        white-space: normal;
     }
     
     .li {
@@ -262,6 +251,13 @@
     
     .titel {
         font-weight: @medium;
+    }
+    
+    .shadow,
+    #lens {
+        z-index: 10;
+        color: white;
+        text-shadow: 1px 1px 1px #ccc;
     }
     /****************** Single-Art-Modal **************************/
     
