@@ -1,3 +1,4 @@
+//every template has a controller with its logic in this file
 (function () {
     'use strict';
     var app = angular.module("dcm");
@@ -15,6 +16,7 @@
         $scope.go_back = function () {
             $window.history.back();
         };
+        //change between grid and list view
         $scope.setStatus = function () {
             if ($rootScope.notgrid) {
                 $rootScope.notgrid = false;

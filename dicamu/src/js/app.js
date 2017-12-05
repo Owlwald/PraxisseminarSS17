@@ -10,8 +10,13 @@
 
     app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject, $location) {
 
+        // global variables
         $scope.data = {};
+        $rootScope.notgrid = true;
+        $rootScope.loggedin = false;
+        $rootScope.falselogin = false;
 
+        //get data from firebase db
         firebase.database().ref().on('value', function (snapshot) {
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
@@ -23,16 +28,15 @@
             $scope.$apply();
         });
 
-        //set selected museum
+        //set selected museum as active museum
         $scope.setMuseum = function (museum) {
             $rootScope.einMuseum = museum;
         }
+
         $scope.setMyCatalog = function (catalog) {
             $rootScope.chosenCatalog = catalog;
         }
-        $rootScope.notgrid = true;
-        $rootScope.loggedin = false;
-        $rootScope.falselogin = false;
+
 
         $scope.logOut = function () {
             $rootScope.loggedin = false;
@@ -57,9 +61,9 @@
             }
         }
 
+        //writes bought catalog persistent to database
         //is in this controller because db is defined here
         //can be outsourced to a database service in a bigger refactoring
-        //writes bought catalog persistent to database
         $rootScope.buyCatDB = function () {
             firebase.database().ref('User/' + $rootScope.loggedInUser.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
                 'Katalog-ID': $rootScope.einKatalog.ID,
@@ -69,6 +73,7 @@
 
     });
 
+    //connect subpage-links to templates
     app.config(function ($routeProvider) {
         $routeProvider
             .when('/', {
