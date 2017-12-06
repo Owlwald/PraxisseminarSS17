@@ -1,21 +1,26 @@
+<!-- SIDEBAR.HTML -->
+
 <div class="scrollable our-menu">
+
+    <!-- Image and Title -->
     <img src="/images/menu.png">
     <p id="dicamu" class="shadow">DiCaMu</p>
 
-
+    <!-- Navigation List -->
     <div class="scrollable-content">
         <div class="list-group" ui-turn-off='uiSidebarLeft'>
 
+            <!-- Startseite -->
             <a class="list-group-item" href="#/home"><i class="fa fa-home pull-left" id="menuicon"></i>Startseite <i class="fa fa-chevron-right pull-right"></i></a>
 
+            <!-- Login -->
             <a class="list-group-item" href='#/login' ng-if="!loggedin"><i class="fa fa-sign-in pull-left" id="menuicon"></i>Login<i class="fa fa-chevron-right pull-right"></i></a>
 
+            <!-- Meine Kataloge -->
             <a class="list-group-item" href="#/my-catalogues" ng-if="loggedin"><i class="fa fa-book pull-left" id="menuicon"></i>Meine Kataloge <i class="fa fa-chevron-right pull-right"></i></a>
 
-            <!--<a class="list-group-item" href='#/all-catalogues'><i class="fa fa-shopping-cart pull-left" id="menuicon"></i>Alle Kataloge <i class="fa fa-chevron-right pull-right"></i></a>-->
-
+            <!-- Logout If Logged In -->
             <a class="list-group-item" href="#/login" ng-click="logOut()" ng-if="loggedin"><i class="fa fa-sign-out pull-left" id="menuicon"></i>Logout<i class="fa fa-chevron-left pull-right"></i></a>
-
         </div>
     </div>
 </div>
