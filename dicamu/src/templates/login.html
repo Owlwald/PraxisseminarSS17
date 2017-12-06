@@ -1,31 +1,33 @@
-<!-- nur kopiert aus der mobile angular js demo -->
+<!-- LOGIN.HTML -->
 
 <div class="scrollable" ng-controller="LoginCtrl">
     <div class="scrollable-content section">
 
+        <!-- Input Form -->
         <form role="form" ng-submit='login()' ng-if="!loggedin">
-
             <fieldset>
+
+                <!-- Email -->
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" ng-model="email.txt" class="form-control" placeholder="Email">
                 </div>
 
+                <!-- Password -->
                 <div class="form-group">
                     <label>Passwort</label>
                     <input type="password" ng-model="password.txt" class="form-control" placeholder="Passwort">
                 </div>
-
             </fieldset>
-
             <hr>
 
+            <!-- Login Button -->
             <a class="btn btn-primary btn-block" ng-click="loginCheck()">LOGIN</a>
 
+            <!-- Warning After Login Failure -->
             <div ng-if="falselogin" class="warning">
                 Die Emailadresse und / oder ihr Passwort sind nicht korrekt. Bitte überprüfen Sie ihre Zugangsdaten und versuchen Sie es erneut.
             </div>
         </form>
-
     </div>
 </div>

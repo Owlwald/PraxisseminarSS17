@@ -1,3 +1,5 @@
+// CORDOVA.JS
+
 angular.module('dicamu.services.Cordova', [])
 
 .factory('deviceReady', function(){
