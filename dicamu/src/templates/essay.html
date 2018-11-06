@@ -1,27 +1,15 @@
+<!-- ESSAY.HTML -->
+
 <div class="scrollable" ng-controller="EssayCtrl">
     <div class="scrollable-content">
 
+        <!-- Tabs -->
         <section class="section container-fluid">
-            <div class="tabs" ui-state="activeTab" default="1">
-                <ul class="nav nav-tabs">
-                    <li ui-class="{'active': activeTab == 1}">
-                        <a class="tabnames" ui-set="{'activeTab': 1}">Text</a>
-                    </li>
-                    <li ui-class="{'active': activeTab == 2}">
-                        <a class="tabnames" ui-set="{'activeTab': 2}">Informationen</a>
-                    </li>
-                </ul>
-
-                <div ui-if="activeTab == 1">
-                    <p>{{singleItem.Text}}</p>
-                </div>
-
-                <div ui-if="activeTab == 2">
-                    <p>Autor: {{singleItem.Autor}}</p>
-                    <p>Titel: {{singleItem.Titel}}</p>
-                </div>
-            </div>
+            <h2 class="lead">Informationen</h2>
+            <p>Autor: {{singleItem.Autor}}</p>
+            <p>Titel: {{singleItem.Titel}}</p>
+            <h2 class="lead">Text</h2>
+            <p>{{singleItem.Text}}</p>
         </section>
-
     </div>
 </div>

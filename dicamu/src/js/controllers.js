@@ -1,3 +1,5 @@
+// CONTROLLERS.JS
+// every template has a controller with its logic in this file
 (function () {
     'use strict';
     var app = angular.module("dcm");
@@ -10,11 +12,13 @@
     });
 
 
-    /********************* Menü-Controller ********************/
+    /********************* Top-Menü-Controller ********************/
     app.controller("TopCtrl", function ($scope, $rootScope, $window) {
+        // back button
         $scope.go_back = function () {
             $window.history.back();
         };
+        // change between grid and list view
         $scope.setStatus = function () {
             if ($rootScope.notgrid) {
                 $rootScope.notgrid = false;
@@ -59,12 +63,13 @@
         $scope.artworks = $rootScope.einKatalog.Kunstwerke;
         $scope.essays = $rootScope.einKatalog.Essays;
 
+        // sets chosen item: artwork or essay
         $scope.setItem = function (item) {
             $rootScope.singleItem = item;
         }
-
+        // buy function
         $scope.buy = function () {
-            console.log("buy this!");
+            // console.log("buy this!");
             $rootScope.buyCatDB();
             $rootScope.catalogOwned = true;
             $rootScope.loginCheck();
@@ -78,6 +83,7 @@
         $rootScope.notcatalog = true;
         $scope.boughtCats = $rootScope.boughtCatalogs;
 
+        // sets selected catalog for next view
         $scope.setChosenCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
         }
@@ -88,7 +94,6 @@
 
     app.controller("LoginCtrl", function ($scope, $rootScope, $location) {
         $rootScope.topTitle = "Login";
-
         $rootScope.notart = true;
         $rootScope.notcatalog = false;
         $scope.email = {};
@@ -97,40 +102,43 @@
         $rootScope.loginCheck = function () {
             // searches for username + pw match in database
             for (var i = 1; i < $scope.user.length; i++) {
-                console.log($scope.user[i].Name);
-                console.log($scope.email.txt);
+                // console.log($scope.user[i].Name);
+                // console.log($scope.email.txt);
                 if (angular.isDefined($scope.email.txt)) {
                     if ($scope.user[i].Name.toLowerCase() === $scope.email.txt.toLowerCase()) {
                         if ($scope.user[i].Passwort === $scope.password.txt) {
-                            console.log("login successful");
+                            // login successful
+                            // console.log("login successful");
                             $rootScope.falselogin = false;
                             $rootScope.loggedin = true;
                             $scope.loggedInUser = $scope.user[i];
                             $rootScope.loggedInUser = $scope.loggedInUser;
-                            console.log($scope.loggedInUser);
-                            //call: get contents of owned catalogs
+                            // console.log($scope.loggedInUser);
+                            // call: get contents of owned catalogs
                             $scope.connectCatalogs();
-                            //change from login-screen to my-catalogs-screen if login successfull
+                            // change from login-screen to my-catalogs-screen if login successfull
                             $location.path('/my-catalogues');
-                            //interrupt this for-loop if correct credentials are found
+                            // interrupt this for-loop if correct credentials are found
                             break;
                         } else {
-                            console.log("ganz falsch");
-
+                            // login failed
+                            // console.log("ganz falsch");
                         }
                     } else {
-                        // TODO wrong pw reaction needs to be implemented
-                        console.log("false login");
+                        // login failed
+                        // console.log("false login");
                         $rootScope.falselogin = true;
                     }
                 } else {
-                    console.log("undefined");
+                    // login failed
+                    //console.log("undefined");
                     $rootScope.falselogin = true;
 
                 }
             }
         };
 
+        // set up list of bought catalogs for user
         $scope.connectCatalogs = function () {
             var boughtData = [];
             for (var i = 0; i < $scope.loggedInUser["Gekaufte Kataloge"].length; i++) {

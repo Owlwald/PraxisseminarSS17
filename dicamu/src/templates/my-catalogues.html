@@ -1,7 +1,10 @@
+<!-- MY-CATALOGUES.HTML -->
+
 <div class="scrollable" ng-controller="MyCatCtrl">
     <div class="scrollable-content">
         <section class="section container-fluid">
 
+            <!-- Catalog List -->
             <div ng-if="notgrid">
                 <div ng-repeat="boughtCat in boughtCats track by $index">
                     <a ng-href="#/catalog" ng-click="setCatalog(boughtCat)">
@@ -12,6 +15,8 @@
                     </a>
                 </div>
             </div>
+
+            <!-- Catalog GRid -->
             <div ng-if="!notgrid">
                 <div ng-repeat="boughtCat in boughtCats track by $index">
                     <a ng-click="setCatalog(boughtCat)" ng-href="#/catalog" class="bg-grid">
@@ -23,7 +28,6 @@
                     </a>
                 </div>
             </div>
-
         </section>
     </div>
 </div>

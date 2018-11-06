@@ -1,3 +1,5 @@
+<!-- CATALOG.HTML -->
+
 <div class="scrollable" ng-controller="CatCtrl">
     <div class="scrollable-content">
 
@@ -22,9 +24,9 @@
 
         </section>
 
-        <!-- show this if user has allowance to access catalog-->
+        <!-- show this if user has allowance to access catalog -->
         <!-- list-view -->
-        <!--ng-if Katalog erworben-->
+        <!-- ng-if Katalog erworben-->
         <section class="section container-fluid" ng-if="loggedin && catalogOwned">
             <p class="lead">Exponate:</p>
             <div ng-repeat="art in artworks" ng-if="!$first">
@@ -41,8 +43,5 @@
                 </a>
             </div>
         </section>
-
-        <!-- grid-view -->
-        <!-- here? -->
     </div>
 </div>

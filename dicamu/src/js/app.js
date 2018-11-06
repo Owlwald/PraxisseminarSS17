@@ -1,3 +1,6 @@
+// APP.JS
+
+// set up app
 (function () {
     'use strict';
 
@@ -8,10 +11,16 @@
         'firebase',
     ]);
 
+    // set up main controller
     app.controller("MainCtrl", function ($scope, $rootScope, $firebaseArray, $firebaseObject, $location) {
 
+        // global variables
         $scope.data = {};
+        $rootScope.notgrid = true;
+        $rootScope.loggedin = false;
+        $rootScope.falselogin = false;
 
+        // get data from firebase db
         firebase.database().ref().on('value', function (snapshot) {
             var data = snapshot.val();
             var museums = snapshot.child("Museum").val()
@@ -23,27 +32,28 @@
             $scope.$apply();
         });
 
-        //set selected museum
+        // set selected museum as active museum
         $scope.setMuseum = function (museum) {
             $rootScope.einMuseum = museum;
         }
+
+        // set selected mycatalog as active catalog 
         $scope.setMyCatalog = function (catalog) {
             $rootScope.chosenCatalog = catalog;
         }
-        $rootScope.notgrid = true;
-        $rootScope.loggedin = false;
-        $rootScope.falselogin = false;
 
+        // login state
         $scope.logOut = function () {
             $rootScope.loggedin = false;
         };
 
+        // set selected catalog as active catalog
         $scope.setCatalog = function (catalog) {
             $rootScope.einKatalog = catalog;
             $scope.checkIfBought(catalog);
         };
 
-        //is called when catalog is tried to be opened
+        // is called when catalog is tried to be opened
         $scope.checkIfBought = function (catalog) {
             var currentUser = $rootScope.loggedInUser;
             var boughtCats = currentUser["Gekaufte Kataloge"];
@@ -57,9 +67,9 @@
             }
         }
 
-        //is in this controller because db is defined here
-        //can be outsourced to a database service in a bigger refactoring
-        //writes bought catalog persistent to database
+        // writes bought catalog persistent to database
+        // is in this controller because db is defined here
+        // can be outsourced to a database service in a bigger refactoring
         $rootScope.buyCatDB = function () {
             firebase.database().ref('User/' + $rootScope.loggedInUser.ID + '/Gekaufte Kataloge/' + $rootScope.index).set({
                 'Katalog-ID': $rootScope.einKatalog.ID,
@@ -69,6 +79,7 @@
 
     });
 
+    // connect subpage-links to templates
     app.config(function ($routeProvider) {
         $routeProvider
             .when('/', {
